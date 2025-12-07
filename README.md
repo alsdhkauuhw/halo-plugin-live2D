@@ -1,6 +1,6 @@
 <h1 align="center">MiSide Live2D Plugin for Halo</h1>
 <p align="center">
-  <a href="https://github.com/halo-dev/halo"><img alt="Halo version" src="https://img.shields.io/badge/halo-2.21.0%2B-brightgreen?style=for-the-badge" /></a>
+  <a href="https://github.com/halo-dev/halo"><img alt="Halo version" src="https://img.shields.io/badge/halo-2.x.x%2B-brightgreen?style=for-the-badge" /></a>
   <a href="https://github.com/alsdhkauuhw/halo-plugin-live2D"><img alt="Build Status" src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge"></a>
   <a href="https://github.com/alsdhkauuhw/halo-plugin-live2D"><img alt="Release" src="https://img.shields.io/badge/release-1.0.0-blue?style=for-the-badge"></a>
   <a href="./LICENSE"><img alt="LICENSE GPL-3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=for-the-badge"></a>
