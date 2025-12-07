@@ -328,61 +328,26 @@ function bindToolboxEvents(config) {
         currentExpressionIndex = (currentExpressionIndex + 1) % config.expressionList.length
         const expression = config.expressionList[currentExpressionIndex]
 
-        console.log(`[Live2D] 准备切换表情: ${expression.displayName} (${expression.name}), 当前索引: ${currentExpressionIndex}`)
+        console.log(`[Live2D] 切换表情: ${expression.displayName} (${expression.name}), 索引: ${currentExpressionIndex}`)
 
-        // 尝试多种表情切换方法
-        let switchSuccess = false
-
-        // 方法1: 直接调用 setExpression
+        // 直接调用 setExpression
         if (typeof Live2DRender.setExpression === 'function') {
-          const result = Live2DRender.setExpression(expression.name)
-          console.log('[Live2D] setExpression 返回值:', result)
-          switchSuccess = true
-        }
-
-        // 方法2: 尝试使用内部模型对象（如果方法1不生效）
-        if (!switchSuccess && window.Live2DRender && window.Live2DRender.model) {
-          try {
-            window.Live2DRender.model.setExpression(expression.name)
-            console.log('[Live2D] 使用 model.setExpression 切换')
-            switchSuccess = true
-          } catch (e) {
-            console.log('[Live2D] model.setExpression 不可用:', e.message)
-          }
-        }
-
-        // 方法3: 尝试先重置表情再设置（强制刷新）
-        if (switchSuccess) {
-          // 先设置为 null 或 default，再设置目标表情
-          setTimeout(() => {
-            if (expression.name !== 'default') {
-              Live2DRender.setExpression('default')
-              setTimeout(() => {
-                Live2DRender.setExpression(expression.name)
-                console.log('[Live2D] 使用重置法切换表情')
-              }, 50)
-            }
-          }, 50)
-        }
-
-        if (!switchSuccess) {
-          console.error('[Live2D] 所有表情切换方法都不可用')
+          Live2DRender.setExpression(expression.name)
+        } else {
+          console.error('[Live2D] setExpression 方法不可用')
         }
 
         // 更新按钮显示
         expressionBtn.textContent = expression.emoji
         expressionBtn.title = expression.displayName
 
-        console.log(`[Live2D] ✅ 表情切换完成: ${expression.displayName}`)
       } catch (error) {
-        console.error('[Live2D] ❌ 切换表情失败:', error)
-        console.error('[Live2D] 错误详情:', error.stack)
+        console.error('[Live2D] 切换表情失败:', error)
       } finally {
-        // 800ms 后解锁（增加延迟以适应重置法）
+        // 300ms 后解锁
         setTimeout(() => {
           isChanging = false
-          console.log('[Live2D] 表情切换锁已解除')
-        }, 800)
+        }, 300)
       }
     })
   }
@@ -450,6 +415,11 @@ function fixCanvasHighDPI() {
   canvas.style.width = currentWidth + 'px'
   canvas.style.height = currentHeight + 'px'
 
+  // 确保 Canvas 可见
+  canvas.style.opacity = '1'
+  canvas.style.pointerEvents = 'auto'
+  canvas.style.visibility = 'visible'
+
   // 获取 WebGL 上下文并调整视口
   const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
   if (gl) {
@@ -464,7 +434,7 @@ function fixCanvasHighDPI() {
  * 尝试修复 Canvas（带重试机制）
  * 因为 live2d-render 异步创建 Canvas，需要等待
  */
-function tryFixCanvas(attempts = 0, maxAttempts = 10) {
+function tryFixCanvas(attempts = 0, maxAttempts = 20) {
   const canvas = document.getElementById('live2d')
 
   if (canvas) {
@@ -473,16 +443,18 @@ function tryFixCanvas(attempts = 0, maxAttempts = 10) {
     // 创建自定义工具箱
     setTimeout(() => {
       createCustomToolbox(pluginConfig)
-    }, 300)
+    }, 100)
 
-    return
+    return true
   }
 
   // Canvas 还未创建，继续等待
   if (attempts < maxAttempts) {
-    setTimeout(() => tryFixCanvas(attempts + 1, maxAttempts), 100)
+    setTimeout(() => tryFixCanvas(attempts + 1, maxAttempts), 50)
+    return false
   } else {
     console.warn('[Live2D] ⚠️ Canvas 创建超时')
+    return false
   }
 }
 

@@ -1,13 +1,13 @@
 var or = { exports: {} };
 (function() {
-  var v, X, j, ue, Y, U, Ve, ve = { d: function(s, e) {
-    for (var t in e) ve.o(e, t) && !ve.o(s, t) && Object.defineProperty(s, t, { enumerable: !0, get: e[t] });
+  var C, X, j, ue, Y, U, Ee, Be = { d: function(s, e) {
+    for (var t in e) Be.o(e, t) && !Be.o(s, t) && Object.defineProperty(s, t, { enumerable: !0, get: e[t] });
   }, o: function(s, e) {
     return Object.prototype.hasOwnProperty.call(s, e);
   }, r: function(s) {
     typeof Symbol < "u" && Symbol.toStringTag && Object.defineProperty(s, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(s, "__esModule", { value: !0 });
-  } }, T = {};
-  ve.r(T), ve.d(T, { hideMessageBox: function() {
+  } }, F = {};
+  Be.r(F), Be.d(F, { hideMessageBox: function() {
     return ma;
   }, initializeLive2D: function() {
     return ya;
@@ -20,7 +20,7 @@ var or = { exports: {} };
   }, setRandomExpression: function() {
     return ca;
   } });
-  class y {
+  class x {
     constructor(e = 0) {
       e < 1 ? (this._ptr = [], this._capacity = 0, this._size = 0) : (this._ptr = new Array(e), this._capacity = e, this._size = 0);
     }
@@ -36,7 +36,7 @@ var or = { exports: {} };
       return t;
     }
     pushBack(e) {
-      this._size >= this._capacity && this.prepareCapacity(this._capacity == 0 ? y.s_defaultSize : 2 * this._capacity), this._ptr[this._size++] = e;
+      this._size >= this._capacity && this.prepareCapacity(this._capacity == 0 ? x.s_defaultSize : 2 * this._capacity), this._ptr[this._size++] = e;
     }
     clear() {
       this._ptr.length = 0, this._size = 0;
@@ -75,24 +75,24 @@ var or = { exports: {} };
     }
     erase(e) {
       const t = e._index;
-      return t < 0 || this._size <= t ? e : (this._ptr.splice(t, 1), --this._size, new he(this, t));
+      return t < 0 || this._size <= t ? e : (this._ptr.splice(t, 1), --this._size, new Ve(this, t));
     }
     prepareCapacity(e) {
       e > this._capacity && (this._capacity == 0 ? (this._ptr = new Array(e), this._capacity = e) : (this._ptr.length = e, this._capacity = e));
     }
     begin() {
-      return this._size == 0 ? this.end() : new he(this, 0);
+      return this._size == 0 ? this.end() : new Ve(this, 0);
     }
     end() {
-      return new he(this, this._size);
+      return new Ve(this, this._size);
     }
     getOffset(e) {
-      const t = new y();
+      const t = new x();
       return t._ptr = this.get(e), t._size = this.get(e).length, t._capacity = this.get(e).length, t;
     }
   }
-  y.s_defaultSize = 10;
-  class he {
+  x.s_defaultSize = 10;
+  class Ve {
     constructor(e, t) {
       this._vector = e ?? null, this._index = t ?? 0;
     }
@@ -106,10 +106,10 @@ var or = { exports: {} };
       return --this._index, this;
     }
     increment() {
-      return new he(this._vector, this._index++);
+      return new Ve(this._vector, this._index++);
     }
     decrement() {
-      return new he(this._vector, this._index--);
+      return new Ve(this._vector, this._index--);
     }
     ptr() {
       return this._vector._ptr[this._index];
@@ -122,8 +122,8 @@ var or = { exports: {} };
     }
   }
   (function(s) {
-    s.csmVector = y, s.iterator = he;
-  })(v || (v = {}));
+    s.csmVector = x, s.iterator = Ve;
+  })(C || (C = {}));
   class se {
     append(e, t) {
       return this.s += t !== void 0 ? e.substr(0, t) : e, this;
@@ -157,7 +157,7 @@ var or = { exports: {} };
   (function(s) {
     s.csmString = se;
   })(X || (X = {}));
-  class it {
+  class tt {
     getString() {
       return this._id;
     }
@@ -165,18 +165,18 @@ var or = { exports: {} };
       this._id = typeof e != "string" ? e : new se(e);
     }
     isEqual(e) {
-      return typeof e == "string" ? this._id.isEqual(e) : e instanceof se ? this._id.isEqual(e.s) : e instanceof it && this._id.isEqual(e._id.s);
+      return typeof e == "string" ? this._id.isEqual(e) : e instanceof se ? this._id.isEqual(e.s) : e instanceof tt && this._id.isEqual(e._id.s);
     }
     isNotEqual(e) {
-      return typeof e == "string" ? !this._id.isEqual(e) : e instanceof se ? !this._id.isEqual(e.s) : e instanceof it && !this._id.isEqual(e._id.s);
+      return typeof e == "string" ? !this._id.isEqual(e) : e instanceof se ? !this._id.isEqual(e.s) : e instanceof tt && !this._id.isEqual(e._id.s);
     }
   }
   (function(s) {
-    s.CubismId = it;
+    s.CubismId = tt;
   })(j || (j = {}));
   class mi {
     constructor() {
-      this._ids = new y();
+      this._ids = new x();
     }
     release() {
       for (let e = 0; e < this._ids.getSize(); ++e) this._ids.set(e, void 0);
@@ -187,7 +187,7 @@ var or = { exports: {} };
     }
     registerId(e) {
       let t = null;
-      return typeof e != "string" ? this.registerId(e.s) : ((t = this.findId(e)) != null || (t = new it(e), this._ids.pushBack(t)), t);
+      return typeof e != "string" ? this.registerId(e.s) : ((t = this.findId(e)) != null || (t = new tt(e), this._ids.pushBack(t)), t);
     }
     getId(e) {
       return this.registerId(e);
@@ -343,29 +343,29 @@ var or = { exports: {} };
   }
   (function(s) {
     s.CubismBlendMode = U, s.CubismRenderer = St, s.CubismTextureColor = K;
-  })(Ve || (Ve = {}));
+  })(Ee || (Ee = {}));
   const Ct = (s, e, t) => {
     ((i, r, a) => {
       pi.print(i, "[CSM]" + r, a);
     })(s, e + `
 `, t);
-  }, ge = (s) => {
+  }, he = (s) => {
     console.assert(s);
   };
-  let st, de, be, $;
-  st = (s, ...e) => {
-    Ct(we.LogLevel_Debug, "[D]" + s, e);
-  }, de = (s, ...e) => {
-    Ct(we.LogLevel_Info, "[I]" + s, e);
-  }, be = (s, ...e) => {
-    Ct(we.LogLevel_Warning, "[W]" + s, e);
+  let it, ge, ve, $;
+  it = (s, ...e) => {
+    Ct(Me.LogLevel_Debug, "[D]" + s, e);
+  }, ge = (s, ...e) => {
+    Ct(Me.LogLevel_Info, "[I]" + s, e);
+  }, ve = (s, ...e) => {
+    Ct(Me.LogLevel_Warning, "[W]" + s, e);
   }, $ = (s, ...e) => {
-    Ct(we.LogLevel_Error, "[E]" + s, e);
+    Ct(Me.LogLevel_Error, "[E]" + s, e);
   };
   class pi {
     static print(e, t, i) {
-      if (e < L.getLoggingLevel()) return;
-      const r = L.coreLogFunction;
+      if (e < V.getLoggingLevel()) return;
+      const r = V.coreLogFunction;
       r && r(t.replace(/\{(\d+)\}/g, (a, o) => i[o]));
     }
     static dumpBytes(e, t, i) {
@@ -436,7 +436,7 @@ var or = { exports: {} };
       return t < 0 || this._size <= t ? e : (this._keyValues.splice(t, 1), --this._size, new Le(this, t));
     }
     dumpAsInt() {
-      for (let e = 0; e < this._size; e++) st("{0} ,", this._keyValues[e]), st(`
+      for (let e = 0; e < this._size; e++) it("{0} ,", this._keyValues[e]), it(`
 `);
     }
   }
@@ -476,14 +476,14 @@ var or = { exports: {} };
       return Object.keys(e).forEach((i) => {
         if (typeof e[i] == "boolean") {
           const r = !!e[i];
-          t.put(i, new ce(r));
+          t.put(i, new de(r));
         } else if (typeof e[i] == "string") {
           const r = String(e[i]);
-          t.put(i, new ze(r));
+          t.put(i, new Ue(r));
         } else if (typeof e[i] == "number") {
           const r = Number(e[i]);
           t.put(i, new bt(r));
-        } else e[i] instanceof Array ? t.put(i, Bt.parseJsonArray(e[i])) : e[i] instanceof Object ? t.put(i, Bt.parseJsonObject(e[i], new Xe())) : e[i] == null ? t.put(i, new je()) : t.put(i, e[i]);
+        } else e[i] instanceof Array ? t.put(i, Bt.parseJsonArray(e[i])) : e[i] instanceof Object ? t.put(i, Bt.parseJsonObject(e[i], new je())) : e[i] == null ? t.put(i, new ze()) : t.put(i, e[i]);
       }), t;
     }
     static parseJsonArray(e) {
@@ -491,17 +491,17 @@ var or = { exports: {} };
       return Object.keys(e).forEach((i) => {
         if (typeof Number(i) == "number") if (typeof e[i] == "boolean") {
           const r = !!e[i];
-          t.add(new ce(r));
+          t.add(new de(r));
         } else if (typeof e[i] == "string") {
           const r = String(e[i]);
-          t.add(new ze(r));
+          t.add(new Ue(r));
         } else if (typeof e[i] == "number") {
           const r = Number(e[i]);
           t.add(new bt(r));
-        } else e[i] instanceof Array ? t.add(this.parseJsonArray(e[i])) : e[i] instanceof Object ? t.add(this.parseJsonObject(e[i], new Xe())) : e[i] == null ? t.add(new je()) : t.add(e[i]);
+        } else e[i] instanceof Array ? t.add(this.parseJsonArray(e[i])) : e[i] instanceof Object ? t.add(this.parseJsonObject(e[i], new je())) : e[i] == null ? t.add(new ze()) : t.add(e[i]);
         else if (e[i] instanceof Array) t.add(this.parseJsonArray(e[i]));
-        else if (e[i] instanceof Object) t.add(this.parseJsonObject(e[i], new Xe()));
-        else if (e[i] == null) t.add(new je());
+        else if (e[i] instanceof Object) t.add(this.parseJsonObject(e[i], new je()));
+        else if (e[i] == null) t.add(new ze());
         else {
           const r = Array(e[i]);
           for (let a = 0; a < r.length; a++) t.add(r[a]);
@@ -531,7 +531,7 @@ var or = { exports: {} };
     getArray(e = null) {
       return e;
     }
-    getVector(e = new y()) {
+    getVector(e = new x()) {
       return e;
     }
     getMap(e) {
@@ -574,13 +574,13 @@ var or = { exports: {} };
       return !1;
     }
     setErrorNotForClientCall(e) {
-      return rt.errorValue;
+      return st.errorValue;
     }
     static staticInitializeNotForClientCall() {
-      ce.trueValue = new ce(!0), ce.falseValue = new ce(!1), D.errorValue = new rt("ERROR", !0), D.nullValue = new je(), D.s_dummyKeys = new y();
+      de.trueValue = new de(!0), de.falseValue = new de(!1), D.errorValue = new st("ERROR", !0), D.nullValue = new ze(), D.s_dummyKeys = new x();
     }
     static staticReleaseNotForClientCall() {
-      ce.trueValue = null, ce.falseValue = null, D.errorValue = null, D.nullValue = null, D.s_dummyKeys = null;
+      de.trueValue = null, de.falseValue = null, D.errorValue = null, D.nullValue = null, D.s_dummyKeys = null;
     }
   }
   class H {
@@ -607,12 +607,12 @@ var or = { exports: {} };
     }
     parseBytes(e, t, i) {
       const r = new Array(1), a = H.arrayBufferToString(e);
-      if (this._root = i == null ? this.parseValue(a, t, 0, r) : i(JSON.parse(a), new Xe()), this._error) {
+      if (this._root = i == null ? this.parseValue(a, t, 0, r) : i(JSON.parse(a), new je()), this._error) {
         let o = "\0";
         return o = "Json parse error : @line " + (this._lineCount + 1) + `
-`, this._root = new ze(o), de("{0}", this._root.getRawString()), !1;
+`, this._root = new Ue(o), ge("{0}", this._root.getRawString()), !1;
       }
-      return this._root != null || (this._root = new rt(new se(this._error), !1), !1);
+      return this._root != null || (this._root = new st(new se(this._error), !1), !1);
     }
     getParseError() {
       return this._error;
@@ -640,17 +640,17 @@ var or = { exports: {} };
           return a = hr(e.slice(n), l), r[0] = e.indexOf(l[0]), new bt(a);
         }
         case '"':
-          return new ze(this.parseString(e, t, n + 1, r));
+          return new Ue(this.parseString(e, t, n + 1, r));
         case "[":
           return o = this.parseArray(e, t, n + 1, r), o;
         case "{":
           return o = this.parseObject(e, t, n + 1, r), o;
         case "n":
-          return n + 3 < t ? (o = new je(), r[0] = n + 4) : this._error = "parse null", o;
+          return n + 3 < t ? (o = new ze(), r[0] = n + 4) : this._error = "parse null", o;
         case "t":
-          return n + 3 < t ? (o = ce.trueValue, r[0] = n + 4) : this._error = "parse true", o;
+          return n + 3 < t ? (o = de.trueValue, r[0] = n + 4) : this._error = "parse true", o;
         case "f":
-          return n + 4 < t ? (o = ce.falseValue, r[0] = n + 5) : this._error = "illegal ',' position", o;
+          return n + 4 < t ? (o = de.falseValue, r[0] = n + 5) : this._error = "illegal ',' position", o;
         case ",":
           return this._error = "illegal ',' position", null;
         case "]":
@@ -705,7 +705,7 @@ var or = { exports: {} };
     }
     parseObject(e, t, i, r) {
       if (this._error) return null;
-      const a = new Xe();
+      const a = new je();
       let o = "", n = i, l = "";
       const h = Array(1);
       let u = !1;
@@ -794,7 +794,7 @@ var or = { exports: {} };
       return typeof e == "number" && !Math.round(e) && e == this._value;
     }
   }
-  class ce extends D {
+  class de extends D {
     isBool() {
       return !0;
     }
@@ -814,7 +814,7 @@ var or = { exports: {} };
       super(), this._boolValue = e;
     }
   }
-  class ze extends D {
+  class Ue extends D {
     constructor(e) {
       super(), typeof e == "string" && (this._stringBuffer = e), e instanceof se && (this._stringBuffer = e.s);
     }
@@ -828,7 +828,7 @@ var or = { exports: {} };
       return typeof e == "string" ? this._stringBuffer == e : e instanceof se && this._stringBuffer == e.s;
     }
   }
-  class rt extends ze {
+  class st extends Ue {
     isStatic() {
       return this._isStatic;
     }
@@ -842,7 +842,7 @@ var or = { exports: {} };
       return !0;
     }
   }
-  class je extends D {
+  class ze extends D {
     isNull() {
       return !0;
     }
@@ -853,7 +853,7 @@ var or = { exports: {} };
       return !0;
     }
     setErrorNotForClientCall(e) {
-      return this._stringBuffer = e, rt.nullValue;
+      return this._stringBuffer = e, st.nullValue;
     }
     constructor() {
       super(), this._stringBuffer = "NullValue";
@@ -861,7 +861,7 @@ var or = { exports: {} };
   }
   class jt extends D {
     constructor() {
-      super(), this._array = new y();
+      super(), this._array = new x();
     }
     release() {
       for (let e = this._array.begin(); e.notEqual(this._array.end()); e.preIncrement()) {
@@ -901,7 +901,7 @@ var or = { exports: {} };
       return this._array.getSize();
     }
   }
-  class Xe extends D {
+  class je extends D {
     constructor() {
       super(), this._map = new J();
     }
@@ -946,7 +946,7 @@ var or = { exports: {} };
     }
     getKeys() {
       if (!this._keys) {
-        this._keys = new y();
+        this._keys = new x();
         const e = this._map.begin();
         for (; e.notEqual(this._map.end()); ) {
           const t = e.ptr().first;
@@ -973,57 +973,57 @@ var or = { exports: {} };
     return isNaN(i) && (i = NaN), e[0] = s.slice(t), i;
   }
   (function(s) {
-    s.CubismJson = H, s.JsonArray = jt, s.JsonBoolean = ce, s.JsonError = rt, s.JsonFloat = bt, s.JsonMap = Xe, s.JsonNullvalue = je, s.JsonString = ze, s.Value = D;
+    s.CubismJson = H, s.JsonArray = jt, s.JsonBoolean = de, s.JsonError = st, s.JsonFloat = bt, s.JsonMap = je, s.JsonNullvalue = ze, s.JsonString = Ue, s.Value = D;
   })(Si || (Si = {}));
-  let _e = !1, Ge = !1, Ye = null, at = null;
-  const Me = Object.freeze({ vertexOffset: 0, vertexStep: 2 });
+  let ce = !1, Xe = !1, Ge = null, rt = null;
+  const be = Object.freeze({ vertexOffset: 0, vertexStep: 2 });
   function gr(s) {
   }
-  class L {
+  class V {
     static startUp(e = null) {
-      if (_e) return de("CubismFramework.startUp() is already done."), _e;
-      if (Ye = e, Ye != null && Live2DCubismCore.Logging.csmSetLogFunction(Ye.logFunction), _e = !0, _e) {
+      if (ce) return ge("CubismFramework.startUp() is already done."), ce;
+      if (Ge = e, Ge != null && Live2DCubismCore.Logging.csmSetLogFunction(Ge.logFunction), ce = !0, ce) {
         const t = Live2DCubismCore.Version.csmGetVersion(), i = (16711680 & t) >> 16, r = 65535 & t, a = t;
-        de("Live2D Cubism Core version: {0}.{1}.{2} ({3})", ("00" + ((4278190080 & t) >> 24)).slice(-2), ("00" + i).slice(-2), ("0000" + r).slice(-4), a);
+        ge("Live2D Cubism Core version: {0}.{1}.{2} ({3})", ("00" + ((4278190080 & t) >> 24)).slice(-2), ("00" + i).slice(-2), ("0000" + r).slice(-4), a);
       }
-      return de("CubismFramework.startUp() is complete."), _e;
+      return ge("CubismFramework.startUp() is complete."), ce;
     }
     static cleanUp() {
-      _e = !1, Ge = !1, Ye = null, at = null;
+      ce = !1, Xe = !1, Ge = null, rt = null;
     }
     static initialize(e = 0) {
-      ge(_e), _e ? Ge ? be("CubismFramework.initialize() skipped, already initialized.") : (D.staticInitializeNotForClientCall(), at = new mi(), Live2DCubismCore.Memory.initializeAmountOfMemory(e), Ge = !0, de("CubismFramework.initialize() is complete.")) : be("CubismFramework is not started.");
+      he(ce), ce ? Xe ? ve("CubismFramework.initialize() skipped, already initialized.") : (D.staticInitializeNotForClientCall(), rt = new mi(), Live2DCubismCore.Memory.initializeAmountOfMemory(e), Xe = !0, ge("CubismFramework.initialize() is complete.")) : ve("CubismFramework is not started.");
     }
     static dispose() {
-      ge(_e), _e ? Ge ? (D.staticReleaseNotForClientCall(), at.release(), at = null, St.staticRelease(), Ge = !1, de("CubismFramework.dispose() is complete.")) : be("CubismFramework.dispose() skipped, not initialized.") : be("CubismFramework is not started.");
+      he(ce), ce ? Xe ? (D.staticReleaseNotForClientCall(), rt.release(), rt = null, St.staticRelease(), Xe = !1, ge("CubismFramework.dispose() is complete.")) : ve("CubismFramework.dispose() skipped, not initialized.") : ve("CubismFramework is not started.");
     }
     static isStarted() {
-      return _e;
+      return ce;
     }
     static isInitialized() {
-      return Ge;
+      return Xe;
     }
     static coreLogFunction(e) {
       Live2DCubismCore.Logging.csmGetLogFunction() && Live2DCubismCore.Logging.csmGetLogFunction()(e);
     }
     static getLoggingLevel() {
-      return Ye != null ? Ye.loggingLevel : we.LogLevel_Off;
+      return Ge != null ? Ge.loggingLevel : Me.LogLevel_Off;
     }
     static getIdManager() {
-      return at;
+      return rt;
     }
     constructor() {
     }
   }
   class dr {
   }
-  var we, Ci;
+  var Me, Ci;
   (function(s) {
     s[s.LogLevel_Verbose = 0] = "LogLevel_Verbose", s[s.LogLevel_Debug = 1] = "LogLevel_Debug", s[s.LogLevel_Info = 2] = "LogLevel_Info", s[s.LogLevel_Warning = 3] = "LogLevel_Warning", s[s.LogLevel_Error = 4] = "LogLevel_Error", s[s.LogLevel_Off = 5] = "LogLevel_Off";
-  })(we || (we = {})), function(s) {
-    s.Constant = Me, s.csmDelete = gr, s.CubismFramework = L;
+  })(Me || (Me = {})), function(s) {
+    s.Constant = be, s.csmDelete = gr, s.CubismFramework = V;
   }(Ci || (Ci = {}));
-  var M = { Canvas: void 0, CanvasId: "live2d", MessageBoxId: "live2dMessageBox", BackgroundRGBA: [0, 0, 0, 0], CanvasSize: "auto", LoadFromCache: !1, Live2dDB: void 0, ViewScale: 1, ViewMaxScale: 2, ViewMinScale: 0.8, ViewLogicalLeft: -1, ViewLogicalRight: 1, ViewLogicalMaxLeft: -2, ViewLogicalMaxRight: 2, ViewLogicalMaxBottom: -2, ViewLogicalMaxTop: 2, ResourcesPath: "", MotionGroupIdle: "Idle", MotionGroupTapBody: "TapBody", HitAreaNameHead: "Head", HitAreaNameBody: "Body", PriorityIdle: 1, PriorityNormal: 2, PriorityForce: 3, CubismLoggingLevel: we.LogLevel_Verbose }, W = typeof globalThis < "u" && globalThis || typeof self < "u" && self || W !== void 0 && W, Bi = "URLSearchParams" in W, vi = "Symbol" in W && "iterator" in Symbol, Mt = "FileReader" in W && "Blob" in W && function() {
+  var M = { Canvas: void 0, CanvasId: "live2d", MessageBoxId: "live2dMessageBox", BackgroundRGBA: [0, 0, 0, 0], CanvasSize: "auto", LoadFromCache: !1, Live2dDB: void 0, ViewScale: 1, ViewMaxScale: 2, ViewMinScale: 0.8, ViewLogicalLeft: -1, ViewLogicalRight: 1, ViewLogicalMaxLeft: -2, ViewLogicalMaxRight: 2, ViewLogicalMaxBottom: -2, ViewLogicalMaxTop: 2, ResourcesPath: "", MotionGroupIdle: "Idle", MotionGroupTapBody: "TapBody", HitAreaNameHead: "Head", HitAreaNameBody: "Body", PriorityIdle: 1, PriorityNormal: 2, PriorityForce: 3, CubismLoggingLevel: Me.LogLevel_Verbose }, W = typeof globalThis < "u" && globalThis || typeof self < "u" && self || W !== void 0 && W, Bi = "URLSearchParams" in W, vi = "Symbol" in W && "iterator" in Symbol, Mt = "FileReader" in W && "Blob" in W && function() {
     try {
       return new Blob(), !0;
     } catch {
@@ -1033,7 +1033,7 @@ var or = { exports: {} };
   if (wt) var cr = ["[object Int8Array]", "[object Uint8Array]", "[object Uint8ClampedArray]", "[object Int16Array]", "[object Uint16Array]", "[object Int32Array]", "[object Uint32Array]", "[object Float32Array]", "[object Float64Array]"], _r = ArrayBuffer.isView || function(s) {
     return s && cr.indexOf(Object.prototype.toString.call(s)) > -1;
   };
-  function nt(s) {
+  function at(s) {
     if (typeof s != "string" && (s = String(s)), /[^a-z0-9\-#$%&'*+.^_`|~!]/i.test(s) || s === "") throw new TypeError('Invalid character in header field name: "' + s + '"');
     return s.toLowerCase();
   }
@@ -1110,17 +1110,17 @@ var or = { exports: {} };
     }, this;
   }
   G.prototype.append = function(s, e) {
-    s = nt(s), e = Xt(e);
+    s = at(s), e = Xt(e);
     var t = this.map[s];
     this.map[s] = t ? t + ", " + e : e;
   }, G.prototype.delete = function(s) {
-    delete this.map[nt(s)];
+    delete this.map[at(s)];
   }, G.prototype.get = function(s) {
-    return s = nt(s), this.has(s) ? this.map[s] : null;
+    return s = at(s), this.has(s) ? this.map[s] : null;
   }, G.prototype.has = function(s) {
-    return this.map.hasOwnProperty(nt(s));
+    return this.map.hasOwnProperty(at(s));
   }, G.prototype.set = function(s, e) {
-    this.map[nt(s)] = Xt(e);
+    this.map[at(s)] = Xt(e);
   }, G.prototype.forEach = function(s, e) {
     for (var t in this.map) this.map.hasOwnProperty(t) && s.call(e, this.map[t], t, this);
   }, G.prototype.keys = function() {
@@ -1162,37 +1162,37 @@ var or = { exports: {} };
       }
     }), e;
   }
-  function me(s, e) {
-    if (!(this instanceof me)) throw new TypeError('Please use the "new" operator, this DOM object constructor cannot be called as a function.');
+  function _e(s, e) {
+    if (!(this instanceof _e)) throw new TypeError('Please use the "new" operator, this DOM object constructor cannot be called as a function.');
     e || (e = {}), this.type = "default", this.status = e.status === void 0 ? 200 : e.status, this.ok = this.status >= 200 && this.status < 300, this.statusText = e.statusText === void 0 ? "" : "" + e.statusText, this.headers = new G(e.headers), this.url = e.url || "", this._initBody(s);
   }
   Re.prototype.clone = function() {
     return new Re(this, { body: this._bodyInit });
-  }, Pi.call(Re.prototype), Pi.call(me.prototype), me.prototype.clone = function() {
-    return new me(this._bodyInit, { status: this.status, statusText: this.statusText, headers: new G(this.headers), url: this.url });
-  }, me.error = function() {
-    var s = new me(null, { status: 0, statusText: "" });
+  }, Pi.call(Re.prototype), Pi.call(_e.prototype), _e.prototype.clone = function() {
+    return new _e(this._bodyInit, { status: this.status, statusText: this.statusText, headers: new G(this.headers), url: this.url });
+  }, _e.error = function() {
+    var s = new _e(null, { status: 0, statusText: "" });
     return s.type = "error", s;
   };
   var yr = [301, 302, 303, 307, 308];
-  me.redirect = function(s, e) {
+  _e.redirect = function(s, e) {
     if (yr.indexOf(e) === -1) throw new RangeError("Invalid status code");
-    return new me(null, { status: e, headers: { location: s } });
+    return new _e(null, { status: e, headers: { location: s } });
   };
-  var He = W.DOMException;
+  var Ye = W.DOMException;
   try {
-    new He();
+    new Ye();
   } catch {
-    (He = function(e, t) {
+    (Ye = function(e, t) {
       this.message = e, this.name = t;
       var i = Error(e);
       this.stack = i.stack;
-    }).prototype = Object.create(Error.prototype), He.prototype.constructor = He;
+    }).prototype = Object.create(Error.prototype), Ye.prototype.constructor = Ye;
   }
   function Ii(s, e) {
     return new Promise(function(t, i) {
       var r = new Re(s, e);
-      if (r.signal && r.signal.aborted) return i(new He("Aborted", "AbortError"));
+      if (r.signal && r.signal.aborted) return i(new Ye("Aborted", "AbortError"));
       var a = new XMLHttpRequest();
       function o() {
         a.abort();
@@ -1211,7 +1211,7 @@ var or = { exports: {} };
         h.url = "responseURL" in a ? a.responseURL : h.headers.get("X-Request-URL");
         var u = "response" in a ? a.response : a.responseText;
         setTimeout(function() {
-          t(new me(u, h));
+          t(new _e(u, h));
         }, 0);
       }, a.onerror = function() {
         setTimeout(function() {
@@ -1223,7 +1223,7 @@ var or = { exports: {} };
         }, 0);
       }, a.onabort = function() {
         setTimeout(function() {
-          i(new He("Aborted", "AbortError"));
+          i(new Ye("Aborted", "AbortError"));
         }, 0);
       }, a.open(r.method, function(n) {
         try {
@@ -1240,25 +1240,25 @@ var or = { exports: {} };
       }), a.send(r._bodyInit === void 0 ? null : r._bodyInit);
     });
   }
-  Ii.polyfill = !0, W.fetch || (W.fetch = Ii, W.Headers = G, W.Request = Re, W.Response = me);
-  const C = Object.freeze({ HitAreaPrefix: "HitArea", HitAreaHead: "Head", HitAreaBody: "Body", PartsIdCore: "Parts01Core", PartsArmPrefix: "Parts01Arm_", PartsArmLPrefix: "Parts01ArmL_", PartsArmRPrefix: "Parts01ArmR_", ParamAngleX: "ParamAngleX", ParamAngleY: "ParamAngleY", ParamAngleZ: "ParamAngleZ", ParamEyeLOpen: "ParamEyeLOpen", ParamEyeLSmile: "ParamEyeLSmile", ParamEyeROpen: "ParamEyeROpen", ParamEyeRSmile: "ParamEyeRSmile", ParamEyeBallX: "ParamEyeBallX", ParamEyeBallY: "ParamEyeBallY", ParamEyeBallForm: "ParamEyeBallForm", ParamBrowLY: "ParamBrowLY", ParamBrowRY: "ParamBrowRY", ParamBrowLX: "ParamBrowLX", ParamBrowRX: "ParamBrowRX", ParamBrowLAngle: "ParamBrowLAngle", ParamBrowRAngle: "ParamBrowRAngle", ParamBrowLForm: "ParamBrowLForm", ParamBrowRForm: "ParamBrowRForm", ParamMouthForm: "ParamMouthForm", ParamMouthOpenY: "ParamMouthOpenY", ParamCheek: "ParamCheek", ParamBodyAngleX: "ParamBodyAngleX", ParamBodyAngleY: "ParamBodyAngleY", ParamBodyAngleZ: "ParamBodyAngleZ", ParamBreath: "ParamBreath", ParamArmLA: "ParamArmLA", ParamArmRA: "ParamArmRA", ParamArmLB: "ParamArmLB", ParamArmRB: "ParamArmRB", ParamHandL: "ParamHandL", ParamHandR: "ParamHandR", ParamHairFront: "ParamHairFront", ParamHairSide: "ParamHairSide", ParamHairBack: "ParamHairBack", ParamHairFluffy: "ParamHairFluffy", ParamShoulderY: "ParamShoulderY", ParamBustX: "ParamBustX", ParamBustY: "ParamBustY", ParamBaseX: "ParamBaseX", ParamBaseY: "ParamBaseY", ParamNONE: "NONE:" });
+  Ii.polyfill = !0, W.fetch || (W.fetch = Ii, W.Headers = G, W.Request = Re, W.Response = _e);
+  const B = Object.freeze({ HitAreaPrefix: "HitArea", HitAreaHead: "Head", HitAreaBody: "Body", PartsIdCore: "Parts01Core", PartsArmPrefix: "Parts01Arm_", PartsArmLPrefix: "Parts01ArmL_", PartsArmRPrefix: "Parts01ArmR_", ParamAngleX: "ParamAngleX", ParamAngleY: "ParamAngleY", ParamAngleZ: "ParamAngleZ", ParamEyeLOpen: "ParamEyeLOpen", ParamEyeLSmile: "ParamEyeLSmile", ParamEyeROpen: "ParamEyeROpen", ParamEyeRSmile: "ParamEyeRSmile", ParamEyeBallX: "ParamEyeBallX", ParamEyeBallY: "ParamEyeBallY", ParamEyeBallForm: "ParamEyeBallForm", ParamBrowLY: "ParamBrowLY", ParamBrowRY: "ParamBrowRY", ParamBrowLX: "ParamBrowLX", ParamBrowRX: "ParamBrowRX", ParamBrowLAngle: "ParamBrowLAngle", ParamBrowRAngle: "ParamBrowRAngle", ParamBrowLForm: "ParamBrowLForm", ParamBrowRForm: "ParamBrowRForm", ParamMouthForm: "ParamMouthForm", ParamMouthOpenY: "ParamMouthOpenY", ParamCheek: "ParamCheek", ParamBodyAngleX: "ParamBodyAngleX", ParamBodyAngleY: "ParamBodyAngleY", ParamBodyAngleZ: "ParamBodyAngleZ", ParamBreath: "ParamBreath", ParamArmLA: "ParamArmLA", ParamArmRA: "ParamArmRA", ParamArmLB: "ParamArmLB", ParamArmRB: "ParamArmRB", ParamHandL: "ParamHandL", ParamHandR: "ParamHandR", ParamHairFront: "ParamHairFront", ParamHairSide: "ParamHairSide", ParamHairBack: "ParamHairBack", ParamHairFluffy: "ParamHairFluffy", ParamShoulderY: "ParamShoulderY", ParamBustX: "ParamBustX", ParamBustY: "ParamBustY", ParamBaseX: "ParamBaseX", ParamBaseY: "ParamBaseY", ParamNONE: "NONE:" });
   var Ti, Ei;
   (function(s) {
-    s.HitAreaBody = C.HitAreaBody, s.HitAreaHead = C.HitAreaHead, s.HitAreaPrefix = C.HitAreaPrefix, s.ParamAngleX = C.ParamAngleX, s.ParamAngleY = C.ParamAngleY, s.ParamAngleZ = C.ParamAngleZ, s.ParamArmLA = C.ParamArmLA, s.ParamArmLB = C.ParamArmLB, s.ParamArmRA = C.ParamArmRA, s.ParamArmRB = C.ParamArmRB, s.ParamBaseX = C.ParamBaseX, s.ParamBaseY = C.ParamBaseY, s.ParamBodyAngleX = C.ParamBodyAngleX, s.ParamBodyAngleY = C.ParamBodyAngleY, s.ParamBodyAngleZ = C.ParamBodyAngleZ, s.ParamBreath = C.ParamBreath, s.ParamBrowLAngle = C.ParamBrowLAngle, s.ParamBrowLForm = C.ParamBrowLForm, s.ParamBrowLX = C.ParamBrowLX, s.ParamBrowLY = C.ParamBrowLY, s.ParamBrowRAngle = C.ParamBrowRAngle, s.ParamBrowRForm = C.ParamBrowRForm, s.ParamBrowRX = C.ParamBrowRX, s.ParamBrowRY = C.ParamBrowRY, s.ParamBustX = C.ParamBustX, s.ParamBustY = C.ParamBustY, s.ParamCheek = C.ParamCheek, s.ParamEyeBallForm = C.ParamEyeBallForm, s.ParamEyeBallX = C.ParamEyeBallX, s.ParamEyeBallY = C.ParamEyeBallY, s.ParamEyeLOpen = C.ParamEyeLOpen, s.ParamEyeLSmile = C.ParamEyeLSmile, s.ParamEyeROpen = C.ParamEyeROpen, s.ParamEyeRSmile = C.ParamEyeRSmile, s.ParamHairBack = C.ParamHairBack, s.ParamHairFluffy = C.ParamHairFluffy, s.ParamHairFront = C.ParamHairFront, s.ParamHairSide = C.ParamHairSide, s.ParamHandL = C.ParamHandL, s.ParamHandR = C.ParamHandR, s.ParamMouthForm = C.ParamMouthForm, s.ParamMouthOpenY = C.ParamMouthOpenY, s.ParamNONE = C.ParamNONE, s.ParamShoulderY = C.ParamShoulderY, s.PartsArmLPrefix = C.PartsArmLPrefix, s.PartsArmPrefix = C.PartsArmPrefix, s.PartsArmRPrefix = C.PartsArmRPrefix, s.PartsIdCore = C.PartsIdCore;
+    s.HitAreaBody = B.HitAreaBody, s.HitAreaHead = B.HitAreaHead, s.HitAreaPrefix = B.HitAreaPrefix, s.ParamAngleX = B.ParamAngleX, s.ParamAngleY = B.ParamAngleY, s.ParamAngleZ = B.ParamAngleZ, s.ParamArmLA = B.ParamArmLA, s.ParamArmLB = B.ParamArmLB, s.ParamArmRA = B.ParamArmRA, s.ParamArmRB = B.ParamArmRB, s.ParamBaseX = B.ParamBaseX, s.ParamBaseY = B.ParamBaseY, s.ParamBodyAngleX = B.ParamBodyAngleX, s.ParamBodyAngleY = B.ParamBodyAngleY, s.ParamBodyAngleZ = B.ParamBodyAngleZ, s.ParamBreath = B.ParamBreath, s.ParamBrowLAngle = B.ParamBrowLAngle, s.ParamBrowLForm = B.ParamBrowLForm, s.ParamBrowLX = B.ParamBrowLX, s.ParamBrowLY = B.ParamBrowLY, s.ParamBrowRAngle = B.ParamBrowRAngle, s.ParamBrowRForm = B.ParamBrowRForm, s.ParamBrowRX = B.ParamBrowRX, s.ParamBrowRY = B.ParamBrowRY, s.ParamBustX = B.ParamBustX, s.ParamBustY = B.ParamBustY, s.ParamCheek = B.ParamCheek, s.ParamEyeBallForm = B.ParamEyeBallForm, s.ParamEyeBallX = B.ParamEyeBallX, s.ParamEyeBallY = B.ParamEyeBallY, s.ParamEyeLOpen = B.ParamEyeLOpen, s.ParamEyeLSmile = B.ParamEyeLSmile, s.ParamEyeROpen = B.ParamEyeROpen, s.ParamEyeRSmile = B.ParamEyeRSmile, s.ParamHairBack = B.ParamHairBack, s.ParamHairFluffy = B.ParamHairFluffy, s.ParamHairFront = B.ParamHairFront, s.ParamHairSide = B.ParamHairSide, s.ParamHandL = B.ParamHandL, s.ParamHandR = B.ParamHandR, s.ParamMouthForm = B.ParamMouthForm, s.ParamMouthOpenY = B.ParamMouthOpenY, s.ParamNONE = B.ParamNONE, s.ParamShoulderY = B.ParamShoulderY, s.PartsArmLPrefix = B.PartsArmLPrefix, s.PartsArmPrefix = B.PartsArmPrefix, s.PartsArmRPrefix = B.PartsArmRPrefix, s.PartsIdCore = B.PartsIdCore;
   })(Ti || (Ti = {}));
   class Vi {
   }
   (function(s) {
     s.ICubismModelSetting = Vi;
   })(Ei || (Ei = {}));
-  const Pe = "FileReferences", Li = "UserData", Ie = "Name", Ri = "File", Pt = "Ids", Fi = "Sound", Ai = "FadeInTime", Di = "FadeOutTime", Ht = "LipSync", qt = "EyeBlink";
+  const we = "FileReferences", Li = "UserData", Pe = "Name", Ri = "File", Pt = "Ids", Fi = "Sound", Ai = "FadeInTime", Di = "FadeOutTime", Ht = "LipSync", qt = "EyeBlink";
   var I, ki, Oi, Q, Ni;
   (function(s) {
     s[s.FrequestNode_Groups = 0] = "FrequestNode_Groups", s[s.FrequestNode_Moc = 1] = "FrequestNode_Moc", s[s.FrequestNode_Motions = 2] = "FrequestNode_Motions", s[s.FrequestNode_Expressions = 3] = "FrequestNode_Expressions", s[s.FrequestNode_Textures = 4] = "FrequestNode_Textures", s[s.FrequestNode_Physics = 5] = "FrequestNode_Physics", s[s.FrequestNode_Pose = 6] = "FrequestNode_Pose", s[s.FrequestNode_HitAreas = 7] = "FrequestNode_HitAreas";
   })(I || (I = {}));
   class Ui extends Vi {
     constructor(e, t) {
-      super(), this._json = H.create(e, t), this._json && (this._jsonValue = new y(), this._jsonValue.pushBack(this._json.getRoot().getValueByString("Groups")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(Pe).getValueByString("Moc")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(Pe).getValueByString("Motions")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(Pe).getValueByString("Expressions")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(Pe).getValueByString("Textures")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(Pe).getValueByString("Physics")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(Pe).getValueByString("Pose")), this._jsonValue.pushBack(this._json.getRoot().getValueByString("HitAreas")));
+      super(), this._json = H.create(e, t), this._json && (this._jsonValue = new x(), this._jsonValue.pushBack(this._json.getRoot().getValueByString("Groups")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(we).getValueByString("Moc")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(we).getValueByString("Motions")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(we).getValueByString("Expressions")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(we).getValueByString("Textures")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(we).getValueByString("Physics")), this._jsonValue.pushBack(this._json.getRoot().getValueByString(we).getValueByString("Pose")), this._jsonValue.pushBack(this._json.getRoot().getValueByString("HitAreas")));
     }
     release() {
       H.delete(this._json), this._jsonValue = null;
@@ -1285,10 +1285,10 @@ var or = { exports: {} };
       return this.isExistHitAreas() ? this._jsonValue.at(I.FrequestNode_HitAreas).getSize() : 0;
     }
     getHitAreaId(e) {
-      return L.getIdManager().getId(this._jsonValue.at(I.FrequestNode_HitAreas).getValueByIndex(e).getValueByString("Id").getRawString());
+      return V.getIdManager().getId(this._jsonValue.at(I.FrequestNode_HitAreas).getValueByIndex(e).getValueByString("Id").getRawString());
     }
     getHitAreaName(e) {
-      return this._jsonValue.at(I.FrequestNode_HitAreas).getValueByIndex(e).getValueByString(Ie).getRawString();
+      return this._jsonValue.at(I.FrequestNode_HitAreas).getValueByIndex(e).getValueByString(Pe).getRawString();
     }
     getPhysicsFileName() {
       return this.isExistPhysicsFile() ? this._jsonValue.at(I.FrequestNode_Physics).getRawString() : "";
@@ -1300,7 +1300,7 @@ var or = { exports: {} };
       return this.isExistExpressionFile() ? this._jsonValue.at(I.FrequestNode_Expressions).getSize() : 0;
     }
     getExpressionName(e) {
-      return this._jsonValue.at(I.FrequestNode_Expressions).getValueByIndex(e).getValueByString(Ie).getRawString();
+      return this._jsonValue.at(I.FrequestNode_Expressions).getValueByIndex(e).getValueByString(Pe).getRawString();
     }
     getExpressionFileName(e) {
       return this._jsonValue.at(I.FrequestNode_Expressions).getValueByIndex(e).getValueByString(Ri).getRawString();
@@ -1327,7 +1327,7 @@ var or = { exports: {} };
       return this.isExistMotionFadeOut(e, t) ? this._jsonValue.at(I.FrequestNode_Motions).getValueByString(e).getValueByIndex(t).getValueByString(Di).toFloat() : -1;
     }
     getUserDataFile() {
-      return this.isExistUserDataFile() ? this._json.getRoot().getValueByString(Pe).getValueByString(Li).getRawString() : "";
+      return this.isExistUserDataFile() ? this._json.getRoot().getValueByString(we).getValueByString(Li).getRawString() : "";
     }
     getLayoutMap(e) {
       const t = this._json.getRoot().getValueByString("Layout").getMap();
@@ -1341,7 +1341,7 @@ var or = { exports: {} };
       let e = 0;
       for (let t = 0; t < this._jsonValue.at(I.FrequestNode_Groups).getSize(); t++) {
         const i = this._jsonValue.at(I.FrequestNode_Groups).getValueByIndex(t);
-        if (!i.isNull() && !i.isError() && i.getValueByString(Ie).getRawString() == qt) {
+        if (!i.isNull() && !i.isError() && i.getValueByString(Pe).getRawString() == qt) {
           e = i.getValueByString(Pt).getVector().getSize();
           break;
         }
@@ -1352,7 +1352,7 @@ var or = { exports: {} };
       if (!this.isExistEyeBlinkParameters()) return null;
       for (let t = 0; t < this._jsonValue.at(I.FrequestNode_Groups).getSize(); t++) {
         const i = this._jsonValue.at(I.FrequestNode_Groups).getValueByIndex(t);
-        if (!i.isNull() && !i.isError() && i.getValueByString(Ie).getRawString() == qt) return L.getIdManager().getId(i.getValueByString(Pt).getValueByIndex(e).getRawString());
+        if (!i.isNull() && !i.isError() && i.getValueByString(Pe).getRawString() == qt) return V.getIdManager().getId(i.getValueByString(Pt).getValueByIndex(e).getRawString());
       }
       return null;
     }
@@ -1361,7 +1361,7 @@ var or = { exports: {} };
       let e = 0;
       for (let t = 0; t < this._jsonValue.at(I.FrequestNode_Groups).getSize(); t++) {
         const i = this._jsonValue.at(I.FrequestNode_Groups).getValueByIndex(t);
-        if (!i.isNull() && !i.isError() && i.getValueByString(Ie).getRawString() == Ht) {
+        if (!i.isNull() && !i.isError() && i.getValueByString(Pe).getRawString() == Ht) {
           e = i.getValueByString(Pt).getVector().getSize();
           break;
         }
@@ -1372,7 +1372,7 @@ var or = { exports: {} };
       if (!this.isExistLipSyncParameters()) return null;
       for (let t = 0; t < this._jsonValue.at(I.FrequestNode_Groups).getSize(); t++) {
         const i = this._jsonValue.at(I.FrequestNode_Groups).getValueByIndex(t);
-        if (!i.isNull() && !i.isError() && i.getValueByString(Ie).getRawString() == Ht) return L.getIdManager().getId(i.getValueByString(Pt).getValueByIndex(e).getRawString());
+        if (!i.isNull() && !i.isError() && i.getValueByString(Pe).getRawString() == Ht) return V.getIdManager().getId(i.getValueByString(Pt).getValueByIndex(e).getRawString());
       }
       return null;
     }
@@ -1421,26 +1421,26 @@ var or = { exports: {} };
       return !i.isNull() && !i.isError();
     }
     isExistUserDataFile() {
-      const e = this._json.getRoot().getValueByString(Pe).getValueByString(Li);
+      const e = this._json.getRoot().getValueByString(we).getValueByString(Li);
       return !e.isNull() && !e.isError();
     }
     isExistEyeBlinkParameters() {
       if (this._jsonValue.at(I.FrequestNode_Groups).isNull() || this._jsonValue.at(I.FrequestNode_Groups).isError()) return !1;
-      for (let e = 0; e < this._jsonValue.at(I.FrequestNode_Groups).getSize(); ++e) if (this._jsonValue.at(I.FrequestNode_Groups).getValueByIndex(e).getValueByString(Ie).getRawString() == qt) return !0;
+      for (let e = 0; e < this._jsonValue.at(I.FrequestNode_Groups).getSize(); ++e) if (this._jsonValue.at(I.FrequestNode_Groups).getValueByIndex(e).getValueByString(Pe).getRawString() == qt) return !0;
       return !1;
     }
     isExistLipSyncParameters() {
       if (this._jsonValue.at(I.FrequestNode_Groups).isNull() || this._jsonValue.at(I.FrequestNode_Groups).isError()) return !1;
-      for (let e = 0; e < this._jsonValue.at(I.FrequestNode_Groups).getSize(); ++e) if (this._jsonValue.at(I.FrequestNode_Groups).getValueByIndex(e).getValueByString(Ie).getRawString() == Ht) return !0;
+      for (let e = 0; e < this._jsonValue.at(I.FrequestNode_Groups).getSize(); ++e) if (this._jsonValue.at(I.FrequestNode_Groups).getValueByIndex(e).getValueByString(Pe).getRawString() == Ht) return !0;
       return !1;
     }
   }
   (function(s) {
     s.CubismModelSettingJson = Ui;
   })(ki || (ki = {}));
-  class ot {
+  class nt {
     static create() {
-      return new ot();
+      return new nt();
     }
     static delete(e) {
     }
@@ -1462,13 +1462,13 @@ var or = { exports: {} };
       this._currentTime = 0;
     }
   }
-  class qe {
+  class He {
     constructor(e, t, i, r, a) {
       this.parameterId = e ?? null, this.offset = t ?? 0, this.peak = i ?? 0, this.cycle = r ?? 0, this.weight = a ?? 0;
     }
   }
   (function(s) {
-    s.BreathParameterData = qe, s.CubismBreath = ot;
+    s.BreathParameterData = He, s.CubismBreath = nt;
   })(Oi || (Oi = {}));
   class Fe {
     static create(e = null) {
@@ -1513,7 +1513,7 @@ var or = { exports: {} };
       for (let a = 0; a < this._parameterIds.getSize(); ++a) e.setParameterValueById(this._parameterIds.at(a), i);
     }
     constructor(e) {
-      if (this._blinkingState = Q.EyeState_First, this._nextBlinkingTime = 0, this._stateStartTimeSeconds = 0, this._blinkingIntervalSeconds = 4, this._closingSeconds = 0.1, this._closedSeconds = 0.05, this._openingSeconds = 0.15, this._userTimeSeconds = 0, this._parameterIds = new y(), e != null) for (let t = 0; t < e.getEyeBlinkParameterCount(); ++t) this._parameterIds.pushBack(e.getEyeBlinkParameterId(t));
+      if (this._blinkingState = Q.EyeState_First, this._nextBlinkingTime = 0, this._stateStartTimeSeconds = 0, this._blinkingIntervalSeconds = 4, this._closingSeconds = 0.1, this._closedSeconds = 0.05, this._openingSeconds = 0.15, this._userTimeSeconds = 0, this._parameterIds = new x(), e != null) for (let t = 0; t < e.getEyeBlinkParameterCount(); ++t) this._parameterIds.pushBack(e.getEyeBlinkParameterId(t));
     }
     determinNextBlinkingTiming() {
       const e = Math.random();
@@ -1526,20 +1526,20 @@ var or = { exports: {} };
     s.CubismEyeBlink = Fe, s.EyeState = Q;
   }(Ni || (Ni = {}));
   const zi = "FadeInTime", ji = "Link";
-  class lt {
+  class ot {
     static create(e, t) {
-      const i = new lt(), r = H.create(e, t), a = r.getRoot();
+      const i = new ot(), r = H.create(e, t), a = r.getRoot();
       a.getValueByString(zi).isNull() || (i._fadeTimeSeconds = a.getValueByString(zi).toFloat(0.5), i._fadeTimeSeconds <= 0 && (i._fadeTimeSeconds = 0.5));
       const o = a.getValueByString("Groups"), n = o.getSize();
       for (let l = 0; l < n; ++l) {
         const h = o.getValueByIndex(l), u = h.getSize();
         let _ = 0;
         for (let g = 0; g < u; ++g) {
-          const d = h.getValueByIndex(g), c = new ut(), m = L.getIdManager().getId(d.getValueByString("Id").getRawString());
+          const d = h.getValueByIndex(g), c = new lt(), m = V.getIdManager().getId(d.getValueByString("Id").getRawString());
           if (c.partId = m, !d.getValueByString(ji).isNull()) {
             const p = d.getValueByString(ji), b = p.getSize();
             for (let S = 0; S < b; ++S) {
-              const w = new ut(), f = L.getIdManager().getId(p.getValueByIndex(S).getString());
+              const w = new lt(), f = V.getIdManager().getId(p.getValueByIndex(S).getString());
               w.partId = f, c.link.pushBack(w);
             }
           }
@@ -1606,12 +1606,12 @@ var or = { exports: {} };
       }
     }
     constructor() {
-      this._fadeTimeSeconds = 0.5, this._lastModel = null, this._partGroups = new y(), this._partGroupCounts = new y();
+      this._fadeTimeSeconds = 0.5, this._lastModel = null, this._partGroups = new x(), this._partGroupCounts = new x();
     }
   }
-  class ut {
+  class lt {
     constructor(e) {
-      if (this.parameterIndex = 0, this.partIndex = 0, this.link = new y(), e != null) {
+      if (this.parameterIndex = 0, this.partIndex = 0, this.link = new x(), e != null) {
         this.partId = e.partId;
         for (const t = e.link.begin(); t.notEqual(e.link.end()); t.preIncrement()) this.link.pushBack(t.ptr().clone());
       }
@@ -1625,15 +1625,15 @@ var or = { exports: {} };
       this.parameterIndex = e.getParameterIndex(this.partId), this.partIndex = e.getPartIndex(this.partId), e.setParameterValueByIndex(this.parameterIndex, 1);
     }
     clone() {
-      const e = new ut();
-      e.partId = this.partId, e.parameterIndex = this.parameterIndex, e.partIndex = this.partIndex, e.link = new y();
+      const e = new lt();
+      e.partId = this.partId, e.parameterIndex = this.parameterIndex, e.partIndex = this.partIndex, e.link = new x();
       for (let t = this.link.begin(); t.notEqual(this.link.end()); t.increment()) e.link.pushBack(t.ptr().clone());
       return e;
     }
   }
   var Xi, Gi, Yi, Hi, qi, Wi;
   (function(s) {
-    s.CubismPose = lt, s.PartData = ut;
+    s.CubismPose = ot, s.PartData = lt;
   })(Xi || (Xi = {}));
   class $i extends z {
     constructor(e, t) {
@@ -1695,31 +1695,31 @@ var or = { exports: {} };
   (function(s) {
     s.CubismModelMatrix = $i;
   })(Gi || (Gi = {}));
-  class B {
+  class v {
     constructor(e, t) {
       this.x = e, this.y = t, this.x = e ?? 0, this.y = t ?? 0;
     }
     add(e) {
-      const t = new B(0, 0);
+      const t = new v(0, 0);
       return t.x = this.x + e.x, t.y = this.y + e.y, t;
     }
     substract(e) {
-      const t = new B(0, 0);
+      const t = new v(0, 0);
       return t.x = this.x - e.x, t.y = this.y - e.y, t;
     }
     multiply(e) {
-      const t = new B(0, 0);
+      const t = new v(0, 0);
       return t.x = this.x * e.x, t.y = this.y * e.y, t;
     }
     multiplyByScaler(e) {
-      return this.multiply(new B(e, e));
+      return this.multiply(new v(e, e));
     }
     division(e) {
-      const t = new B(0, 0);
+      const t = new v(0, 0);
       return t.x = this.x / e.x, t.y = this.y / e.y, t;
     }
     divisionByScalar(e) {
-      return this.division(new B(e, e));
+      return this.division(new v(e, e));
     }
     getLength() {
       return Math.sqrt(this.x * this.x + this.y * this.y);
@@ -1742,7 +1742,7 @@ var or = { exports: {} };
     }
   }
   (function(s) {
-    s.CubismVector2 = B;
+    s.CubismVector2 = v;
   })(Yi || (Yi = {}));
   class P {
     static range(e, t, i) {
@@ -1794,7 +1794,7 @@ var or = { exports: {} };
       return t.x - e.x > 0 && (r = -r), r;
     }
     static radianToDirection(e) {
-      const t = new B();
+      const t = new v();
       return t.x = this.sin(e), t.y = this.cos(e), t;
     }
     static quadraticEquation(e, t, i) {
@@ -1804,12 +1804,12 @@ var or = { exports: {} };
       if (this.sqrt(e) < P.Epsilon) return this.range(this.quadraticEquation(t, i, r), 0, 1);
       const a = t / e, o = i / e, n = (3 * o - a * a) / 3, l = n / 3, h = (2 * a * a * a - 9 * a * o + r / e * 27) / 27, u = h / 2, _ = u * u + l * l * l, g = 0.51;
       if (_ < 0) {
-        const m = -n / 3, p = m * m * m, b = this.sqrt(p), S = -h / (2 * b), w = this.range(S, -1, 1), f = Math.acos(w), k = 2 * this.cbrt(b), V = k * this.cos(f / 3) - a / 3;
-        if (this.abs(V - 0.5) < g) return this.range(V, 0, 1);
-        const R = k * this.cos((f + 2 * Math.PI) / 3) - a / 3;
-        if (this.abs(R - 0.5) < g) return this.range(R, 0, 1);
-        const E = k * this.cos((f + 4 * Math.PI) / 3) - a / 3;
-        return this.range(E, 0, 1);
+        const m = -n / 3, p = m * m * m, b = this.sqrt(p), S = -h / (2 * b), w = this.range(S, -1, 1), f = Math.acos(w), k = 2 * this.cbrt(b), E = k * this.cos(f / 3) - a / 3;
+        if (this.abs(E - 0.5) < g) return this.range(E, 0, 1);
+        const L = k * this.cos((f + 2 * Math.PI) / 3) - a / 3;
+        if (this.abs(L - 0.5) < g) return this.range(L, 0, 1);
+        const T = k * this.cos((f + 4 * Math.PI) / 3) - a / 3;
+        return this.range(T, 0, 1);
       }
       if (_ == 0) {
         let m;
@@ -1863,12 +1863,12 @@ var or = { exports: {} };
   (function(s) {
     s.CubismTargetPoint = Ji;
   })(qi || (qi = {}));
-  class We {
+  class qe {
     static delete(e) {
       e.release(), e = null;
     }
     constructor() {
-      this.setFinishedMotionHandler = (e) => this._onFinishedMotion = e, this.getFinishedMotionHandler = () => this._onFinishedMotion, this._fadeInSeconds = -1, this._fadeOutSeconds = -1, this._weight = 1, this._offsetSeconds = 0, this._firedEventValues = new y();
+      this.setFinishedMotionHandler = (e) => this._onFinishedMotion = e, this.getFinishedMotionHandler = () => this._onFinishedMotion, this._fadeInSeconds = -1, this._fadeOutSeconds = -1, this._weight = 1, this._offsetSeconds = 0, this._firedEventValues = new x();
     }
     release() {
       this._weight = 0;
@@ -1881,7 +1881,7 @@ var or = { exports: {} };
         t.getEndTime() < 0 && t.setEndTime(a <= 0 ? -1 : t.getStartTime() + a);
       }
       let r = this._weight;
-      r = r * (this._fadeInSeconds == 0 ? 1 : P.getEasingSine((i - t.getFadeInStartTime()) / this._fadeInSeconds)) * (this._fadeOutSeconds == 0 || t.getEndTime() < 0 ? 1 : P.getEasingSine((t.getEndTime() - i) / this._fadeOutSeconds)), t.setState(i, r), ge(0 <= r && r <= 1), this.doUpdateParameters(e, i, r, t), t.getEndTime() > 0 && t.getEndTime() < i && t.setIsFinished(!0);
+      r = r * (this._fadeInSeconds == 0 ? 1 : P.getEasingSine((i - t.getFadeInStartTime()) / this._fadeInSeconds)) * (this._fadeOutSeconds == 0 || t.getEndTime() < 0 ? 1 : P.getEasingSine((t.getEndTime() - i) / this._fadeOutSeconds)), t.setState(i, r), he(0 <= r && r <= 1), this.doUpdateParameters(e, i, r, t), t.getEndTime() > 0 && t.getEndTime() < i && t.setIsFinished(!0);
     }
     setFadeInTime(e) {
       this._fadeInSeconds = e;
@@ -1927,10 +1927,10 @@ var or = { exports: {} };
     }
   }
   (function(s) {
-    s.ACubismMotion = We;
+    s.ACubismMotion = qe;
   })(Wi || (Wi = {}));
   const Zi = "Parameters", It = "Blend";
-  class Tt extends We {
+  class Tt extends qe {
     static create(e, t) {
       const i = new Tt();
       return i.parse(e, t), i;
@@ -1939,13 +1939,13 @@ var or = { exports: {} };
       for (let a = 0; a < this._parameters.getSize(); ++a) {
         const o = this._parameters.at(a);
         switch (o.blendType) {
-          case pe.ExpressionBlendType_Add:
+          case me.ExpressionBlendType_Add:
             e.addParameterValueById(o.parameterId, o.value, i);
             break;
-          case pe.ExpressionBlendType_Multiply:
+          case me.ExpressionBlendType_Multiply:
             e.multiplyParameterValueById(o.parameterId, o.value, i);
             break;
-          case pe.ExpressionBlendType_Overwrite:
+          case me.ExpressionBlendType_Overwrite:
             e.setParameterValueById(o.parameterId, o.value, i);
         }
       }
@@ -1956,26 +1956,26 @@ var or = { exports: {} };
       const a = r.getValueByString(Zi).getSize();
       this._parameters.prepareCapacity(a);
       for (let o = 0; o < a; ++o) {
-        const n = r.getValueByString(Zi).getValueByIndex(o), l = L.getIdManager().getId(n.getValueByString("Id").getRawString()), h = n.getValueByString("Value").toFloat();
+        const n = r.getValueByString(Zi).getValueByIndex(o), l = V.getIdManager().getId(n.getValueByString("Id").getRawString()), h = n.getValueByString("Value").toFloat();
         let u;
-        u = n.getValueByString(It).isNull() || n.getValueByString(It).getString() == "Add" ? pe.ExpressionBlendType_Add : n.getValueByString(It).getString() == "Multiply" ? pe.ExpressionBlendType_Multiply : n.getValueByString(It).getString() == "Overwrite" ? pe.ExpressionBlendType_Overwrite : pe.ExpressionBlendType_Add;
+        u = n.getValueByString(It).isNull() || n.getValueByString(It).getString() == "Add" ? me.ExpressionBlendType_Add : n.getValueByString(It).getString() == "Multiply" ? me.ExpressionBlendType_Multiply : n.getValueByString(It).getString() == "Overwrite" ? me.ExpressionBlendType_Overwrite : me.ExpressionBlendType_Add;
         const _ = new es();
         _.parameterId = l, _.blendType = u, _.value = h, this._parameters.pushBack(_);
       }
       H.delete(i);
     }
     constructor() {
-      super(), this._parameters = new y();
+      super(), this._parameters = new x();
     }
   }
-  var pe, Ki, ee, re, Qi;
+  var me, Ki, ee, re, Qi;
   (function(s) {
     s[s.ExpressionBlendType_Add = 0] = "ExpressionBlendType_Add", s[s.ExpressionBlendType_Multiply = 1] = "ExpressionBlendType_Multiply", s[s.ExpressionBlendType_Overwrite = 2] = "ExpressionBlendType_Overwrite";
-  })(pe || (pe = {}));
+  })(me || (me = {}));
   class es {
   }
   (function(s) {
-    s.CubismExpressionMotion = Tt, s.ExpressionBlendType = pe, s.ExpressionParameter = es;
+    s.CubismExpressionMotion = Tt, s.ExpressionBlendType = me, s.ExpressionParameter = es;
   })(Ki || (Ki = {})), function(s) {
     s[s.CubismMotionCurveTarget_Model = 0] = "CubismMotionCurveTarget_Model", s[s.CubismMotionCurveTarget_Parameter = 1] = "CubismMotionCurveTarget_Parameter", s[s.CubismMotionCurveTarget_PartOpacity = 2] = "CubismMotionCurveTarget_PartOpacity";
   }(ee || (ee = {})), function(s) {
@@ -2003,13 +2003,13 @@ var or = { exports: {} };
   }
   class rs {
     constructor() {
-      this.duration = 0, this.loop = !1, this.curveCount = 0, this.eventCount = 0, this.fps = 0, this.curves = new y(), this.segments = new y(), this.points = new y(), this.events = new y();
+      this.duration = 0, this.loop = !1, this.curveCount = 0, this.eventCount = 0, this.fps = 0, this.curves = new x(), this.segments = new x(), this.points = new x(), this.events = new x();
     }
   }
   (function(s) {
     s.CubismMotionCurve = is, s.CubismMotionCurveTarget = ee, s.CubismMotionData = rs, s.CubismMotionEvent = ss, s.CubismMotionPoint = Wt, s.CubismMotionSegment = ts, s.CubismMotionSegmentType = re;
   })(Qi || (Qi = {}));
-  const te = "Meta", Te = "Curves", Et = "FadeInTime", Vt = "FadeOutTime", as = "Segments", ns = "UserData";
+  const te = "Meta", Ie = "Curves", Et = "FadeInTime", Vt = "FadeOutTime", as = "Segments", ns = "UserData";
   class os {
     constructor(e, t) {
       this._json = H.create(e, t);
@@ -2051,28 +2051,28 @@ var or = { exports: {} };
       return this._json.getRoot().getValueByString(te).getValueByString(Vt).toFloat();
     }
     getMotionCurveTarget(e) {
-      return this._json.getRoot().getValueByString(Te).getValueByIndex(e).getValueByString("Target").getRawString();
+      return this._json.getRoot().getValueByString(Ie).getValueByIndex(e).getValueByString("Target").getRawString();
     }
     getMotionCurveId(e) {
-      return L.getIdManager().getId(this._json.getRoot().getValueByString(Te).getValueByIndex(e).getValueByString("Id").getRawString());
+      return V.getIdManager().getId(this._json.getRoot().getValueByString(Ie).getValueByIndex(e).getValueByString("Id").getRawString());
     }
     isExistMotionCurveFadeInTime(e) {
-      return !this._json.getRoot().getValueByString(Te).getValueByIndex(e).getValueByString(Et).isNull();
+      return !this._json.getRoot().getValueByString(Ie).getValueByIndex(e).getValueByString(Et).isNull();
     }
     isExistMotionCurveFadeOutTime(e) {
-      return !this._json.getRoot().getValueByString(Te).getValueByIndex(e).getValueByString(Vt).isNull();
+      return !this._json.getRoot().getValueByString(Ie).getValueByIndex(e).getValueByString(Vt).isNull();
     }
     getMotionCurveFadeInTime(e) {
-      return this._json.getRoot().getValueByString(Te).getValueByIndex(e).getValueByString(Et).toFloat();
+      return this._json.getRoot().getValueByString(Ie).getValueByIndex(e).getValueByString(Et).toFloat();
     }
     getMotionCurveFadeOutTime(e) {
-      return this._json.getRoot().getValueByString(Te).getValueByIndex(e).getValueByString(Vt).toFloat();
+      return this._json.getRoot().getValueByString(Ie).getValueByIndex(e).getValueByString(Vt).toFloat();
     }
     getMotionCurveSegmentCount(e) {
-      return this._json.getRoot().getValueByString(Te).getValueByIndex(e).getValueByString(as).getVector().getSize();
+      return this._json.getRoot().getValueByString(Ie).getValueByIndex(e).getValueByString(as).getVector().getSize();
     }
     getMotionCurveSegment(e, t) {
-      return this._json.getRoot().getValueByString(Te).getValueByIndex(e).getValueByString(as).getValueByIndex(t).toFloat();
+      return this._json.getRoot().getValueByString(Ie).getValueByIndex(e).getValueByString(as).getValueByIndex(t).toFloat();
     }
     getEventCount() {
       return this._json.getRoot().getValueByString(te).getValueByString("UserDataCount").toInt();
@@ -2131,19 +2131,19 @@ var or = { exports: {} };
     const n = s.segments.at(r);
     return n.evaluate(s.points.get(n.basePointIndex), t);
   }
-  class Ft extends We {
+  class Ft extends qe {
     static create(e, t, i) {
       const r = new Ft();
       return r.parse(e, t), r._sourceFrameRate = r._motionData.fps, r._loopDurationSeconds = r._motionData.duration, r._onFinishedMotion = i, r;
     }
     doUpdateParameters(e, t, i, r) {
-      this._modelCurveIdEyeBlink == null && (this._modelCurveIdEyeBlink = L.getIdManager().getId("EyeBlink")), this._modelCurveIdLipSync == null && (this._modelCurveIdLipSync = L.getIdManager().getId("LipSync")), this._modelCurveIdOpacity == null && (this._modelCurveIdOpacity = L.getIdManager().getId(Rt));
+      this._modelCurveIdEyeBlink == null && (this._modelCurveIdEyeBlink = V.getIdManager().getId("EyeBlink")), this._modelCurveIdLipSync == null && (this._modelCurveIdLipSync = V.getIdManager().getId("LipSync")), this._modelCurveIdOpacity == null && (this._modelCurveIdOpacity = V.getIdManager().getId(Rt));
       let a = t - r.getStartTime();
       a < 0 && (a = 0);
       let o = Number.MAX_VALUE, n = Number.MAX_VALUE;
       const l = 64;
       let h = 0, u = 0;
-      this._eyeBlinkParameterIds.getSize() > l && st("too many eye blink targets : {0}", this._eyeBlinkParameterIds.getSize()), this._lipSyncParameterIds.getSize() > l && st("too many lip sync targets : {0}", this._lipSyncParameterIds.getSize());
+      this._eyeBlinkParameterIds.getSize() > l && it("too many eye blink targets : {0}", this._eyeBlinkParameterIds.getSize()), this._lipSyncParameterIds.getSize() > l && it("too many lip sync targets : {0}", this._lipSyncParameterIds.getSize());
       const _ = this._fadeInSeconds <= 0 ? 1 : P.getEasingSine((t - r.getFadeInStartTime()) / this._fadeInSeconds), g = this._fadeOutSeconds <= 0 || r.getEndTime() < 0 ? 1 : P.getEasingSine((r.getEndTime() - t) / this._fadeOutSeconds);
       let d, c, m, p = a;
       if (this._isLoop) for (; p > this._motionData.duration; ) p -= this._motionData.duration;
@@ -2240,7 +2240,7 @@ var or = { exports: {} };
       i.isExistMotionFadeInTime() ? this._fadeInSeconds = i.getMotionFadeInTime() < 0 ? 1 : i.getMotionFadeInTime() : this._fadeInSeconds = 1, i.isExistMotionFadeOutTime() ? this._fadeOutSeconds = i.getMotionFadeOutTime() < 0 ? 1 : i.getMotionFadeOutTime() : this._fadeOutSeconds = 1, this._motionData.curves.updateSize(this._motionData.curveCount, is, !0), this._motionData.segments.updateSize(i.getMotionTotalSegmentCount(), ts, !0), this._motionData.points.updateSize(i.getMotionTotalPointCount(), Wt, !0), this._motionData.events.updateSize(this._motionData.eventCount, ss, !0);
       let a = 0, o = 0;
       for (let n = 0; n < this._motionData.curveCount; ++n) {
-        i.getMotionCurveTarget(n) == "Model" ? this._motionData.curves.at(n).type = ee.CubismMotionCurveTarget_Model : i.getMotionCurveTarget(n) == "Parameter" ? this._motionData.curves.at(n).type = ee.CubismMotionCurveTarget_Parameter : i.getMotionCurveTarget(n) == "PartOpacity" ? this._motionData.curves.at(n).type = ee.CubismMotionCurveTarget_PartOpacity : be('Warning : Unable to get segment type from Curve! The number of "CurveCount" may be incorrect!'), this._motionData.curves.at(n).id = i.getMotionCurveId(n), this._motionData.curves.at(n).baseSegmentIndex = o, this._motionData.curves.at(n).fadeInTime = i.isExistMotionCurveFadeInTime(n) ? i.getMotionCurveFadeInTime(n) : -1, this._motionData.curves.at(n).fadeOutTime = i.isExistMotionCurveFadeOutTime(n) ? i.getMotionCurveFadeOutTime(n) : -1;
+        i.getMotionCurveTarget(n) == "Model" ? this._motionData.curves.at(n).type = ee.CubismMotionCurveTarget_Model : i.getMotionCurveTarget(n) == "Parameter" ? this._motionData.curves.at(n).type = ee.CubismMotionCurveTarget_Parameter : i.getMotionCurveTarget(n) == "PartOpacity" ? this._motionData.curves.at(n).type = ee.CubismMotionCurveTarget_PartOpacity : ve('Warning : Unable to get segment type from Curve! The number of "CurveCount" may be incorrect!'), this._motionData.curves.at(n).id = i.getMotionCurveId(n), this._motionData.curves.at(n).baseSegmentIndex = o, this._motionData.curves.at(n).fadeInTime = i.isExistMotionCurveFadeInTime(n) ? i.getMotionCurveFadeInTime(n) : -1, this._motionData.curves.at(n).fadeOutTime = i.isExistMotionCurveFadeOutTime(n) ? i.getMotionCurveFadeOutTime(n) : -1;
         for (let l = 0; l < i.getMotionCurveSegmentCount(n); ) {
           switch (l == 0 ? (this._motionData.segments.at(o).basePointIndex = a, this._motionData.points.at(a).time = i.getMotionCurveSegment(n, l), this._motionData.points.at(a).value = i.getMotionCurveSegment(n, l + 1), a += 1, l += 2) : this._motionData.segments.at(o).basePointIndex = a - 1, i.getMotionCurveSegment(n, l)) {
             case re.CubismMotionSegmentType_Linear:
@@ -2256,7 +2256,7 @@ var or = { exports: {} };
               this._motionData.segments.at(o).segmentType = re.CubismMotionSegmentType_InverseStepped, this._motionData.segments.at(o).evaluate = vr, this._motionData.points.at(a).time = i.getMotionCurveSegment(n, l + 1), this._motionData.points.at(a).value = i.getMotionCurveSegment(n, l + 2), a += 1, l += 3;
               break;
             default:
-              ge(0);
+              he(0);
           }
           ++this._motionData.curves.at(n).segmentCount, ++o;
         }
@@ -2286,7 +2286,7 @@ var or = { exports: {} };
     getModelOpacityId(e) {
       if (e != -1) {
         const t = this._motionData.curves.at(e);
-        if (t.type == ee.CubismMotionCurveTarget_Model && t.id.getString().s.localeCompare(Rt) == 0) return L.getIdManager().getId(t.id.getString().s);
+        if (t.type == ee.CubismMotionCurveTarget_Model && t.id.getString().s.localeCompare(Rt) == 0) return V.getIdManager().getId(t.id.getString().s);
       }
       return null;
     }
@@ -2303,7 +2303,7 @@ var or = { exports: {} };
       this._autoDelete = !1, this._motion = null, this._available = !0, this._finished = !1, this._started = !1, this._startTimeSeconds = -1, this._fadeInStartTimeSeconds = 0, this._endTimeSeconds = -1, this._stateTimeSeconds = 0, this._stateWeight = 0, this._lastEventCheckSeconds = 0, this._motionQueueEntryHandle = this, this._fadeOutSeconds = 0, this._isTriggeredFadeOut = !1;
     }
     release() {
-      this._autoDelete && this._motion && We.delete(this._motion);
+      this._autoDelete && this._motion && qe.delete(this._motion);
     }
     setFadeOut(e) {
       this._fadeOutSeconds = e, this._isTriggeredFadeOut = !0;
@@ -2375,7 +2375,7 @@ var or = { exports: {} };
   })(hs || (hs = {}));
   class ds {
     constructor() {
-      this._userTimeSeconds = 0, this._eventCallBack = null, this._eventCustomData = null, this._motions = new y();
+      this._userTimeSeconds = 0, this._eventCallBack = null, this._eventCustomData = null, this._motions = new x();
     }
     release() {
       for (let e = 0; e < this._motions.getSize(); ++e) this._motions.at(e) && (this._motions.at(e).release(), this._motions.set(e, null));
@@ -2443,7 +2443,7 @@ var or = { exports: {} };
     }
   }
   const At = -1;
-  var cs, _s, ht, ye, ms;
+  var cs, _s, ut, fe, ms;
   (function(s) {
     s.CubismMotionQueueManager = ds, s.InvalidMotionQueueEntryHandleValue = At;
   })(cs || (cs = {}));
@@ -2476,12 +2476,12 @@ var or = { exports: {} };
     s.CubismMotionManager = Jt;
   })(_s || (_s = {})), function(s) {
     s[s.CubismPhysicsTargetType_Parameter = 0] = "CubismPhysicsTargetType_Parameter";
-  }(ht || (ht = {})), function(s) {
+  }(ut || (ut = {})), function(s) {
     s[s.CubismPhysicsSource_X = 0] = "CubismPhysicsSource_X", s[s.CubismPhysicsSource_Y = 1] = "CubismPhysicsSource_Y", s[s.CubismPhysicsSource_Angle = 2] = "CubismPhysicsSource_Angle";
-  }(ye || (ye = {}));
+  }(fe || (fe = {}));
   class br {
     constructor() {
-      this.gravity = new B(0, 0), this.wind = new B(0, 0);
+      this.gravity = new v(0, 0), this.wind = new v(0, 0);
     }
   }
   class Zt {
@@ -2490,7 +2490,7 @@ var or = { exports: {} };
   }
   class ps {
     constructor() {
-      this.initialPosition = new B(0, 0), this.position = new B(0, 0), this.lastPosition = new B(0, 0), this.lastGravity = new B(0, 0), this.force = new B(0, 0), this.velocity = new B(0, 0);
+      this.initialPosition = new v(0, 0), this.position = new v(0, 0), this.lastPosition = new v(0, 0), this.lastGravity = new v(0, 0), this.force = new v(0, 0), this.velocity = new v(0, 0);
     }
   }
   class fs {
@@ -2505,18 +2505,18 @@ var or = { exports: {} };
   }
   class xs {
     constructor() {
-      this.destination = new Zt(), this.translationScale = new B(0, 0);
+      this.destination = new Zt(), this.translationScale = new v(0, 0);
     }
   }
   class Ss {
     constructor() {
-      this.settings = new y(), this.inputs = new y(), this.outputs = new y(), this.particles = new y(), this.gravity = new B(0, 0), this.wind = new B(0, 0), this.fps = 0;
+      this.settings = new x(), this.inputs = new x(), this.outputs = new x(), this.particles = new x(), this.gravity = new v(0, 0), this.wind = new v(0, 0), this.fps = 0;
     }
   }
   (function(s) {
-    s.CubismPhysicsInput = ys, s.CubismPhysicsNormalization = Kt, s.CubismPhysicsOutput = xs, s.CubismPhysicsParameter = Zt, s.CubismPhysicsParticle = ps, s.CubismPhysicsRig = Ss, s.CubismPhysicsSource = ye, s.CubismPhysicsSubRig = fs, s.CubismPhysicsTargetType = ht, s.PhysicsJsonEffectiveForces = br;
+    s.CubismPhysicsInput = ys, s.CubismPhysicsNormalization = Kt, s.CubismPhysicsOutput = xs, s.CubismPhysicsParameter = Zt, s.CubismPhysicsParticle = ps, s.CubismPhysicsRig = Ss, s.CubismPhysicsSource = fe, s.CubismPhysicsSubRig = fs, s.CubismPhysicsTargetType = ut, s.PhysicsJsonEffectiveForces = br;
   })(ms || (ms = {}));
-  const gt = "Position", Qt = "Angle", Cs = "Type", xe = "Meta", Dt = "EffectiveForces", Bs = "Gravity", vs = "Wind", O = "PhysicsSettings", $e = "Normalization", bs = "Minimum", Ms = "Maximum", ws = "Default", Ps = "Reflect", Is = "Weight", dt = "Input", Ae = "Output", De = "Vertices";
+  const ht = "Position", Qt = "Angle", Cs = "Type", ye = "Meta", Dt = "EffectiveForces", Bs = "Gravity", vs = "Wind", O = "PhysicsSettings", We = "Normalization", bs = "Minimum", Ms = "Maximum", ws = "Default", Ps = "Reflect", Is = "Weight", gt = "Input", Ae = "Output", De = "Vertices";
   class Ts {
     constructor(e, t) {
       this._json = H.create(e, t);
@@ -2525,60 +2525,60 @@ var or = { exports: {} };
       H.delete(this._json);
     }
     getGravity() {
-      const e = new B(0, 0);
-      return e.x = this._json.getRoot().getValueByString(xe).getValueByString(Dt).getValueByString(Bs).getValueByString("X").toFloat(), e.y = this._json.getRoot().getValueByString(xe).getValueByString(Dt).getValueByString(Bs).getValueByString("Y").toFloat(), e;
+      const e = new v(0, 0);
+      return e.x = this._json.getRoot().getValueByString(ye).getValueByString(Dt).getValueByString(Bs).getValueByString("X").toFloat(), e.y = this._json.getRoot().getValueByString(ye).getValueByString(Dt).getValueByString(Bs).getValueByString("Y").toFloat(), e;
     }
     getWind() {
-      const e = new B(0, 0);
-      return e.x = this._json.getRoot().getValueByString(xe).getValueByString(Dt).getValueByString(vs).getValueByString("X").toFloat(), e.y = this._json.getRoot().getValueByString(xe).getValueByString(Dt).getValueByString(vs).getValueByString("Y").toFloat(), e;
+      const e = new v(0, 0);
+      return e.x = this._json.getRoot().getValueByString(ye).getValueByString(Dt).getValueByString(vs).getValueByString("X").toFloat(), e.y = this._json.getRoot().getValueByString(ye).getValueByString(Dt).getValueByString(vs).getValueByString("Y").toFloat(), e;
     }
     getFps() {
-      return this._json.getRoot().getValueByString(xe).getValueByString("Fps").toFloat(0);
+      return this._json.getRoot().getValueByString(ye).getValueByString("Fps").toFloat(0);
     }
     getSubRigCount() {
-      return this._json.getRoot().getValueByString(xe).getValueByString("PhysicsSettingCount").toInt();
+      return this._json.getRoot().getValueByString(ye).getValueByString("PhysicsSettingCount").toInt();
     }
     getTotalInputCount() {
-      return this._json.getRoot().getValueByString(xe).getValueByString("TotalInputCount").toInt();
+      return this._json.getRoot().getValueByString(ye).getValueByString("TotalInputCount").toInt();
     }
     getTotalOutputCount() {
-      return this._json.getRoot().getValueByString(xe).getValueByString("TotalOutputCount").toInt();
+      return this._json.getRoot().getValueByString(ye).getValueByString("TotalOutputCount").toInt();
     }
     getVertexCount() {
-      return this._json.getRoot().getValueByString(xe).getValueByString("VertexCount").toInt();
+      return this._json.getRoot().getValueByString(ye).getValueByString("VertexCount").toInt();
     }
     getNormalizationPositionMinimumValue(e) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString($e).getValueByString(gt).getValueByString(bs).toFloat();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(We).getValueByString(ht).getValueByString(bs).toFloat();
     }
     getNormalizationPositionMaximumValue(e) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString($e).getValueByString(gt).getValueByString(Ms).toFloat();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(We).getValueByString(ht).getValueByString(Ms).toFloat();
     }
     getNormalizationPositionDefaultValue(e) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString($e).getValueByString(gt).getValueByString(ws).toFloat();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(We).getValueByString(ht).getValueByString(ws).toFloat();
     }
     getNormalizationAngleMinimumValue(e) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString($e).getValueByString(Qt).getValueByString(bs).toFloat();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(We).getValueByString(Qt).getValueByString(bs).toFloat();
     }
     getNormalizationAngleMaximumValue(e) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString($e).getValueByString(Qt).getValueByString(Ms).toFloat();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(We).getValueByString(Qt).getValueByString(Ms).toFloat();
     }
     getNormalizationAngleDefaultValue(e) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString($e).getValueByString(Qt).getValueByString(ws).toFloat();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(We).getValueByString(Qt).getValueByString(ws).toFloat();
     }
     getInputCount(e) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(dt).getVector().getSize();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(gt).getVector().getSize();
     }
     getInputWeight(e, t) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(dt).getValueByIndex(t).getValueByString(Is).toFloat();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(gt).getValueByIndex(t).getValueByString(Is).toFloat();
     }
     getInputReflect(e, t) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(dt).getValueByIndex(t).getValueByString(Ps).toBoolean();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(gt).getValueByIndex(t).getValueByString(Ps).toBoolean();
     }
     getInputType(e, t) {
-      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(dt).getValueByIndex(t).getValueByString(Cs).getRawString();
+      return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(gt).getValueByIndex(t).getValueByString(Cs).getRawString();
     }
     getInputSourceId(e, t) {
-      return L.getIdManager().getId(this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(dt).getValueByIndex(t).getValueByString("Source").getValueByString("Id").getRawString());
+      return V.getIdManager().getId(this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(gt).getValueByIndex(t).getValueByString("Source").getValueByString("Id").getRawString());
     }
     getOutputCount(e) {
       return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(Ae).getVector().getSize();
@@ -2593,7 +2593,7 @@ var or = { exports: {} };
       return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(Ae).getValueByIndex(t).getValueByString(Is).toFloat();
     }
     getOutputDestinationId(e, t) {
-      return L.getIdManager().getId(this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(Ae).getValueByIndex(t).getValueByString("Destination").getValueByString("Id").getRawString());
+      return V.getIdManager().getId(this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(Ae).getValueByIndex(t).getValueByString("Destination").getValueByString("Id").getRawString());
     }
     getOutputType(e, t) {
       return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(Ae).getValueByIndex(t).getValueByString(Cs).getRawString();
@@ -2617,8 +2617,8 @@ var or = { exports: {} };
       return this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(De).getValueByIndex(t).getValueByString("Radius").toFloat();
     }
     getParticlePosition(e, t) {
-      const i = new B(0, 0);
-      return i.x = this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(De).getValueByIndex(t).getValueByString(gt).getValueByString("X").toFloat(), i.y = this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(De).getValueByIndex(t).getValueByString(gt).getValueByString("Y").toFloat(), i;
+      const i = new v(0, 0);
+      return i.x = this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(De).getValueByIndex(t).getValueByString(ht).getValueByString("X").toFloat(), i.y = this._json.getRoot().getValueByString(O).getValueByIndex(e).getValueByString(De).getValueByIndex(t).getValueByString(ht).getValueByString("Y").toFloat(), i;
     }
   }
   var Es;
@@ -2626,9 +2626,9 @@ var or = { exports: {} };
     s.CubismPhysicsJson = Ts;
   })(Es || (Es = {}));
   const Vs = "Angle";
-  class ct {
+  class dt {
     static create(e, t) {
-      const i = new ct();
+      const i = new dt();
       return i.parse(e, t), i._physicsRig.gravity.y = 0, i;
     }
     static delete(e) {
@@ -2641,13 +2641,13 @@ var or = { exports: {} };
       let r = 0, a = 0, o = 0;
       for (let n = 0; n < this._physicsRig.settings.getSize(); ++n) {
         this._physicsRig.settings.at(n).normalizationPosition.minimum = i.getNormalizationPositionMinimumValue(n), this._physicsRig.settings.at(n).normalizationPosition.maximum = i.getNormalizationPositionMaximumValue(n), this._physicsRig.settings.at(n).normalizationPosition.defalut = i.getNormalizationPositionDefaultValue(n), this._physicsRig.settings.at(n).normalizationAngle.minimum = i.getNormalizationAngleMinimumValue(n), this._physicsRig.settings.at(n).normalizationAngle.maximum = i.getNormalizationAngleMaximumValue(n), this._physicsRig.settings.at(n).normalizationAngle.defalut = i.getNormalizationAngleDefaultValue(n), this._physicsRig.settings.at(n).inputCount = i.getInputCount(n), this._physicsRig.settings.at(n).baseInputIndex = r;
-        for (let u = 0; u < this._physicsRig.settings.at(n).inputCount; ++u) this._physicsRig.inputs.at(r + u).sourceParameterIndex = -1, this._physicsRig.inputs.at(r + u).weight = i.getInputWeight(n, u), this._physicsRig.inputs.at(r + u).reflect = i.getInputReflect(n, u), i.getInputType(n, u) == "X" ? (this._physicsRig.inputs.at(r + u).type = ye.CubismPhysicsSource_X, this._physicsRig.inputs.at(r + u).getNormalizedParameterValue = Mr) : i.getInputType(n, u) == "Y" ? (this._physicsRig.inputs.at(r + u).type = ye.CubismPhysicsSource_Y, this._physicsRig.inputs.at(r + u).getNormalizedParameterValue = wr) : i.getInputType(n, u) == Vs && (this._physicsRig.inputs.at(r + u).type = ye.CubismPhysicsSource_Angle, this._physicsRig.inputs.at(r + u).getNormalizedParameterValue = Pr), this._physicsRig.inputs.at(r + u).source.targetType = ht.CubismPhysicsTargetType_Parameter, this._physicsRig.inputs.at(r + u).source.id = i.getInputSourceId(n, u);
+        for (let u = 0; u < this._physicsRig.settings.at(n).inputCount; ++u) this._physicsRig.inputs.at(r + u).sourceParameterIndex = -1, this._physicsRig.inputs.at(r + u).weight = i.getInputWeight(n, u), this._physicsRig.inputs.at(r + u).reflect = i.getInputReflect(n, u), i.getInputType(n, u) == "X" ? (this._physicsRig.inputs.at(r + u).type = fe.CubismPhysicsSource_X, this._physicsRig.inputs.at(r + u).getNormalizedParameterValue = Mr) : i.getInputType(n, u) == "Y" ? (this._physicsRig.inputs.at(r + u).type = fe.CubismPhysicsSource_Y, this._physicsRig.inputs.at(r + u).getNormalizedParameterValue = wr) : i.getInputType(n, u) == Vs && (this._physicsRig.inputs.at(r + u).type = fe.CubismPhysicsSource_Angle, this._physicsRig.inputs.at(r + u).getNormalizedParameterValue = Pr), this._physicsRig.inputs.at(r + u).source.targetType = ut.CubismPhysicsTargetType_Parameter, this._physicsRig.inputs.at(r + u).source.id = i.getInputSourceId(n, u);
         r += this._physicsRig.settings.at(n).inputCount, this._physicsRig.settings.at(n).outputCount = i.getOutputCount(n), this._physicsRig.settings.at(n).baseOutputIndex = a;
         const l = new Rs();
         l.outputs.resize(this._physicsRig.settings.at(n).outputCount);
         const h = new Rs();
         h.outputs.resize(this._physicsRig.settings.at(n).outputCount);
-        for (let u = 0; u < this._physicsRig.settings.at(n).outputCount; ++u) l.outputs.set(u, 0), h.outputs.set(u, 0), this._physicsRig.outputs.at(a + u).destinationParameterIndex = -1, this._physicsRig.outputs.at(a + u).vertexIndex = i.getOutputVertexIndex(n, u), this._physicsRig.outputs.at(a + u).angleScale = i.getOutputAngleScale(n, u), this._physicsRig.outputs.at(a + u).weight = i.getOutputWeight(n, u), this._physicsRig.outputs.at(a + u).destination.targetType = ht.CubismPhysicsTargetType_Parameter, this._physicsRig.outputs.at(a + u).destination.id = i.getOutputDestinationId(n, u), i.getOutputType(n, u) == "X" ? (this._physicsRig.outputs.at(a + u).type = ye.CubismPhysicsSource_X, this._physicsRig.outputs.at(a + u).getValue = Ir, this._physicsRig.outputs.at(a + u).getScale = Vr) : i.getOutputType(n, u) == "Y" ? (this._physicsRig.outputs.at(a + u).type = ye.CubismPhysicsSource_Y, this._physicsRig.outputs.at(a + u).getValue = Tr, this._physicsRig.outputs.at(a + u).getScale = Lr) : i.getOutputType(n, u) == Vs && (this._physicsRig.outputs.at(a + u).type = ye.CubismPhysicsSource_Angle, this._physicsRig.outputs.at(a + u).getValue = Er, this._physicsRig.outputs.at(a + u).getScale = Rr), this._physicsRig.outputs.at(a + u).reflect = i.getOutputReflect(n, u);
+        for (let u = 0; u < this._physicsRig.settings.at(n).outputCount; ++u) l.outputs.set(u, 0), h.outputs.set(u, 0), this._physicsRig.outputs.at(a + u).destinationParameterIndex = -1, this._physicsRig.outputs.at(a + u).vertexIndex = i.getOutputVertexIndex(n, u), this._physicsRig.outputs.at(a + u).angleScale = i.getOutputAngleScale(n, u), this._physicsRig.outputs.at(a + u).weight = i.getOutputWeight(n, u), this._physicsRig.outputs.at(a + u).destination.targetType = ut.CubismPhysicsTargetType_Parameter, this._physicsRig.outputs.at(a + u).destination.id = i.getOutputDestinationId(n, u), i.getOutputType(n, u) == "X" ? (this._physicsRig.outputs.at(a + u).type = fe.CubismPhysicsSource_X, this._physicsRig.outputs.at(a + u).getValue = Ir, this._physicsRig.outputs.at(a + u).getScale = Vr) : i.getOutputType(n, u) == "Y" ? (this._physicsRig.outputs.at(a + u).type = fe.CubismPhysicsSource_Y, this._physicsRig.outputs.at(a + u).getValue = Tr, this._physicsRig.outputs.at(a + u).getScale = Lr) : i.getOutputType(n, u) == Vs && (this._physicsRig.outputs.at(a + u).type = fe.CubismPhysicsSource_Angle, this._physicsRig.outputs.at(a + u).getValue = Er, this._physicsRig.outputs.at(a + u).getScale = Rr), this._physicsRig.outputs.at(a + u).reflect = i.getOutputReflect(n, u);
         this._currentRigOutputs.pushBack(l), this._previousRigOutputs.pushBack(h), a += this._physicsRig.settings.at(n).outputCount, this._physicsRig.settings.at(n).particleCount = i.getParticleCount(n), this._physicsRig.settings.at(n).baseParticleIndex = o;
         for (let u = 0; u < this._physicsRig.settings.at(n).particleCount; ++u) this._physicsRig.particles.at(o + u).mobility = i.getParticleMobility(n, u), this._physicsRig.particles.at(o + u).delay = i.getParticleDelay(n, u), this._physicsRig.particles.at(o + u).acceleration = i.getParticleAcceleration(n, u), this._physicsRig.particles.at(o + u).radius = i.getParticleRadius(n, u), this._physicsRig.particles.at(o + u).position = i.getParticlePosition(n, u);
         o += this._physicsRig.settings.at(n).particleCount;
@@ -2657,7 +2657,7 @@ var or = { exports: {} };
     stabilization(e) {
       var t, i, r, a;
       let o, n, l, h;
-      const u = new B();
+      const u = new v();
       let _, g, d, c, m, p, b, S;
       m = e.getModel().parameters.values, p = e.getModel().parameters.maximumValues, b = e.getModel().parameters.minimumValues, S = e.getModel().parameters.defaultValues, ((i = (t = this._parameterCaches) === null || t === void 0 ? void 0 : t.length) !== null && i !== void 0 ? i : 0) < e.getParameterCount() && (this._parameterCaches = new Float32Array(e.getParameterCount())), ((a = (r = this._parameterInputCaches) === null || r === void 0 ? void 0 : r.length) !== null && a !== void 0 ? a : 0) < e.getParameterCount() && (this._parameterInputCaches = new Float32Array(e.getParameterCount()));
       for (let w = 0; w < e.getParameterCount(); ++w) this._parameterCaches[w] = m[w], this._parameterInputCaches[w] = m[w];
@@ -2668,43 +2668,43 @@ var or = { exports: {} };
         for (let f = 0; f < _.outputCount; ++f) {
           const k = d[f].vertexIndex;
           if (d[f].destinationParameterIndex == -1 && (d[f].destinationParameterIndex = e.getParameterIndex(d[f].destination.id)), k < 1 || k >= _.particleCount) continue;
-          let V = new B();
-          V = c[k].position.substract(c[k - 1].position), h = d[f].getValue(V, c, k, d[f].reflect, this._options.gravity), this._currentRigOutputs.at(w).outputs.set(f, h), this._previousRigOutputs.at(w).outputs.set(f, h);
-          const R = d[f].destinationParameterIndex, E = !Float32Array.prototype.slice && "subarray" in Float32Array.prototype ? JSON.parse(JSON.stringify(m.subarray(R))) : m.slice(R);
-          ei(E, b[R], p[R], h, d[f]);
-          for (let q = R, tt = 0; q < this._parameterCaches.length; q++, tt++) m[q] = this._parameterCaches[q] = E[tt];
+          let E = new v();
+          E = c[k].position.substract(c[k - 1].position), h = d[f].getValue(E, c, k, d[f].reflect, this._options.gravity), this._currentRigOutputs.at(w).outputs.set(f, h), this._previousRigOutputs.at(w).outputs.set(f, h);
+          const L = d[f].destinationParameterIndex, T = !Float32Array.prototype.slice && "subarray" in Float32Array.prototype ? JSON.parse(JSON.stringify(m.subarray(L))) : m.slice(L);
+          ei(T, b[L], p[L], h, d[f]);
+          for (let q = L, et = 0; q < this._parameterCaches.length; q++, et++) m[q] = this._parameterCaches[q] = T[et];
         }
       }
     }
     evaluate(e, t) {
       var i, r, a, o;
       let n, l, h, u;
-      const _ = new B();
+      const _ = new v();
       let g, d, c, m, p, b, S, w, f;
       if (0 >= t) return;
       if (this._currentRemainTime += t, this._currentRemainTime > 5 && (this._currentRemainTime = 0), p = e.getModel().parameters.values, b = e.getModel().parameters.maximumValues, S = e.getModel().parameters.minimumValues, w = e.getModel().parameters.defaultValues, ((r = (i = this._parameterCaches) === null || i === void 0 ? void 0 : i.length) !== null && r !== void 0 ? r : 0) < e.getParameterCount() && (this._parameterCaches = new Float32Array(e.getParameterCount())), ((o = (a = this._parameterInputCaches) === null || a === void 0 ? void 0 : a.length) !== null && o !== void 0 ? o : 0) < e.getParameterCount()) {
         this._parameterInputCaches = new Float32Array(e.getParameterCount());
-        for (let V = 0; V < e.getParameterCount(); ++V) this._parameterInputCaches[V] = p[V];
+        for (let E = 0; E < e.getParameterCount(); ++E) this._parameterInputCaches[E] = p[E];
       }
       for (f = this._physicsRig.fps > 0 ? 1 / this._physicsRig.fps : t; this._currentRemainTime >= f; ) {
-        for (let R = 0; R < this._physicsRig.subRigCount; ++R) {
-          g = this._physicsRig.settings.at(R), c = this._physicsRig.outputs.get(g.baseOutputIndex);
-          for (let E = 0; E < g.outputCount; ++E) this._previousRigOutputs.at(R).outputs.set(E, this._currentRigOutputs.at(R).outputs.at(E));
+        for (let L = 0; L < this._physicsRig.subRigCount; ++L) {
+          g = this._physicsRig.settings.at(L), c = this._physicsRig.outputs.get(g.baseOutputIndex);
+          for (let T = 0; T < g.outputCount; ++T) this._previousRigOutputs.at(L).outputs.set(T, this._currentRigOutputs.at(L).outputs.at(T));
         }
-        const V = f / this._currentRemainTime;
-        for (let R = 0; R < e.getParameterCount(); ++R) this._parameterCaches[R] = this._parameterInputCaches[R] * (1 - V) + p[R] * V, this._parameterInputCaches[R] = this._parameterCaches[R];
-        for (let R = 0; R < this._physicsRig.subRigCount; ++R) {
-          n = { angle: 0 }, _.x = 0, _.y = 0, g = this._physicsRig.settings.at(R), d = this._physicsRig.inputs.get(g.baseInputIndex), c = this._physicsRig.outputs.get(g.baseOutputIndex), m = this._physicsRig.particles.get(g.baseParticleIndex);
-          for (let E = 0; E < g.inputCount; ++E) l = d[E].weight / 100, d[E].sourceParameterIndex == -1 && (d[E].sourceParameterIndex = e.getParameterIndex(d[E].source.id)), d[E].getNormalizedParameterValue(_, n, this._parameterCaches[d[E].sourceParameterIndex], S[d[E].sourceParameterIndex], b[d[E].sourceParameterIndex], w[d[E].sourceParameterIndex], g.normalizationPosition, g.normalizationAngle, d[E].reflect, l);
+        const E = f / this._currentRemainTime;
+        for (let L = 0; L < e.getParameterCount(); ++L) this._parameterCaches[L] = this._parameterInputCaches[L] * (1 - E) + p[L] * E, this._parameterInputCaches[L] = this._parameterCaches[L];
+        for (let L = 0; L < this._physicsRig.subRigCount; ++L) {
+          n = { angle: 0 }, _.x = 0, _.y = 0, g = this._physicsRig.settings.at(L), d = this._physicsRig.inputs.get(g.baseInputIndex), c = this._physicsRig.outputs.get(g.baseOutputIndex), m = this._physicsRig.particles.get(g.baseParticleIndex);
+          for (let T = 0; T < g.inputCount; ++T) l = d[T].weight / 100, d[T].sourceParameterIndex == -1 && (d[T].sourceParameterIndex = e.getParameterIndex(d[T].source.id)), d[T].getNormalizedParameterValue(_, n, this._parameterCaches[d[T].sourceParameterIndex], S[d[T].sourceParameterIndex], b[d[T].sourceParameterIndex], w[d[T].sourceParameterIndex], g.normalizationPosition, g.normalizationAngle, d[T].reflect, l);
           h = P.degreesToRadian(-n.angle), _.x = _.x * P.cos(h) - _.y * P.sin(h), _.y = _.x * P.sin(h) + _.y * P.cos(h), Fr(m, g.particleCount, _, n.angle, this._options.wind, 1e-3 * g.normalizationPosition.maximum, f, 5);
-          for (let E = 0; E < g.outputCount; ++E) {
-            const q = c[E].vertexIndex;
-            if (c[E].destinationParameterIndex == -1 && (c[E].destinationParameterIndex = e.getParameterIndex(c[E].destination.id)), q < 1 || q >= g.particleCount) continue;
-            const tt = new B();
-            tt.x = m[q].position.x - m[q - 1].position.x, tt.y = m[q].position.y - m[q - 1].position.y, u = c[E].getValue(tt, m, q, c[E].reflect, this._options.gravity), this._currentRigOutputs.at(R).outputs.set(E, u);
-            const xt = c[E].destinationParameterIndex, ar = !Float32Array.prototype.slice && "subarray" in Float32Array.prototype ? JSON.parse(JSON.stringify(this._parameterCaches.subarray(xt))) : this._parameterCaches.slice(xt);
-            ei(ar, S[xt], b[xt], u, c[E]);
-            for (let ci = xt, nr = 0; ci < this._parameterCaches.length; ci++, nr++) this._parameterCaches[ci] = ar[nr];
+          for (let T = 0; T < g.outputCount; ++T) {
+            const q = c[T].vertexIndex;
+            if (c[T].destinationParameterIndex == -1 && (c[T].destinationParameterIndex = e.getParameterIndex(c[T].destination.id)), q < 1 || q >= g.particleCount) continue;
+            const et = new v();
+            et.x = m[q].position.x - m[q - 1].position.x, et.y = m[q].position.y - m[q - 1].position.y, u = c[T].getValue(et, m, q, c[T].reflect, this._options.gravity), this._currentRigOutputs.at(L).outputs.set(T, u);
+            const yt = c[T].destinationParameterIndex, ar = !Float32Array.prototype.slice && "subarray" in Float32Array.prototype ? JSON.parse(JSON.stringify(this._parameterCaches.subarray(yt))) : this._parameterCaches.slice(yt);
+            ei(ar, S[yt], b[yt], u, c[T]);
+            for (let ci = yt, nr = 0; ci < this._parameterCaches.length; ci++, nr++) this._parameterCaches[ci] = ar[nr];
           }
         }
         this._currentRemainTime -= f;
@@ -2732,7 +2732,7 @@ var or = { exports: {} };
       return this._options;
     }
     constructor() {
-      this._physicsRig = null, this._options = new Ls(), this._options.gravity.y = -1, this._options.gravity.x = 0, this._options.wind.x = 0, this._options.wind.y = 0, this._currentRigOutputs = new y(), this._previousRigOutputs = new y(), this._currentRemainTime = 0, this._parameterCaches = null, this._parameterInputCaches = null;
+      this._physicsRig = null, this._options = new Ls(), this._options.gravity.y = -1, this._options.gravity.x = 0, this._options.wind.x = 0, this._options.wind.y = 0, this._currentRigOutputs = new x(), this._previousRigOutputs = new x(), this._currentRemainTime = 0, this._parameterCaches = null, this._parameterInputCaches = null;
     }
     release() {
       this._physicsRig = void 0, this._physicsRig = null;
@@ -2740,19 +2740,19 @@ var or = { exports: {} };
     initialize() {
       let e, t, i;
       for (let r = 0; r < this._physicsRig.subRigCount; ++r) {
-        t = this._physicsRig.settings.at(r), e = this._physicsRig.particles.get(t.baseParticleIndex), e[0].initialPosition = new B(0, 0), e[0].lastPosition = new B(e[0].initialPosition.x, e[0].initialPosition.y), e[0].lastGravity = new B(0, -1), e[0].lastGravity.y *= -1, e[0].velocity = new B(0, 0), e[0].force = new B(0, 0);
-        for (let a = 1; a < t.particleCount; ++a) i = new B(0, 0), i.y = e[a].radius, e[a].initialPosition = new B(e[a - 1].initialPosition.x + i.x, e[a - 1].initialPosition.y + i.y), e[a].position = new B(e[a].initialPosition.x, e[a].initialPosition.y), e[a].lastPosition = new B(e[a].initialPosition.x, e[a].initialPosition.y), e[a].lastGravity = new B(0, -1), e[a].lastGravity.y *= -1, e[a].velocity = new B(0, 0), e[a].force = new B(0, 0);
+        t = this._physicsRig.settings.at(r), e = this._physicsRig.particles.get(t.baseParticleIndex), e[0].initialPosition = new v(0, 0), e[0].lastPosition = new v(e[0].initialPosition.x, e[0].initialPosition.y), e[0].lastGravity = new v(0, -1), e[0].lastGravity.y *= -1, e[0].velocity = new v(0, 0), e[0].force = new v(0, 0);
+        for (let a = 1; a < t.particleCount; ++a) i = new v(0, 0), i.y = e[a].radius, e[a].initialPosition = new v(e[a - 1].initialPosition.x + i.x, e[a - 1].initialPosition.y + i.y), e[a].position = new v(e[a].initialPosition.x, e[a].initialPosition.y), e[a].lastPosition = new v(e[a].initialPosition.x, e[a].initialPosition.y), e[a].lastGravity = new v(0, -1), e[a].lastGravity.y *= -1, e[a].velocity = new v(0, 0), e[a].force = new v(0, 0);
       }
     }
   }
   class Ls {
     constructor() {
-      this.gravity = new B(0, 0), this.wind = new B(0, 0);
+      this.gravity = new v(0, 0), this.wind = new v(0, 0);
     }
   }
   class Rs {
     constructor() {
-      this.outputs = new y(0);
+      this.outputs = new x(0);
     }
   }
   function Mr(s, e, t, i, r, a, o, n, l, h) {
@@ -2786,14 +2786,14 @@ var or = { exports: {} };
     return JSON.parse(JSON.stringify(e));
   }
   function Fr(s, e, t, i, r, a, o, n) {
-    let l, h, u, _, g = new B(0, 0), d = new B(0, 0), c = new B(0, 0), m = new B(0, 0);
-    s[0].position = new B(t.x, t.y), l = P.degreesToRadian(i), _ = P.radianToDirection(l), _.normalize();
-    for (let p = 1; p < e; ++p) s[p].force = _.multiplyByScaler(s[p].acceleration).add(r), s[p].lastPosition = new B(s[p].position.x, s[p].position.y), h = s[p].delay * o * 30, g = s[p].position.substract(s[p - 1].position), u = P.directionToRadian(s[p].lastGravity, _) / n, g.x = P.cos(u) * g.x - g.y * P.sin(u), g.y = P.sin(u) * g.x + g.y * P.cos(u), s[p].position = s[p - 1].position.add(g), d = s[p].velocity.multiplyByScaler(h), c = s[p].force.multiplyByScaler(h).multiplyByScaler(h), s[p].position = s[p].position.add(d).add(c), m = s[p].position.substract(s[p - 1].position), m.normalize(), s[p].position = s[p - 1].position.add(m.multiplyByScaler(s[p].radius)), P.abs(s[p].position.x) < a && (s[p].position.x = 0), h != 0 && (s[p].velocity = s[p].position.substract(s[p].lastPosition), s[p].velocity = s[p].velocity.divisionByScalar(h), s[p].velocity = s[p].velocity.multiplyByScaler(s[p].mobility)), s[p].force = new B(0, 0), s[p].lastGravity = new B(_.x, _.y);
+    let l, h, u, _, g = new v(0, 0), d = new v(0, 0), c = new v(0, 0), m = new v(0, 0);
+    s[0].position = new v(t.x, t.y), l = P.degreesToRadian(i), _ = P.radianToDirection(l), _.normalize();
+    for (let p = 1; p < e; ++p) s[p].force = _.multiplyByScaler(s[p].acceleration).add(r), s[p].lastPosition = new v(s[p].position.x, s[p].position.y), h = s[p].delay * o * 30, g = s[p].position.substract(s[p - 1].position), u = P.directionToRadian(s[p].lastGravity, _) / n, g.x = P.cos(u) * g.x - g.y * P.sin(u), g.y = P.sin(u) * g.x + g.y * P.cos(u), s[p].position = s[p - 1].position.add(g), d = s[p].velocity.multiplyByScaler(h), c = s[p].force.multiplyByScaler(h).multiplyByScaler(h), s[p].position = s[p].position.add(d).add(c), m = s[p].position.substract(s[p - 1].position), m.normalize(), s[p].position = s[p - 1].position.add(m.multiplyByScaler(s[p].radius)), P.abs(s[p].position.x) < a && (s[p].position.x = 0), h != 0 && (s[p].velocity = s[p].position.substract(s[p].lastPosition), s[p].velocity = s[p].velocity.divisionByScalar(h), s[p].velocity = s[p].velocity.multiplyByScaler(s[p].mobility)), s[p].force = new v(0, 0), s[p].lastGravity = new v(_.x, _.y);
   }
   function Ar(s, e, t, i, r, a) {
-    let o, n, l = new B(0, 0);
-    s[0].position = new B(t.x, t.y), o = P.degreesToRadian(i), n = P.radianToDirection(o), n.normalize();
-    for (let h = 1; h < e; ++h) s[h].force = n.multiplyByScaler(s[h].acceleration).add(r), s[h].lastPosition = new B(s[h].position.x, s[h].position.y), s[h].velocity = new B(0, 0), l = s[h].force, l.normalize(), l = l.multiplyByScaler(s[h].radius), s[h].position = s[h - 1].position.add(l), P.abs(s[h].position.x) < a && (s[h].position.x = 0), s[h].force = new B(0, 0), s[h].lastGravity = new B(n.x, n.y);
+    let o, n, l = new v(0, 0);
+    s[0].position = new v(t.x, t.y), o = P.degreesToRadian(i), n = P.radianToDirection(o), n.normalize();
+    for (let h = 1; h < e; ++h) s[h].force = n.multiplyByScaler(s[h].acceleration).add(r), s[h].lastPosition = new v(s[h].position.x, s[h].position.y), s[h].velocity = new v(0, 0), l = s[h].force, l.normalize(), l = l.multiplyByScaler(s[h].radius), s[h].position = s[h - 1].position.add(l), P.abs(s[h].position.x) < a && (s[h].position.x = 0), s[h].force = new v(0, 0), s[h].lastGravity = new v(n.x, n.y);
   }
   function ei(s, e, t, i, r) {
     let a, o, n;
@@ -2831,7 +2831,7 @@ var or = { exports: {} };
   }
   var Fs, As;
   (function(s) {
-    s.CubismPhysics = ct, s.Options = Ls;
+    s.CubismPhysics = dt, s.Options = Ls;
   })(Fs || (Fs = {}));
   class kt {
     constructor(e, t, i, r) {
@@ -2856,7 +2856,7 @@ var or = { exports: {} };
       this.x -= e, this.y -= t, this.width += 2 * e, this.height += 2 * t;
     }
   }
-  let ke, Se, Ot;
+  let ke, xe, Ot;
   (function(s) {
     s.csmRect = kt;
   })(As || (As = {}));
@@ -2867,7 +2867,7 @@ var or = { exports: {} };
     getMaskRenderTexture() {
       if (this._maskTexture && this._maskTexture.textures != null) this._maskTexture.frameNo = this._currentFrameNo;
       else {
-        this._maskRenderTextures != null && this._maskRenderTextures.clear(), this._maskRenderTextures = new y(), this._maskColorBuffers != null && this._maskColorBuffers.clear(), this._maskColorBuffers = new y();
+        this._maskRenderTextures != null && this._maskRenderTextures.clear(), this._maskRenderTextures = new x(), this._maskColorBuffers != null && this._maskColorBuffers.clear(), this._maskColorBuffers = new x();
         const e = this._clippingMaskBufferSize;
         for (let t = 0; t < this._renderTextureCount; t++) this._maskColorBuffers.pushBack(this.gl.createTexture()), this.gl.bindTexture(this.gl.TEXTURE_2D, this._maskColorBuffers.at(t)), this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, e, e, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, null), this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE), this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE), this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR), this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR), this.gl.bindTexture(this.gl.TEXTURE_2D, null), this._maskRenderTextures.pushBack(this.gl.createFramebuffer()), this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this._maskRenderTextures.at(t)), this.gl.framebufferTexture2D(this.gl.FRAMEBUFFER, this.gl.COLOR_ATTACHMENT0, this.gl.TEXTURE_2D, this._maskColorBuffers.at(t), 0);
         this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, Ot), this._maskTexture = new Ds(this._currentFrameNo, this._maskRenderTextures);
@@ -2883,8 +2883,8 @@ var or = { exports: {} };
       for (let l = 0; l < n; l++) {
         const h = t._clippedDrawableIndexList[l], u = e.getDrawableVertexCount(h), _ = e.getDrawableVertices(h);
         let g = Number.MAX_VALUE, d = Number.MAX_VALUE, c = -Number.MAX_VALUE, m = -Number.MAX_VALUE;
-        const p = u * Me.vertexStep;
-        for (let b = Me.vertexOffset; b < p; b += Me.vertexStep) {
+        const p = u * be.vertexStep;
+        for (let b = be.vertexOffset; b < p; b += be.vertexStep) {
           const S = _[b], w = _[b + 1];
           S < g && (g = S), S > c && (c = S), w < d && (d = w), w > m && (m = w);
         }
@@ -2897,7 +2897,7 @@ var or = { exports: {} };
       }
     }
     constructor() {
-      this._currentMaskRenderTexture = null, this._maskColorBuffers = null, this._currentFrameNo = 0, this._renderTextureCount = 0, this._clippingMaskBufferSize = 256, this._clippingContextListForMask = new y(), this._clippingContextListForDraw = new y(), this._channelColors = new y(), this._tmpBoundsOnModel = new kt(), this._tmpMatrix = new z(), this._tmpMatrixForMask = new z(), this._tmpMatrixForDraw = new z(), this._maskTexture = null;
+      this._currentMaskRenderTexture = null, this._maskColorBuffers = null, this._currentFrameNo = 0, this._renderTextureCount = 0, this._clippingMaskBufferSize = 256, this._clippingContextListForMask = new x(), this._clippingContextListForDraw = new x(), this._channelColors = new x(), this._tmpBoundsOnModel = new kt(), this._tmpMatrix = new z(), this._tmpMatrixForMask = new z(), this._tmpMatrixForDraw = new z(), this._maskTexture = null;
       let e = new K();
       e.R = 1, e.G = 0, e.B = 0, e.A = 0, this._channelColors.pushBack(e), e = new K(), e.R = 0, e.G = 1, e.B = 0, e.A = 0, this._channelColors.pushBack(e), e = new K(), e.R = 0, e.G = 0, e.B = 1, e.A = 0, this._channelColors.pushBack(e), e = new K(), e.R = 0, e.G = 0, e.B = 0, e.A = 1, this._channelColors.pushBack(e);
     }
@@ -2917,7 +2917,7 @@ var or = { exports: {} };
       this._maskColorBuffers = null, this._maskRenderTextures != null && this._maskRenderTextures.clear(), this._maskRenderTextures = null, this._clearedFrameBufferflags != null && this._clearedFrameBufferflags.clear(), this._clearedFrameBufferflags = null;
     }
     initialize(e, t, i, r, a) {
-      a % 1 != 0 && (be("The number of render textures must be specified as an integer. The decimal point is rounded down and corrected to an integer."), a = ~~a), a < 1 && be("The number of render textures must be an integer greater than or equal to 1. Set the number of render textures to 1."), this._renderTextureCount = a < 1 ? 1 : a, this._clearedFrameBufferflags = new y(this._renderTextureCount);
+      a % 1 != 0 && (ve("The number of render textures must be specified as an integer. The decimal point is rounded down and corrected to an integer."), a = ~~a), a < 1 && ve("The number of render textures must be an integer greater than or equal to 1. Set the number of render textures to 1."), this._renderTextureCount = a < 1 ? 1 : a, this._clearedFrameBufferflags = new x(this._renderTextureCount);
       for (let o = 0; o < t; o++) {
         if (r[o] <= 0) {
           this._clippingContextListForDraw.pushBack(null);
@@ -2935,7 +2935,7 @@ var or = { exports: {} };
         this.calcClippedDrawTotalBounds(e, a), a._isUsing && i++;
       }
       if (i > 0) {
-        this.setupLayoutBounds(t.isUsingHighPrecisionMask() ? 0 : i), t.isUsingHighPrecisionMask() || (this.gl.viewport(0, 0, this._clippingMaskBufferSize, this._clippingMaskBufferSize), this._currentMaskRenderTexture = this.getMaskRenderTexture().at(0), t.preDraw(), this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this._currentMaskRenderTexture)), this._clearedFrameBufferflags.getSize() != this._renderTextureCount && (this._clearedFrameBufferflags.clear(), this._clearedFrameBufferflags = new y(this._renderTextureCount));
+        this.setupLayoutBounds(t.isUsingHighPrecisionMask() ? 0 : i), t.isUsingHighPrecisionMask() || (this.gl.viewport(0, 0, this._clippingMaskBufferSize, this._clippingMaskBufferSize), this._currentMaskRenderTexture = this.getMaskRenderTexture().at(0), t.preDraw(), this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this._currentMaskRenderTexture)), this._clearedFrameBufferflags.getSize() != this._renderTextureCount && (this._clearedFrameBufferflags.clear(), this._clearedFrameBufferflags = new x(this._renderTextureCount));
         for (let r = 0; r < this._clearedFrameBufferflags.getSize(); r++) this._clearedFrameBufferflags.set(r, !1);
         for (let r = 0; r < this._clippingContextListForMask.getSize(); r++) {
           const a = this._clippingContextListForMask.at(r), o = a._allClippedDrawRect, n = a._layoutBounds, l = 0.05;
@@ -2953,7 +2953,7 @@ var or = { exports: {} };
             }
           }
         }
-        t.isUsingHighPrecisionMask() || (this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, Ot), t.setClippingContextBufferForMask(null), this.gl.viewport(Se[0], Se[1], Se[2], Se[3]));
+        t.isUsingHighPrecisionMask() || (this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, Ot), t.setClippingContextBufferForMask(null), this.gl.viewport(xe[0], xe[1], xe[2], xe[3]));
       }
     }
     findSameClip(e, t) {
@@ -3085,15 +3085,15 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this._lastVertexAttribArrayEnabled = new Array(4), this._lastColorMask = new Array(4), this._lastBlending = new Array(4), this._lastViewport = new Array(4);
     }
   }
-  class Je {
+  class $e {
     static getInstance() {
-      return ke == null && (ke = new Je()), ke;
+      return ke == null && (ke = new $e()), ke;
     }
     static deleteInstance() {
       ke && (ke.release(), ke = null);
     }
     constructor() {
-      this._shaderSets = new y();
+      this._shaderSets = new x();
     }
     release() {
       this.releaseShaderProgram();
@@ -3103,32 +3103,32 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       if (d || $("NoPremultipliedAlpha is not allowed"), this._shaderSets.getSize() == 0 && this.generateShaders(), e.getClippingContextBufferForMask() != null) {
         const f = this._shaderSets.at(Oe.ShaderNames_SetupMask);
         this.gl.useProgram(f.shaderProgram), this.gl.activeTexture(this.gl.TEXTURE0), this.gl.bindTexture(this.gl.TEXTURE_2D, t), this.gl.uniform1i(f.samplerTexture0Location, 0), n.vertex == null && (n.vertex = this.gl.createBuffer()), this.gl.bindBuffer(this.gl.ARRAY_BUFFER, n.vertex), this.gl.bufferData(this.gl.ARRAY_BUFFER, r, this.gl.DYNAMIC_DRAW), this.gl.enableVertexAttribArray(f.attributePositionLocation), this.gl.vertexAttribPointer(f.attributePositionLocation, 2, this.gl.FLOAT, !1, 0, 0), n.uv == null && (n.uv = this.gl.createBuffer()), this.gl.bindBuffer(this.gl.ARRAY_BUFFER, n.uv), this.gl.bufferData(this.gl.ARRAY_BUFFER, o, this.gl.DYNAMIC_DRAW), this.gl.enableVertexAttribArray(f.attributeTexCoordLocation), this.gl.vertexAttribPointer(f.attributeTexCoordLocation, 2, this.gl.FLOAT, !1, 0, 0);
-        const k = e.getClippingContextBufferForMask()._layoutChannelNo, V = e.getClippingContextBufferForMask().getClippingManager().getChannelFlagAsColor(k);
-        this.gl.uniform4f(f.uniformChannelFlagLocation, V.R, V.G, V.B, V.A), this.gl.uniformMatrix4fv(f.uniformClipMatrixLocation, !1, e.getClippingContextBufferForMask()._matrixForMask.getArray());
-        const R = e.getClippingContextBufferForMask()._layoutBounds;
-        this.gl.uniform4f(f.uniformBaseColorLocation, 2 * R.x - 1, 2 * R.y - 1, 2 * R.getRight() - 1, 2 * R.getBottom() - 1), this.gl.uniform4f(f.uniformMultiplyColorLocation, _.R, _.G, _.B, _.A), this.gl.uniform4f(f.uniformScreenColorLocation, g.R, g.G, g.B, g.A), p = this.gl.ZERO, b = this.gl.ONE_MINUS_SRC_COLOR, S = this.gl.ZERO, w = this.gl.ONE_MINUS_SRC_ALPHA;
+        const k = e.getClippingContextBufferForMask()._layoutChannelNo, E = e.getClippingContextBufferForMask().getClippingManager().getChannelFlagAsColor(k);
+        this.gl.uniform4f(f.uniformChannelFlagLocation, E.R, E.G, E.B, E.A), this.gl.uniformMatrix4fv(f.uniformClipMatrixLocation, !1, e.getClippingContextBufferForMask()._matrixForMask.getArray());
+        const L = e.getClippingContextBufferForMask()._layoutBounds;
+        this.gl.uniform4f(f.uniformBaseColorLocation, 2 * L.x - 1, 2 * L.y - 1, 2 * L.getRight() - 1, 2 * L.getBottom() - 1), this.gl.uniform4f(f.uniformMultiplyColorLocation, _.R, _.G, _.B, _.A), this.gl.uniform4f(f.uniformScreenColorLocation, g.R, g.G, g.B, g.A), p = this.gl.ZERO, b = this.gl.ONE_MINUS_SRC_COLOR, S = this.gl.ZERO, w = this.gl.ONE_MINUS_SRC_ALPHA;
       } else {
         const f = e.getClippingContextBufferForDraw() != null, k = f ? m ? 2 : 1 : 0;
-        let V = new si();
+        let E = new si();
         switch (h) {
           case U.CubismBlendMode_Normal:
           default:
-            V = this._shaderSets.at(Oe.ShaderNames_NormalPremultipliedAlpha + k), p = this.gl.ONE, b = this.gl.ONE_MINUS_SRC_ALPHA, S = this.gl.ONE, w = this.gl.ONE_MINUS_SRC_ALPHA;
+            E = this._shaderSets.at(Oe.ShaderNames_NormalPremultipliedAlpha + k), p = this.gl.ONE, b = this.gl.ONE_MINUS_SRC_ALPHA, S = this.gl.ONE, w = this.gl.ONE_MINUS_SRC_ALPHA;
             break;
           case U.CubismBlendMode_Additive:
-            V = this._shaderSets.at(Oe.ShaderNames_AddPremultipliedAlpha + k), p = this.gl.ONE, b = this.gl.ONE, S = this.gl.ZERO, w = this.gl.ONE;
+            E = this._shaderSets.at(Oe.ShaderNames_AddPremultipliedAlpha + k), p = this.gl.ONE, b = this.gl.ONE, S = this.gl.ZERO, w = this.gl.ONE;
             break;
           case U.CubismBlendMode_Multiplicative:
-            V = this._shaderSets.at(Oe.ShaderNames_MultPremultipliedAlpha + k), p = this.gl.DST_COLOR, b = this.gl.ONE_MINUS_SRC_ALPHA, S = this.gl.ZERO, w = this.gl.ONE;
+            E = this._shaderSets.at(Oe.ShaderNames_MultPremultipliedAlpha + k), p = this.gl.DST_COLOR, b = this.gl.ONE_MINUS_SRC_ALPHA, S = this.gl.ZERO, w = this.gl.ONE;
         }
-        if (this.gl.useProgram(V.shaderProgram), n.vertex == null && (n.vertex = this.gl.createBuffer()), this.gl.bindBuffer(this.gl.ARRAY_BUFFER, n.vertex), this.gl.bufferData(this.gl.ARRAY_BUFFER, r, this.gl.DYNAMIC_DRAW), this.gl.enableVertexAttribArray(V.attributePositionLocation), this.gl.vertexAttribPointer(V.attributePositionLocation, 2, this.gl.FLOAT, !1, 0, 0), n.uv == null && (n.uv = this.gl.createBuffer()), this.gl.bindBuffer(this.gl.ARRAY_BUFFER, n.uv), this.gl.bufferData(this.gl.ARRAY_BUFFER, o, this.gl.DYNAMIC_DRAW), this.gl.enableVertexAttribArray(V.attributeTexCoordLocation), this.gl.vertexAttribPointer(V.attributeTexCoordLocation, 2, this.gl.FLOAT, !1, 0, 0), f) {
+        if (this.gl.useProgram(E.shaderProgram), n.vertex == null && (n.vertex = this.gl.createBuffer()), this.gl.bindBuffer(this.gl.ARRAY_BUFFER, n.vertex), this.gl.bufferData(this.gl.ARRAY_BUFFER, r, this.gl.DYNAMIC_DRAW), this.gl.enableVertexAttribArray(E.attributePositionLocation), this.gl.vertexAttribPointer(E.attributePositionLocation, 2, this.gl.FLOAT, !1, 0, 0), n.uv == null && (n.uv = this.gl.createBuffer()), this.gl.bindBuffer(this.gl.ARRAY_BUFFER, n.uv), this.gl.bufferData(this.gl.ARRAY_BUFFER, o, this.gl.DYNAMIC_DRAW), this.gl.enableVertexAttribArray(E.attributeTexCoordLocation), this.gl.vertexAttribPointer(E.attributeTexCoordLocation, 2, this.gl.FLOAT, !1, 0, 0), f) {
           this.gl.activeTexture(this.gl.TEXTURE1);
-          const R = e.getClippingContextBufferForDraw().getClippingManager().getColorBuffer().at(e.getClippingContextBufferForDraw()._bufferIndex);
-          this.gl.bindTexture(this.gl.TEXTURE_2D, R), this.gl.uniform1i(V.samplerTexture1Location, 1), this.gl.uniformMatrix4fv(V.uniformClipMatrixLocation, !1, e.getClippingContextBufferForDraw()._matrixForDraw.getArray());
-          const E = e.getClippingContextBufferForDraw()._layoutChannelNo, q = e.getClippingContextBufferForDraw().getClippingManager().getChannelFlagAsColor(E);
-          this.gl.uniform4f(V.uniformChannelFlagLocation, q.R, q.G, q.B, q.A);
+          const L = e.getClippingContextBufferForDraw().getClippingManager().getColorBuffer().at(e.getClippingContextBufferForDraw()._bufferIndex);
+          this.gl.bindTexture(this.gl.TEXTURE_2D, L), this.gl.uniform1i(E.samplerTexture1Location, 1), this.gl.uniformMatrix4fv(E.uniformClipMatrixLocation, !1, e.getClippingContextBufferForDraw()._matrixForDraw.getArray());
+          const T = e.getClippingContextBufferForDraw()._layoutChannelNo, q = e.getClippingContextBufferForDraw().getClippingManager().getChannelFlagAsColor(T);
+          this.gl.uniform4f(E.uniformChannelFlagLocation, q.R, q.G, q.B, q.A);
         }
-        this.gl.activeTexture(this.gl.TEXTURE0), this.gl.bindTexture(this.gl.TEXTURE_2D, t), this.gl.uniform1i(V.samplerTexture0Location, 0), this.gl.uniformMatrix4fv(V.uniformMatrixLocation, !1, c.getArray()), this.gl.uniform4f(V.uniformBaseColorLocation, u.R, u.G, u.B, u.A), this.gl.uniform4f(V.uniformMultiplyColorLocation, _.R, _.G, _.B, _.A), this.gl.uniform4f(V.uniformScreenColorLocation, g.R, g.G, g.B, g.A);
+        this.gl.activeTexture(this.gl.TEXTURE0), this.gl.bindTexture(this.gl.TEXTURE_2D, t), this.gl.uniform1i(E.samplerTexture0Location, 0), this.gl.uniformMatrix4fv(E.uniformMatrixLocation, !1, c.getArray()), this.gl.uniform4f(E.uniformBaseColorLocation, u.R, u.G, u.B, u.A), this.gl.uniform4f(E.uniformMultiplyColorLocation, _.R, _.G, _.B, _.A), this.gl.uniform4f(E.uniformScreenColorLocation, g.R, g.G, g.B, g.A);
       }
       n.index == null && (n.index = this.gl.createBuffer()), this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, n.index), this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, a, this.gl.DYNAMIC_DRAW), this.gl.blendFuncSeparate(p, b, S, w);
     }
@@ -3186,7 +3186,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       return this._model.isUsingMasking() ? this._clippingManager.getRenderTextureCount() : -1;
     }
     constructor() {
-      super(), this._clippingContextBufferForMask = null, this._clippingContextBufferForDraw = null, this._rendererProfile = new Dr(), this.firstDraw = !0, this._textures = new J(), this._sortedDrawableIndexList = new y(), this._bufferData = { vertex: WebGLBuffer = null, uv: WebGLBuffer = null, index: WebGLBuffer = null }, this._textures.prepareCapacity(32, !0);
+      super(), this._clippingContextBufferForMask = null, this._clippingContextBufferForDraw = null, this._rendererProfile = new Dr(), this.firstDraw = !0, this._textures = new J(), this._sortedDrawableIndexList = new x(), this._bufferData = { vertex: WebGLBuffer = null, uv: WebGLBuffer = null, index: WebGLBuffer = null }, this._textures.prepareCapacity(32, !0);
     }
     release() {
       this._clippingManager && (this._clippingManager.release(), this._clippingManager = void 0, this._clippingManager = null), this.gl != null && (this.gl.deleteBuffer(this._bufferData.vertex), this._bufferData.vertex = null, this.gl.deleteBuffer(this._bufferData.uv), this._bufferData.uv = null, this.gl.deleteBuffer(this._bufferData.index), this._bufferData.index = null, this._bufferData = null, this._textures = null);
@@ -3213,7 +3213,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
               this._model.getDrawableDynamicFlagVertexPositionsDidChange(l) && (this.setIsCulling(this._model.getDrawableCulling(l) != 0), this.setClippingContextBufferForMask(a), this.drawMesh(this.getModel().getDrawableTextureIndex(l), this.getModel().getDrawableVertexIndexCount(l), this.getModel().getDrawableVertexCount(l), this.getModel().getDrawableVertexIndices(l), this.getModel().getDrawableVertices(l), this.getModel().getDrawableVertexUvs(l), this.getModel().getMultiplyColor(l), this.getModel().getScreenColor(l), this.getModel().getDrawableOpacity(l), U.CubismBlendMode_Normal, !1));
             }
           }
-          this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, Ot), this.setClippingContextBufferForMask(null), this.gl.viewport(Se[0], Se[1], Se[2], Se[3]), this.preDraw();
+          this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, Ot), this.setClippingContextBufferForMask(null), this.gl.viewport(xe[0], xe[1], xe[2], xe[3]), this.preDraw();
         }
         this.setClippingContextBufferForDraw(a), this.setIsCulling(this.getModel().getDrawableCulling(r)), this.drawMesh(this.getModel().getDrawableTextureIndex(r), this.getModel().getDrawableVertexIndexCount(r), this.getModel().getDrawableVertexCount(r), this.getModel().getDrawableVertexIndices(r), this.getModel().getDrawableVertices(r), this.getModel().getDrawableVertexUvs(r), this.getModel().getMultiplyColor(r), this.getModel().getScreenColor(r), this.getModel().getDrawableOpacity(r), this.getModel().getDrawableBlendMode(r), this.getModel().getDrawableInvertedMaskBit(r));
       }
@@ -3222,7 +3222,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this.isCulling() ? this.gl.enable(this.gl.CULL_FACE) : this.gl.disable(this.gl.CULL_FACE), this.gl.frontFace(this.gl.CCW);
       const g = this.getModelColor();
       let d;
-      this.getClippingContextBufferForMask() == null && (g.A *= h, this.isPremultipliedAlpha() && (g.R *= g.A, g.G *= g.A, g.B *= g.A)), d = this._textures.getValue(e) != null ? this._textures.getValue(e) : null, Je.getInstance().setupShaderProgram(this, d, i, a, r, o, this._bufferData, h, u, g, n, l, this.isPremultipliedAlpha(), this.getMvpMatrix(), _), this.gl.drawElements(this.gl.TRIANGLES, t, this.gl.UNSIGNED_SHORT, 0), this.gl.useProgram(null), this.setClippingContextBufferForDraw(null), this.setClippingContextBufferForMask(null);
+      this.getClippingContextBufferForMask() == null && (g.A *= h, this.isPremultipliedAlpha() && (g.R *= g.A, g.G *= g.A, g.B *= g.A)), d = this._textures.getValue(e) != null ? this._textures.getValue(e) : null, $e.getInstance().setupShaderProgram(this, d, i, a, r, o, this._bufferData, h, u, g, n, l, this.isPremultipliedAlpha(), this.getMvpMatrix(), _), this.gl.drawElements(this.gl.TRIANGLES, t, this.gl.UNSIGNED_SHORT, 0), this.gl.useProgram(null), this.setClippingContextBufferForDraw(null), this.setClippingContextBufferForMask(null);
     }
     saveProfile() {
       this._rendererProfile.save();
@@ -3231,10 +3231,10 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this._rendererProfile.restore();
     }
     static doStaticRelease() {
-      Je.deleteInstance();
+      $e.deleteInstance();
     }
     setRenderState(e, t) {
-      Ot = e, Se = t;
+      Ot = e, xe = t;
     }
     preDraw() {
       if (this.firstDraw && (this.firstDraw = !1), this.gl.disable(this.gl.SCISSOR_TEST), this.gl.disable(this.gl.STENCIL_TEST), this.gl.disable(this.gl.DEPTH_TEST), this.gl.frontFace(this.gl.CW), this.gl.enable(this.gl.BLEND), this.gl.colorMask(!0, !0, !0, !0), this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null), this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, null), this.getAnisotropy() > 0 && this._extension) for (let e = 0; e < this._textures.getSize(); ++e) this.gl.bindTexture(this.gl.TEXTURE_2D, this._textures.getValue(e)), this.gl.texParameterf(this.gl.TEXTURE_2D, this._extension.TEXTURE_MAX_ANISOTROPY_EXT, this.getAnisotropy());
@@ -3252,14 +3252,14 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       return this._clippingContextBufferForDraw;
     }
     startUp(e) {
-      this.gl = e, this._clippingManager && this._clippingManager.setGL(e), Je.getInstance().setGl(e), this._rendererProfile.setGl(e), this._extension = this.gl.getExtension("EXT_texture_filter_anisotropic") || this.gl.getExtension("WEBKIT_EXT_texture_filter_anisotropic") || this.gl.getExtension("MOZ_EXT_texture_filter_anisotropic");
+      this.gl = e, this._clippingManager && this._clippingManager.setGL(e), $e.getInstance().setGl(e), this._rendererProfile.setGl(e), this._extension = this.gl.getExtension("EXT_texture_filter_anisotropic") || this.gl.getExtension("WEBKIT_EXT_texture_filter_anisotropic") || this.gl.getExtension("MOZ_EXT_texture_filter_anisotropic");
     }
   }
   var Ns, Us, zs;
   St.staticRelease = () => {
     ri.doStaticRelease();
   }, function(s) {
-    s.CubismClippingContext = ks, s.CubismClippingManager_WebGL = ii, s.CubismRenderTextureResource = Ds, s.CubismRenderer_WebGL = ri, s.CubismShaderSet = si, s.CubismShader_WebGL = Je, s.ShaderNames = Oe;
+    s.CubismClippingContext = ks, s.CubismClippingManager_WebGL = ii, s.CubismRenderTextureResource = Ds, s.CubismRenderer_WebGL = ri, s.CubismShaderSet = si, s.CubismShader_WebGL = $e, s.ShaderNames = Oe;
   }(Ns || (Ns = {}));
   class js {
     constructor(e = !1, t = new K()) {
@@ -3415,20 +3415,20 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     }
     getPartId(e) {
       const t = this._model.parts.ids[e];
-      return L.getIdManager().getId(t);
+      return V.getIdManager().getId(t);
     }
     getPartCount() {
       return this._model.parts.count;
     }
     setPartOpacityByIndex(e, t) {
-      this._notExistPartOpacities.isExist(e) ? this._notExistPartOpacities.setValue(e, t) : (ge(0 <= e && e < this.getPartCount()), this._partOpacities[e] = t);
+      this._notExistPartOpacities.isExist(e) ? this._notExistPartOpacities.setValue(e, t) : (he(0 <= e && e < this.getPartCount()), this._partOpacities[e] = t);
     }
     setPartOpacityById(e, t) {
       const i = this.getPartIndex(e);
       i < 0 || this.setPartOpacityByIndex(i, t);
     }
     getPartOpacityByIndex(e) {
-      return this._notExistPartOpacities.isExist(e) ? this._notExistPartOpacities.getValue(e) : (ge(0 <= e && e < this.getPartCount()), this._partOpacities[e]);
+      return this._notExistPartOpacities.isExist(e) ? this._notExistPartOpacities.getValue(e) : (he(0 <= e && e < this.getPartCount()), this._partOpacities[e]);
     }
     getPartOpacityById(e) {
       const t = this.getPartIndex(e);
@@ -3456,14 +3456,14 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       return this._model.parameters.defaultValues[e];
     }
     getParameterValueByIndex(e) {
-      return this._notExistParameterValues.isExist(e) ? this._notExistParameterValues.getValue(e) : (ge(0 <= e && e < this.getParameterCount()), this._parameterValues[e]);
+      return this._notExistParameterValues.isExist(e) ? this._notExistParameterValues.getValue(e) : (he(0 <= e && e < this.getParameterCount()), this._parameterValues[e]);
     }
     getParameterValueById(e) {
       const t = this.getParameterIndex(e);
       return this.getParameterValueByIndex(t);
     }
     setParameterValueByIndex(e, t, i = 1) {
-      this._notExistParameterValues.isExist(e) ? this._notExistParameterValues.setValue(e, i == 1 ? t : this._notExistParameterValues.getValue(e) * (1 - i) + t * i) : (ge(0 <= e && e < this.getParameterCount()), this._model.parameters.maximumValues[e] < t && (t = this._model.parameters.maximumValues[e]), this._model.parameters.minimumValues[e] > t && (t = this._model.parameters.minimumValues[e]), this._parameterValues[e] = i == 1 ? t : this._parameterValues[e] = this._parameterValues[e] * (1 - i) + t * i);
+      this._notExistParameterValues.isExist(e) ? this._notExistParameterValues.setValue(e, i == 1 ? t : this._notExistParameterValues.getValue(e) * (1 - i) + t * i) : (he(0 <= e && e < this.getParameterCount()), this._model.parameters.maximumValues[e] < t && (t = this._model.parameters.maximumValues[e]), this._model.parameters.minimumValues[e] > t && (t = this._model.parameters.minimumValues[e]), this._parameterValues[e] = i == 1 ? t : this._parameterValues[e] = this._parameterValues[e] * (1 - i) + t * i);
     }
     setParameterValueById(e, t, i = 1) {
       const r = this.getParameterIndex(e);
@@ -3493,7 +3493,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     }
     getDrawableId(e) {
       const t = this._model.drawables.ids;
-      return L.getIdManager().getId(t[e]);
+      return V.getIdManager().getId(t[e]);
     }
     getDrawableRenderOrders() {
       return this._model.drawables.renderOrders;
@@ -3585,17 +3585,17 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       for (let i = 0; i < e; ++i) this._parameterValues[i] = this._savedParameters.at(i);
     }
     initialize() {
-      ge(this._model), this._parameterValues = this._model.parameters.values, this._partOpacities = this._model.parts.opacities, this._parameterMaximumValues = this._model.parameters.maximumValues, this._parameterMinimumValues = this._model.parameters.minimumValues;
+      he(this._model), this._parameterValues = this._model.parameters.values, this._partOpacities = this._model.parts.opacities, this._parameterMaximumValues = this._model.parameters.maximumValues, this._parameterMinimumValues = this._model.parameters.minimumValues;
       {
         const t = this._model.parameters.ids, i = this._model.parameters.count;
         this._parameterIds.prepareCapacity(i);
-        for (let r = 0; r < i; ++r) this._parameterIds.pushBack(L.getIdManager().getId(t[r]));
+        for (let r = 0; r < i; ++r) this._parameterIds.pushBack(V.getIdManager().getId(t[r]));
       }
       const e = this._model.parts.count;
       {
         const t = this._model.parts.ids;
         this._partIds.prepareCapacity(e);
-        for (let i = 0; i < e; ++i) this._partIds.pushBack(L.getIdManager().getId(t[i]));
+        for (let i = 0; i < e; ++i) this._partIds.pushBack(V.getIdManager().getId(t[i]));
         this._userPartMultiplyColors.prepareCapacity(e), this._userPartScreenColors.prepareCapacity(e), this._partChildDrawables.prepareCapacity(e);
       }
       {
@@ -3604,18 +3604,18 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
         const r = new Xr(!1, !1);
         for (let a = 0; a < e; ++a) {
           const o = new K(1, 1, 1, 1), n = new K(0, 0, 0, 1), l = new Xs(!1, o), h = new Xs(!1, n);
-          this._userPartMultiplyColors.pushBack(l), this._userPartScreenColors.pushBack(h), this._partChildDrawables.pushBack(new y()), this._partChildDrawables.at(a).prepareCapacity(i);
+          this._userPartMultiplyColors.pushBack(l), this._userPartScreenColors.pushBack(h), this._partChildDrawables.pushBack(new x()), this._partChildDrawables.at(a).prepareCapacity(i);
         }
         for (let a = 0; a < i; ++a) {
           const o = new K(1, 1, 1, 1), n = new K(0, 0, 0, 1), l = new js(!1, o), h = new js(!1, n);
-          this._drawableIds.pushBack(L.getIdManager().getId(t[a])), this._userMultiplyColors.pushBack(l), this._userScreenColors.pushBack(h), this._userCullings.pushBack(r);
+          this._drawableIds.pushBack(V.getIdManager().getId(t[a])), this._userMultiplyColors.pushBack(l), this._userScreenColors.pushBack(h), this._userCullings.pushBack(r);
           const u = this.getDrawableParentPartIndex(a);
           u >= 0 && this._partChildDrawables.at(u).pushBack(a);
         }
       }
     }
     constructor(e) {
-      this._model = e, this._parameterValues = null, this._parameterMaximumValues = null, this._parameterMinimumValues = null, this._partOpacities = null, this._savedParameters = new y(), this._parameterIds = new y(), this._drawableIds = new y(), this._partIds = new y(), this._isOverwrittenModelMultiplyColors = !1, this._isOverwrittenModelScreenColors = !1, this._isOverwrittenCullings = !1, this._modelOpacity = 1, this._userMultiplyColors = new y(), this._userScreenColors = new y(), this._userCullings = new y(), this._userPartMultiplyColors = new y(), this._userPartScreenColors = new y(), this._partChildDrawables = new y(), this._notExistPartId = new J(), this._notExistParameterId = new J(), this._notExistParameterValues = new J(), this._notExistPartOpacities = new J();
+      this._model = e, this._parameterValues = null, this._parameterMaximumValues = null, this._parameterMinimumValues = null, this._partOpacities = null, this._savedParameters = new x(), this._parameterIds = new x(), this._drawableIds = new x(), this._partIds = new x(), this._isOverwrittenModelMultiplyColors = !1, this._isOverwrittenModelScreenColors = !1, this._isOverwrittenCullings = !1, this._modelOpacity = 1, this._userMultiplyColors = new x(), this._userScreenColors = new x(), this._userCullings = new x(), this._userPartMultiplyColors = new x(), this._userPartScreenColors = new x(), this._partChildDrawables = new x(), this._notExistPartId = new J(), this._notExistParameterId = new J(), this._notExistParameterValues = new J(), this._notExistPartOpacities = new J();
     }
     release() {
       this._model.release(), this._model = null;
@@ -3624,12 +3624,12 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
   (function(s) {
     s.CubismModel = Gs;
   })(Us || (Us = {}));
-  class _t {
+  class ct {
     static create(e, t) {
       let i = null;
       if (t && !this.hasMocConsistency(e)) return $("Inconsistent MOC3."), i;
       const r = Live2DCubismCore.Moc.fromArrayBuffer(e);
-      return r && (i = new _t(r), i._mocVersion = Live2DCubismCore.Version.csmGetMocVersion(r, e)), i;
+      return r && (i = new ct(r), i._mocVersion = Live2DCubismCore.Version.csmGetMocVersion(r, e)), i;
     }
     static delete(e) {
       e._moc._release(), e._moc = null, e = null;
@@ -3646,7 +3646,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this._moc = e, this._modelCount = 0, this._mocVersion = 0;
     }
     release() {
-      ge(this._modelCount == 0), this._moc._release(), this._moc = null;
+      he(this._modelCount == 0), this._moc._release(), this._moc = null;
     }
     getLatestMocVersion() {
       return Live2DCubismCore.Version.csmGetLatestMocVersion();
@@ -3659,7 +3659,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     }
   }
   (function(s) {
-    s.CubismMoc = _t;
+    s.CubismMoc = ct;
   })(zs || (zs = {}));
   const Ys = "Meta", ai = "UserData";
   class Hs {
@@ -3679,7 +3679,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       return this._json.getRoot().getValueByString(ai).getValueByIndex(e).getValueByString("Target").getRawString();
     }
     getUserDataId(e) {
-      return L.getIdManager().getId(this._json.getRoot().getValueByString(ai).getValueByIndex(e).getValueByString("Id").getRawString());
+      return V.getIdManager().getId(this._json.getRoot().getValueByString(ai).getValueByIndex(e).getValueByString("Id").getRawString());
     }
     getUserDataValue(e) {
       return this._json.getRoot().getValueByString(ai).getValueByIndex(e).getValueByString("Value").getRawString();
@@ -3691,9 +3691,9 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
   })(qs || (qs = {}));
   class Js {
   }
-  class mt {
+  class _t {
     static create(e, t) {
-      const i = new mt();
+      const i = new _t();
       return i.parseUserData(e, t), i;
     }
     static delete(e) {
@@ -3704,15 +3704,15 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     }
     parseUserData(e, t) {
       let i = new Hs(e, t);
-      const r = L.getIdManager().getId("ArtMesh"), a = i.getUserDataCount();
+      const r = V.getIdManager().getId("ArtMesh"), a = i.getUserDataCount();
       for (let o = 0; o < a; o++) {
         const n = new Js();
-        n.targetId = i.getUserDataId(o), n.targetType = L.getIdManager().getId(i.getUserDataTargetType(o)), n.value = new se(i.getUserDataValue(o)), this._userDataNodes.pushBack(n), n.targetType == r && this._artMeshUserDataNode.pushBack(n);
+        n.targetId = i.getUserDataId(o), n.targetType = V.getIdManager().getId(i.getUserDataTargetType(o)), n.value = new se(i.getUserDataValue(o)), this._userDataNodes.pushBack(n), n.targetType == r && this._artMeshUserDataNode.pushBack(n);
       }
       i.release(), i = void 0;
     }
     constructor() {
-      this._userDataNodes = new y(), this._artMeshUserDataNode = new y();
+      this._userDataNodes = new x(), this._artMeshUserDataNode = new x();
     }
     release() {
       for (let e = 0; e < this._userDataNodes.getSize(); ++e) this._userDataNodes.set(e, null);
@@ -3720,7 +3720,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     }
   }
   (function(s) {
-    s.CubismModelUserData = mt, s.CubismModelUserDataNode = Js;
+    s.CubismModelUserData = _t, s.CubismModelUserDataNode = Js;
   })(Ws || (Ws = {}));
   class Nt {
     isInitialized() {
@@ -3751,19 +3751,19 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       return this._opacity;
     }
     loadModel(e, t = !1) {
-      this._moc = _t.create(e, t), this._moc != null ? (this._model = this._moc.createModel(), this._model != null ? (this._model.saveParameters(), this._modelMatrix = new $i(this._model.getCanvasWidth(), this._model.getCanvasHeight())) : $("Failed to CreateModel().")) : $("Failed to CubismMoc.create().");
+      this._moc = ct.create(e, t), this._moc != null ? (this._model = this._moc.createModel(), this._model != null ? (this._model.saveParameters(), this._modelMatrix = new $i(this._model.getCanvasWidth(), this._model.getCanvasHeight())) : $("Failed to CreateModel().")) : $("Failed to CubismMoc.create().");
     }
     loadExpression(e, t, i) {
       return Tt.create(e, t);
     }
     loadPose(e, t) {
-      this._pose = lt.create(e, t);
+      this._pose = ot.create(e, t);
     }
     loadUserData(e, t) {
-      this._modelUserData = mt.create(e, t);
+      this._modelUserData = _t.create(e, t);
     }
     loadPhysics(e, t) {
-      this._physics = ct.create(e, t);
+      this._physics = dt.create(e, t);
     }
     isHit(e, t, i) {
       const r = this._model.getDrawableIndex(e);
@@ -3771,7 +3771,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       const a = this._model.getDrawableVertexCount(r), o = this._model.getDrawableVertices(r);
       let n = o[0], l = o[0], h = o[1], u = o[1];
       for (let d = 1; d < a; ++d) {
-        const c = o[Me.vertexOffset + d * Me.vertexStep], m = o[Me.vertexOffset + d * Me.vertexStep + 1];
+        const c = o[be.vertexOffset + d * be.vertexStep], m = o[be.vertexOffset + d * be.vertexStep + 1];
         c < n && (n = c), c > l && (l = c), m < h && (h = m), m > u && (u = m);
       }
       const _ = this._modelMatrix.invertTransformX(t), g = this._modelMatrix.invertTransformY(i);
@@ -3790,7 +3790,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this._renderer != null && (this._renderer.release(), this._renderer = null);
     }
     motionEventFired(e) {
-      de("{0}", e.s);
+      ge("{0}", e.s);
     }
     static cubismDefaultMotionEventCallback(e, t, i) {
       i != null && i.motionEventFired(t);
@@ -3799,7 +3799,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this.loadMotion = (e, t, i, r) => Ft.create(e, t, r), this._moc = null, this._model = null, this._motionManager = null, this._expressionManager = null, this._eyeBlink = null, this._breath = null, this._modelMatrix = null, this._pose = null, this._dragManager = null, this._physics = null, this._modelUserData = null, this._initialized = !1, this._updating = !1, this._opacity = 1, this._lipsync = !0, this._lastLipSyncValue = 0, this._dragX = 0, this._dragY = 0, this._accelerationX = 0, this._accelerationY = 0, this._accelerationZ = 0, this._mocConsistency = !1, this._debugMode = !1, this._renderer = null, this._motionManager = new Jt(), this._motionManager.setEventCallback(Nt.cubismDefaultMotionEventCallback, this), this._expressionManager = new Jt(), this._dragManager = new Ji();
     }
     release() {
-      this._motionManager != null && (this._motionManager.release(), this._motionManager = null), this._expressionManager != null && (this._expressionManager.release(), this._expressionManager = null), this._moc != null && (this._moc.deleteModel(this._model), this._moc.release(), this._moc = null), this._modelMatrix = null, lt.delete(this._pose), Fe.delete(this._eyeBlink), ot.delete(this._breath), this._dragManager = null, ct.delete(this._physics), mt.delete(this._modelUserData), this.deleteRenderer();
+      this._motionManager != null && (this._motionManager.release(), this._motionManager = null), this._expressionManager != null && (this._expressionManager.release(), this._expressionManager = null), this._moc != null && (this._moc.deleteModel(this._model), this._moc.release(), this._moc = null), this._modelMatrix = null, ot.delete(this._pose), Fe.delete(this._eyeBlink), nt.delete(this._breath), this._dragManager = null, dt.delete(this._physics), _t.delete(this._modelUserData), this.deleteRenderer();
     }
   }
   (function(s) {
@@ -3906,13 +3906,13 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       l((i = i.apply(s, [])).next());
     });
   };
-  let Ze = null;
+  let Je = null;
   class oi {
     static getInstance() {
-      return Ze == null && (Ze = new oi()), Ze;
+      return Je == null && (Je = new oi()), Je;
     }
     static releaseInstance() {
-      Ze != null && (Ze = void 0), Ze = null;
+      Je != null && (Je = void 0), Je = null;
     }
     update(e) {
       let t, i;
@@ -4069,7 +4069,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
             const c = this._modelSetting.getExpressionName(d), m = this._modelSetting.getExpressionFileName(d);
             ne(`${this._modelHomeDir}${m}`).then((p) => p.arrayBuffer()).then((p) => {
               const b = this.loadExpression(p, p.byteLength, c);
-              this._expressions.getValue(c) != null && (We.delete(this._expressions.getValue(c)), this._expressions.setValue(c, null)), this._expressions.setValue(c, b), this._expressionCount++, this._expressionCount >= g && (this._state = A.LoadPhysics, i());
+              this._expressions.getValue(c) != null && (qe.delete(this._expressions.getValue(c)), this._expressions.setValue(c, null)), this._expressions.setValue(c, b), this._expressionCount++, this._expressionCount >= g && (this._state = A.LoadPhysics, i());
             });
           }
           this._state = A.WaitLoadExpression;
@@ -4091,9 +4091,9 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       }, a = () => {
         this._modelSetting.getEyeBlinkParameterCount() > 0 && (this._eyeBlink = Fe.create(this._modelSetting), this._state = A.SetupBreath), o();
       }, o = () => {
-        this._breath = ot.create();
-        const g = new y();
-        g.pushBack(new qe(this._idParamAngleX, 0, 15, 6.5345, 0.5)), g.pushBack(new qe(this._idParamAngleY, 0, 8, 3.5345, 0.5)), g.pushBack(new qe(this._idParamAngleZ, 0, 10, 5.5345, 0.5)), g.pushBack(new qe(this._idParamBodyAngleX, 0, 4, 15.5345, 0.5)), g.pushBack(new qe(L.getIdManager().getId(C.ParamBreath), 0.5, 0.5, 3.2345, 1)), this._breath.setParameters(g), this._state = A.LoadUserData, n();
+        this._breath = nt.create();
+        const g = new x();
+        g.pushBack(new He(this._idParamAngleX, 0, 15, 6.5345, 0.5)), g.pushBack(new He(this._idParamAngleY, 0, 8, 3.5345, 0.5)), g.pushBack(new He(this._idParamAngleZ, 0, 10, 5.5345, 0.5)), g.pushBack(new He(this._idParamBodyAngleX, 0, 4, 15.5345, 0.5)), g.pushBack(new He(V.getIdManager().getId(B.ParamBreath), 0.5, 0.5, 3.2345, 1)), this._breath.setParameters(g), this._state = A.LoadUserData, n();
       }, n = () => {
         if (this._modelSetting.getUserDataFile() != "") {
           const g = this._modelSetting.getUserDataFile();
@@ -4117,7 +4117,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
         const g = [], d = this._modelSetting.getMotionGroupCount();
         for (let c = 0; c < d; c++) g[c] = this._modelSetting.getMotionGroupName(c), this._allMotionCount += this._modelSetting.getMotionCount(g[c]);
         for (let c = 0; c < d; c++) this.preLoadMotionGroup(g[c]);
-        d == 0 && (this._state = A.LoadTexture, this._motionManager.stopAllMotions(), this._updating = !1, this._initialized = !0, this.createRenderer(), this.setupTextures(), this.getRenderer().startUp(x));
+        d == 0 && (this._state = A.LoadTexture, this._motionManager.stopAllMotions(), this._updating = !1, this._initialized = !0, this.createRenderer(), this.setupTextures(), this.getRenderer().startUp(y));
       };
     }
     setupTextures() {
@@ -4185,7 +4185,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this.setExpression(t);
     }
     motionEventFired(e) {
-      de("{0} is fired on LAppModel!!", e.s);
+      ge("{0} is fired on LAppModel!!", e.s);
     }
     hitTest(e, t, i) {
       if (this._opacity < 1) return !1;
@@ -4202,7 +4202,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
         this._debugMode && Z.printMessage(`[APP]load motion: ${i} => [${r}]`), ne(`${this._modelHomeDir}${i}`).then((a) => a.arrayBuffer()).then((a) => {
           const o = this.loadMotion(a, a.byteLength, r);
           let n = this._modelSetting.getMotionFadeInTimeValue(e, t);
-          n >= 0 && o.setFadeInTime(n), n = this._modelSetting.getMotionFadeOutTimeValue(e, t), n >= 0 && o.setFadeOutTime(n), o.setEffectIds(this._eyeBlinkIds, this._lipSyncIds), this._motions.getValue(r) != null && We.delete(this._motions.getValue(r)), this._motions.setValue(r, o), this._motionCount++, this._motionCount >= this._allMotionCount && (this._state = A.LoadTexture, this._motionManager.stopAllMotions(), this._updating = !1, this._initialized = !0, this.createRenderer(), this.setupTextures(), this.getRenderer().startUp(x));
+          n >= 0 && o.setFadeInTime(n), n = this._modelSetting.getMotionFadeOutTimeValue(e, t), n >= 0 && o.setFadeOutTime(n), o.setEffectIds(this._eyeBlinkIds, this._lipSyncIds), this._motions.getValue(r) != null && qe.delete(this._motions.getValue(r)), this._motions.setValue(r, o), this._motionCount++, this._motionCount >= this._allMotionCount && (this._state = A.LoadTexture, this._motionManager.stopAllMotions(), this._updating = !1, this._initialized = !0, this.createRenderer(), this.setupTextures(), this.getRenderer().startUp(y));
         });
       }
     }
@@ -4214,7 +4214,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     }
     doDraw() {
       if (this._model == null) return;
-      const e = [0, 0, F.width, F.height];
+      const e = [0, 0, R.width, R.height];
       this.getRenderer().setRenderState(gi, e), this.getRenderer().drawModel();
     }
     draw(e) {
@@ -4222,14 +4222,14 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     }
     hasMocConsistencyFromFile() {
       return er(this, void 0, void 0, function* () {
-        if (ge(this._modelSetting.getModelFileName().localeCompare("")), this._modelSetting.getModelFileName() != "") {
+        if (he(this._modelSetting.getModelFileName().localeCompare("")), this._modelSetting.getModelFileName() != "") {
           const e = this._modelSetting.getModelFileName(), t = yield ne(`${this._modelHomeDir}${e}`), i = yield t.arrayBuffer();
-          return this._consistency = _t.hasMocConsistency(i), this._consistency ? de("Consistent MOC3.") : de("Inconsistent MOC3."), this._consistency;
+          return this._consistency = ct.hasMocConsistency(i), this._consistency ? ge("Consistent MOC3.") : ge("Inconsistent MOC3."), this._consistency;
         }
       });
     }
     constructor() {
-      super(), this._modelSetting = null, this._modelHomeDir = null, this._userTimeSeconds = 0, this._eyeBlinkIds = new y(), this._lipSyncIds = new y(), this._motions = new J(), this._expressions = new J(), this._hitArea = new y(), this._userArea = new y(), this._idParamAngleX = L.getIdManager().getId(C.ParamAngleX), this._idParamAngleY = L.getIdManager().getId(C.ParamAngleY), this._idParamAngleZ = L.getIdManager().getId(C.ParamAngleZ), this._idParamEyeBallX = L.getIdManager().getId(C.ParamEyeBallX), this._idParamEyeBallY = L.getIdManager().getId(C.ParamEyeBallY), this._idParamBodyAngleX = L.getIdManager().getId(C.ParamBodyAngleX), this._mocConsistency = !0, this._state = A.LoadAssets, this._expressionCount = 0, this._textureCount = 0, this._motionCount = 0, this._allMotionCount = 0, this._wavFileHandler = new oi(), this._consistency = !1;
+      super(), this._modelSetting = null, this._modelHomeDir = null, this._userTimeSeconds = 0, this._eyeBlinkIds = new x(), this._lipSyncIds = new x(), this._motions = new J(), this._expressions = new J(), this._hitArea = new x(), this._userArea = new x(), this._idParamAngleX = V.getIdManager().getId(B.ParamAngleX), this._idParamAngleY = V.getIdManager().getId(B.ParamAngleY), this._idParamAngleZ = V.getIdManager().getId(B.ParamAngleZ), this._idParamEyeBallX = V.getIdManager().getId(B.ParamEyeBallX), this._idParamEyeBallY = V.getIdManager().getId(B.ParamEyeBallY), this._idParamBodyAngleX = V.getIdManager().getId(B.ParamBodyAngleX), this._mocConsistency = !0, this._state = A.LoadAssets, this._expressionCount = 0, this._textureCount = 0, this._motionCount = 0, this._allMotionCount = 0, this._wavFileHandler = new oi(), this._consistency = !1;
     }
   }
   const Wr = `
@@ -4243,7 +4243,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
 `, Kr = `
 <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M624.48 882.4c-2.96 10.64-4.72 18-7.04 25.2-10.08 31.12-25.04 41.6-57.92 41.12-115.28-1.6-230.56-3.52-345.84-4.56-30 0-60 3.04-90 3.76-54.4 1.44-72.8-14.48-73.28-69.28-1.6-177.28-3.12-354.56-2-531.84 0-64 7.2-128 13.6-191.2 2.24-21.92 3.28-54.32 30.32-56 14.48-0.8 37.36 23.52 44.64 41.28 35.76 87.28 99.36 118.32 189.76 106.24a671.52 671.52 0 0 1 84.24-1.68 72.56 72.56 0 0 0 66.88-38.4c17.52-30.16 34.72-60.4 53.04-90.08a86.16 86.16 0 0 1 24-28.48c12-7.44 30-16 40-12.16s18.72 22.88 22.32 36.64 0.88 30.8 0.96 46.32c1.04 180.24 2.48 360.4 2.56 540.64 0 26.32 9.04 40.96 31.36 55.52 70.96 46.4 127.44 38.88 194.08-33.76 9.12-10 16.64-21.6 26.24-30.96a59.68 59.68 0 0 1 79.28-6.4 58.08 58.08 0 0 1 14.48 78.24C913.76 848 790.24 949.04 644.08 888a194.08 194.08 0 0 0-19.6-5.6z m-454.08-488a48 48 0 0 0-45.6 44.32 47.2 47.2 0 0 0 46.64 46.16A44.64 44.64 0 0 0 216 440.64a45.2 45.2 0 0 0-45.6-46.32z m338.16 90.4a45.92 45.92 0 0 0 43.84-45.2 45.28 45.28 0 0 0-46.64-45.04 45.12 45.12 0 0 0 2.8 90.24z" p-id="17483" fill="#202020"></path></svg>
 `;
-  var fe = function(s, e, t, i) {
+  var pe = function(s, e, t, i) {
     return new (t || (t = Promise))(function(r, a) {
       function o(h) {
         try {
@@ -4268,32 +4268,32 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       l((i = i.apply(s, [])).next());
     });
   };
-  const li = 35, Ce = "#00A6ED", Qr = "white", Ut = "rgb(224, 209, 41)";
-  let oe, Ke, ui = !1, tr = 35;
-  const Be = "__live2d-toolbox-item";
-  function pt() {
-    oe && (Ke && clearTimeout(Ke), Ke = setTimeout(() => {
+  const li = 35, Se = "#00A6ED", Qr = "white", Ut = "rgb(224, 209, 41)";
+  let oe, Ze, ui = !1, tr = 35;
+  const Ce = "__live2d-toolbox-item";
+  function mt() {
+    oe && (Ze && clearTimeout(Ze), Ze = setTimeout(() => {
       oe.style.opacity = "1";
     }, 200));
   }
-  function ft() {
-    oe && !ui && (Ke && clearTimeout(Ke), Ke = setTimeout(() => {
+  function pt() {
+    oe && !ui && (Ze && clearTimeout(Ze), Ze = setTimeout(() => {
       oe.style.opacity = "0";
     }, 200));
   }
-  function yt(s, e = "", t = []) {
+  function ft(s, e = "", t = []) {
     const i = document.createElement("div");
-    i.classList.add(Be), t.forEach((o) => i.classList.add(o));
+    i.classList.add(Ce), t.forEach((o) => i.classList.add(o));
     const r = document.createElement("span"), a = document.createElement("span");
     return r.innerHTML = s, a.innerText = e, i.appendChild(r), i.appendChild(a), i;
   }
   function ea(s) {
-    const e = yt(Zr, "", ["button-item"]);
-    return e.style.backgroundColor = Ce, e.style.fontSize = "1.05rem", e.addEventListener("mouseenter", () => {
+    const e = ft(Zr, "", ["button-item"]);
+    return e.style.backgroundColor = Se, e.style.fontSize = "1.05rem", e.addEventListener("mouseenter", () => {
       e.style.backgroundColor = Ut;
     }), e.addEventListener("mouseleave", () => {
-      e.style.backgroundColor = Ce;
-    }), e.onclick = () => fe(this, void 0, void 0, function* () {
+      e.style.backgroundColor = Se;
+    }), e.onclick = () => pe(this, void 0, void 0, function* () {
       window.open("https://github.com/LSTM-Kirigaya/Live2dRender", "_blank");
     }), e;
   }
@@ -4303,32 +4303,32 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     const e = M.Canvas;
     s.style.zIndex = parseInt(e.style.zIndex) + 1 + "", s.style.opacity = "0", s.style.transition = ".7s cubic-bezier(0.23, 1, 0.32, 1)", s.style.position = "fixed", s.style.right = e.width - tr + "px", s.style.top = window.innerHeight - e.height + "px";
     const t = function(o) {
-      const n = yt(Wr, "", ["button-item"]);
-      n.style.backgroundColor = Ce, n.style.fontSize = "1.05rem", n.addEventListener("mouseenter", () => {
+      const n = ft(Wr, "", ["button-item"]);
+      n.style.backgroundColor = Se, n.style.fontSize = "1.05rem", n.addEventListener("mouseenter", () => {
         n.style.backgroundColor = Ut;
       }), n.addEventListener("mouseleave", () => {
-        n.style.backgroundColor = Ce;
+        n.style.backgroundColor = Se;
       });
       let l = 0;
-      return n.onclick = () => fe(this, void 0, void 0, function* () {
+      return n.onclick = () => pe(this, void 0, void 0, function* () {
         const h = M.Canvas;
         if (h) {
           const u = Math.ceil(h.width);
           l = (l + u) % (u << 1), h.style.transform = `translateX(${l}px)`, o.style.transform = `translateX(${Math.max(0, l - tr)}px)`, l > 0 ? (ui = !0, n.style.transform = "rotate(180deg)", setTimeout(() => {
-            pt();
+            mt();
           }, 500)) : (ui = !1, n.style.transform = "rotate(0)");
         }
       }), n;
     }(s), i = function(o) {
-      const n = yt($r, "", ["button-item"]);
-      n.style.backgroundColor = Ce, n.style.fontSize = "1.05rem", n.style.position = "relative";
+      const n = ft($r, "", ["button-item"]);
+      n.style.backgroundColor = Se, n.style.fontSize = "1.05rem", n.style.position = "relative";
       const l = document.createElement("div");
       l.style.position = "absolute", l.style.top = "0px", l.style.flexDirection = "column", l.style.transition = "all .75s cubic-bezier(0.23, 1, 0.32, 1)", l.style.display = "flex", l.style.opacity = "0";
       let h = 0;
       l.style.transform = `translate(-75px, ${h - 50}px)`, n.addEventListener("mouseenter", () => {
         n.style.backgroundColor = Ut, l.style.visibility = "visible", l.style.opacity = "1", l.style.transform = `translate(-75px, ${h}px)`;
       }), n.addEventListener("mouseleave", () => {
-        n.style.backgroundColor = Ce, l.style.opacity = "0", l.style.transform = `translate(-75px, ${h - 50}px)`, setTimeout(() => {
+        n.style.backgroundColor = Se, l.style.opacity = "0", l.style.transform = `translate(-75px, ${h - 50}px)`, setTimeout(() => {
           l.style.visibility = "hidden";
         }, 500);
       }), l.addEventListener("wheel", (_) => {
@@ -4341,8 +4341,8 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
         if (g && d) {
           const m = Math.max(0, Math.floor(d.height / li) - 1), p = g.getModel(0), b = Math.min(p._expressions.getSize(), m);
           for (let S = 0; S < b; ++S) {
-            const w = p._expressions._keyValues[S].first, f = w.replace(".exp3.json", ""), k = yt(Kr, f);
-            k.classList.add("expression-item"), k.onclick = () => fe(this, void 0, void 0, function* () {
+            const w = p._expressions._keyValues[S].first, f = w.replace(".exp3.json", ""), k = ft(Kr, f);
+            k.classList.add("expression-item"), k.onclick = () => pe(this, void 0, void 0, function* () {
               p.setExpression(w);
             }), c.push(k);
           }
@@ -4352,24 +4352,24 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       for (const _ of u) l.appendChild(_);
       return n.appendChild(l), n;
     }(), r = function(o) {
-      const n = yt(Jr, "", ["button-item"]);
-      return n.style.backgroundColor = Ce, n.style.fontSize = "1.05rem", n.addEventListener("mouseenter", () => {
+      const n = ft(Jr, "", ["button-item"]);
+      return n.style.backgroundColor = Se, n.style.fontSize = "1.05rem", n.addEventListener("mouseenter", () => {
         n.style.backgroundColor = Ut;
       }), n.addEventListener("mouseleave", () => {
-        n.style.backgroundColor = Ce;
-      }), n.onclick = () => fe(this, void 0, void 0, function* () {
+        n.style.backgroundColor = Se;
+      }), n.onclick = () => pe(this, void 0, void 0, function* () {
         Ks.refreshCache = !0, le.getInstance().loadLive2dModel();
       }), n;
     }(), a = ea();
     return s.appendChild(t), s.appendChild(i), s.appendChild(r), s.appendChild(a), document.body.appendChild(s), s;
   }
-  let Qe = null;
+  let Ke = null;
   class le {
     static getInstance() {
-      return Qe == null && (Qe = new le()), Qe;
+      return Ke == null && (Ke = new le()), Ke;
     }
     static releaseInstance() {
-      Qe != null && (Qe = void 0), Qe = null;
+      Ke != null && (Ke = void 0), Ke = null;
     }
     getModel(e) {
       return e < this._models.getSize() ? this._models.at(e) : null;
@@ -4392,7 +4392,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       for (let i = 0; i < this._models.getSize(); i++) this._models.at(i).hitTest(M.HitAreaNameHead, e, t) ? this._models.at(i).setRandomExpression() : this._models.at(i).hitTest(M.HitAreaNameBody, e, t) && this._models.at(i).startRandomMotion(M.MotionGroupTapBody, M.PriorityNormal, this._finishedMotion);
     }
     onUpdate() {
-      const { width: e, height: t } = F, i = this._models.getSize();
+      const { width: e, height: t } = R, i = this._models.getSize();
       for (let r = 0; r < i; ++r) {
         const a = new z(), o = this.getModel(r);
         o.getModel() && (o.getModel().getCanvasWidth() > 1 && e < t ? (o.getModelMatrix().setWidth(2), a.scale(1, e / t)) : a.scale(t / e, 1), this._viewMatrix != null && a.multiplyByMatrix(this._viewMatrix)), o.update(), o.draw(a);
@@ -4414,10 +4414,10 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
         const n = new qr();
         this._models.pushBack(n), yield n.loadAssets(o, a), setTimeout(() => {
           (function() {
-            oe && (ft(), document.body.removeChild(oe), oe = ir(), pt(), oe.onmouseenter = () => fe(this, void 0, void 0, function* () {
+            oe && (pt(), document.body.removeChild(oe), oe = ir(), mt(), oe.onmouseenter = () => pe(this, void 0, void 0, function* () {
+              mt();
+            }), oe.onmouseleave = () => pe(this, void 0, void 0, function* () {
               pt();
-            }), oe.onmouseleave = () => fe(this, void 0, void 0, function* () {
-              ft();
             }));
           })();
         }, 500), Zs("[Live2dRender] 模型重载完成，重载路径: " + o);
@@ -4452,16 +4452,16 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     constructor() {
       this._finishedMotion = (e) => {
         console.log(e);
-      }, this._viewMatrix = new z(), this._models = new y(), this.loadLive2dModel();
+      }, this._viewMatrix = new z(), this._models = new x(), this.loadLive2dModel();
     }
   }
   var sr;
   class ta {
     constructor() {
-      this._textures = new y();
+      this._textures = new x();
     }
     release() {
-      for (let e = this._textures.begin(); e.notEqual(this._textures.end()); e.preIncrement()) x.deleteTexture(e.ptr().id);
+      for (let e = this._textures.begin(); e.notEqual(this._textures.end()); e.preIncrement()) y.deleteTexture(e.ptr().id);
       this._textures = null;
     }
     createTextureFromFile(e, t, i) {
@@ -4469,8 +4469,8 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
         for (let c = this._textures.begin(); c.notEqual(this._textures.end()); c.preIncrement()) if (c.ptr().fileName == e && c.ptr().usePremultply == t) return c.ptr().img = new Image(), c.ptr().img.onload = () => i(c.ptr()), void (c.ptr().img.src = e);
         const l = new Image();
         l.onload = () => {
-          const c = x.createTexture();
-          x.bindTexture(x.TEXTURE_2D, c), x.texParameteri(x.TEXTURE_2D, x.TEXTURE_MIN_FILTER, x.LINEAR_MIPMAP_LINEAR), x.texParameteri(x.TEXTURE_2D, x.TEXTURE_MAG_FILTER, x.LINEAR), t && x.pixelStorei(x.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1), x.texImage2D(x.TEXTURE_2D, 0, x.RGBA, x.RGBA, x.UNSIGNED_BYTE, l), x.generateMipmap(x.TEXTURE_2D), x.bindTexture(x.TEXTURE_2D, null);
+          const c = y.createTexture();
+          y.bindTexture(y.TEXTURE_2D, c), y.texParameteri(y.TEXTURE_2D, y.TEXTURE_MIN_FILTER, y.LINEAR_MIPMAP_LINEAR), y.texParameteri(y.TEXTURE_2D, y.TEXTURE_MAG_FILTER, y.LINEAR), t && y.pixelStorei(y.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1), y.texImage2D(y.TEXTURE_2D, 0, y.RGBA, y.RGBA, y.UNSIGNED_BYTE, l), y.generateMipmap(y.TEXTURE_2D), y.bindTexture(y.TEXTURE_2D, null);
           const m = new ia();
           m != null && (m.fileName = e, m.width = l.width, m.height = l.height, m.id = c, m.img = l, m.usePremultply = t, this._textures.pushBack(m)), i(m);
         };
@@ -4665,7 +4665,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this._programId = null, this._touchManager = new sa(), this._deviceToScreen = new z(), this._viewMatrix = new rr();
     }
     initialize() {
-      const { width: e, height: t } = F, i = e / t, r = -i, a = i, o = M.ViewLogicalLeft, n = M.ViewLogicalRight;
+      const { width: e, height: t } = R, i = e / t, r = -i, a = i, o = M.ViewLogicalLeft, n = M.ViewLogicalRight;
       if (this._viewMatrix.setScreenRect(r, a, o, n), this._viewMatrix.scale(M.ViewScale, M.ViewScale), this._deviceToScreen.loadIdentity(), e > t) {
         const l = Math.abs(a - r);
         this._deviceToScreen.scaleRelative(l / e, -l / e);
@@ -4676,15 +4676,15 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this._deviceToScreen.translateRelative(0.5 * -e, 0.5 * -t), this._viewMatrix.setMaxScale(M.ViewMaxScale), this._viewMatrix.setMinScale(M.ViewMinScale), this._viewMatrix.setMaxScreenRect(M.ViewLogicalMaxLeft, M.ViewLogicalMaxRight, M.ViewLogicalMaxBottom, M.ViewLogicalMaxTop);
     }
     release() {
-      this._viewMatrix = null, this._touchManager = null, this._deviceToScreen = null, x.deleteProgram(this._programId), this._programId = null;
+      this._viewMatrix = null, this._touchManager = null, this._deviceToScreen = null, y.deleteProgram(this._programId), this._programId = null;
     }
     render() {
-      x.useProgram(this._programId), x.flush();
+      y.useProgram(this._programId), y.flush();
       const e = le.getInstance();
       e.setViewMatrix(this._viewMatrix), e.onUpdate();
     }
     initializeSprite() {
-      F.width, F.height, N.getInstance().getTextureManager(), this._programId == null && (this._programId = N.getInstance().createShader());
+      R.width, R.height, N.getInstance().getTextureManager(), this._programId == null && (this._programId = N.getInstance().createShader());
     }
     onTouchesBegan(e, t) {
       this._touchManager.touchesBegan(e, t);
@@ -4717,12 +4717,12 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     }
   }
   let hi = null, ie = null;
-  class et {
+  class Qe {
     constructor() {
       this._messageBox = null;
     }
     static getInstance() {
-      return hi == null && (hi = new et()), hi;
+      return hi == null && (hi = new Qe()), hi;
     }
     getMessageBox() {
       return this._messageBox == null && (this._messageBox = document.querySelector("#live2dMessageBox-content")), this._messageBox;
@@ -4747,7 +4747,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       e.classList.remove("live2dMessageBox-content-hidden"), e.classList.add("live2dMessageBox-content-visible");
     }
   }
-  let F = null, Ne = null, x = null, gi = null;
+  let R = null, Ne = null, y = null, gi = null;
   class N {
     static getInstance() {
       return Ne == null && (Ne = new N()), Ne;
@@ -4756,31 +4756,31 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       Ne != null && Ne.release(), Ne = null;
     }
     initialize() {
-      return F = document.createElement("canvas"), F.id = M.CanvasId, F.style.position = "fixed", F.style.bottom = "0", F.style.right = "0", F.style.zIndex = "9999", M.Canvas = F, M.CanvasSize === "auto" ? this._resizeCanvas() : (F.width = M.CanvasSize.width, F.height = M.CanvasSize.height), F.style.opacity = "0", F.style.transition = ".7s cubic-bezier(0.23, 1, 0.32, 1)", x = F.getContext("webgl") || F.getContext("experimental-webgl"), x ? (document.body.appendChild(F), et.getInstance().initialize(F), gi || (gi = x.getParameter(x.FRAMEBUFFER_BINDING)), x.enable(x.BLEND), x.blendFunc(x.SRC_ALPHA, x.ONE_MINUS_SRC_ALPHA), x.clear(x.COLOR_BUFFER_BIT | x.DEPTH_BUFFER_BIT), "ontouchend" in F ? (F.ontouchstart = la, F.ontouchmove = ua, F.ontouchend = ha, F.ontouchcancel = ga) : (F.onmousedown = aa, F.onmousemove = na, F.onmouseup = oa), this._view.initialize(), this.initializeCubism(), !0) : (console.log("Cannot initialize WebGL. This browser does not support."), x = null, !1);
+      return R = document.createElement("canvas"), R.id = M.CanvasId, R.style.position = "fixed", R.style.bottom = "0", R.style.right = "0", R.style.zIndex = "9999", M.Canvas = R, M.CanvasSize === "auto" ? this._resizeCanvas() : (R.width = M.CanvasSize.width, R.height = M.CanvasSize.height), R.style.opacity = "0", R.style.transition = ".7s cubic-bezier(0.23, 1, 0.32, 1)", y = R.getContext("webgl") || R.getContext("experimental-webgl"), y ? (document.body.appendChild(R), Qe.getInstance().initialize(R), gi || (gi = y.getParameter(y.FRAMEBUFFER_BINDING)), y.enable(y.BLEND), y.blendFunc(y.SRC_ALPHA, y.ONE_MINUS_SRC_ALPHA), y.clear(y.COLOR_BUFFER_BIT | y.DEPTH_BUFFER_BIT), "ontouchend" in R ? (R.ontouchstart = la, R.ontouchmove = ua, R.ontouchend = ha, R.ontouchcancel = ga) : (R.onmousedown = aa, R.onmousemove = na, R.onmouseup = oa), this._view.initialize(), this.initializeCubism(), !0) : (console.log("Cannot initialize WebGL. This browser does not support."), y = null, !1);
     }
     onResize() {
       this._resizeCanvas(), this._view.initialize(), this._view.initializeSprite();
-      const e = [0, 0, F.width, F.height];
-      x.viewport(e[0], e[1], e[2], e[3]);
+      const e = [0, 0, R.width, R.height];
+      y.viewport(e[0], e[1], e[2], e[3]);
     }
     release() {
-      this._textureManager.release(), this._textureManager = null, this._view.release(), this._view = null, le.releaseInstance(), L.dispose();
+      this._textureManager.release(), this._textureManager = null, this._view.release(), this._view = null, le.releaseInstance(), V.dispose();
     }
     run() {
       const e = () => {
-        Ne != null && (Z.updateTime(), x.clearColor(...M.BackgroundRGBA), x.enable(x.DEPTH_TEST), x.depthFunc(x.LEQUAL), x.clear(x.COLOR_BUFFER_BIT | x.DEPTH_BUFFER_BIT), x.clearDepth(1), x.enable(x.BLEND), x.blendFunc(x.SRC_ALPHA, x.ONE_MINUS_SRC_ALPHA), this._view.render(), requestAnimationFrame(e));
+        Ne != null && (Z.updateTime(), y.clearColor(...M.BackgroundRGBA), y.enable(y.DEPTH_TEST), y.depthFunc(y.LEQUAL), y.clear(y.COLOR_BUFFER_BIT | y.DEPTH_BUFFER_BIT), y.clearDepth(1), y.enable(y.BLEND), y.blendFunc(y.SRC_ALPHA, y.ONE_MINUS_SRC_ALPHA), this._view.render(), requestAnimationFrame(e));
       };
       e();
     }
     createShader() {
-      const e = x.createShader(x.VERTEX_SHADER);
+      const e = y.createShader(y.VERTEX_SHADER);
       if (e == null) return null;
-      x.shaderSource(e, "precision mediump float;attribute vec3 position;attribute vec2 uv;varying vec2 vuv;void main(void){   gl_Position = vec4(position, 1.0);   vuv = uv;}"), x.compileShader(e);
-      const t = x.createShader(x.FRAGMENT_SHADER);
+      y.shaderSource(e, "precision mediump float;attribute vec3 position;attribute vec2 uv;varying vec2 vuv;void main(void){   gl_Position = vec4(position, 1.0);   vuv = uv;}"), y.compileShader(e);
+      const t = y.createShader(y.FRAGMENT_SHADER);
       if (t == null) return null;
-      x.shaderSource(t, "precision mediump float;varying vec2 vuv;uniform sampler2D texture;void main(void){   gl_FragColor = texture2D(texture, vuv);}"), x.compileShader(t);
-      const i = x.createProgram();
-      return x.attachShader(i, e), x.attachShader(i, t), x.deleteShader(e), x.deleteShader(t), x.linkProgram(i), x.useProgram(i), i;
+      y.shaderSource(t, "precision mediump float;varying vec2 vuv;uniform sampler2D texture;void main(void){   gl_FragColor = texture2D(texture, vuv);}"), y.compileShader(t);
+      const i = y.createProgram();
+      return y.attachShader(i, e), y.attachShader(i, t), y.deleteShader(e), y.deleteShader(t), y.linkProgram(i), y.useProgram(i), i;
     }
     getView() {
       return this._view;
@@ -4792,10 +4792,10 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
       this._captured = !1, this._mouseX = 0, this._mouseY = 0, this._isEnd = !1, this._cubismOption = new dr(), this._view = new ra(), this._textureManager = new ta();
     }
     initializeCubism() {
-      this._cubismOption.logFunction = Z.printMessage, this._cubismOption.loggingLevel = M.CubismLoggingLevel, L.startUp(this._cubismOption), L.initialize(), le.getInstance(), Z.updateTime();
+      this._cubismOption.logFunction = Z.printMessage, this._cubismOption.loggingLevel = M.CubismLoggingLevel, V.startUp(this._cubismOption), V.initialize(), le.getInstance(), Z.updateTime();
     }
     _resizeCanvas() {
-      F.width = window.innerWidth, F.height = window.innerHeight;
+      R.width = window.innerWidth, R.height = window.innerHeight;
     }
   }
   function aa(s) {
@@ -4867,13 +4867,13 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     s && s.model.setRandomExpression();
   }
   function _a(s, e) {
-    et.getInstance().setMessage(s, e);
+    Qe.getInstance().setMessage(s, e);
   }
   function ma() {
-    et.getInstance().hideMessageBox();
+    Qe.getInstance().hideMessageBox();
   }
   function pa() {
-    et.getInstance().revealMessageBox();
+    Qe.getInstance().revealMessageBox();
   }
   function fa(s) {
     const e = document.createElement("script");
@@ -4924,7 +4924,7 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
                 (function() {
                   const r = document.createElement("style");
                   r.innerHTML = `
-.${Be} {
+.${Ce} {
     margin: 2px;
     padding: 2px;
     display: flex;
@@ -4934,61 +4934,61 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
     align-items: center;
     cursor: pointer;
     font-size: 0.7rem;
-    background-color: ${Ce};
+    background-color: ${Se};
     color: ${Qr};
     border-radius: 0.5em;
     transition: all .35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.${Be}:hover {
+.${Ce}:hover {
     background-color: rgb(224, 209, 41);
 }
 
-.${Be}.button-item {
+.${Ce}.button-item {
     display: flex;
     align-items: center;
     width: fit-content;
     padding: 5px 10px 0px;
 }
 
-.${Be}.button-item svg {
+.${Ce}.button-item svg {
     height: 20px;
 }
 
-.${Be}.expression-item {
+.${Ce}.expression-item {
     display: flex;
     align-items: center;
     width: fit-content;
     padding: 3px 10px;
 }
 
-.${Be}.expression-item > span:last-child {
+.${Ce}.expression-item > span:last-child {
     width: 60px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.${Be}.expression-item svg {
+.${Ce}.expression-item svg {
     height: 20px;
     margin-right: 5px;
 }
 
-.${Be} svg path {
+.${Ce} svg path {
     fill: white;
 }
 
 `, document.head.appendChild(r);
-                })(), oe = ir(), ft(), oe.onmouseenter = () => fe(this, void 0, void 0, function* () {
+                })(), oe = ir(), pt(), oe.onmouseenter = () => pe(this, void 0, void 0, function* () {
+                  mt();
+                }), oe.onmouseleave = () => pe(this, void 0, void 0, function* () {
                   pt();
-                }), oe.onmouseleave = () => fe(this, void 0, void 0, function* () {
-                  ft();
                 });
                 const i = M.Canvas;
-                i.onmouseenter = () => fe(this, void 0, void 0, function* () {
+                i.onmouseenter = () => pe(this, void 0, void 0, function* () {
+                  mt();
+                }), i.onmouseleave = () => pe(this, void 0, void 0, function* () {
                   pt();
-                }), i.onmouseleave = () => fe(this, void 0, void 0, function* () {
-                  ft();
                 });
               }();
             }, 500)) : console.log("初始化失败，退出");
@@ -5003,25 +5003,25 @@ Please call 'CubimRenderer_WebGL.startUp' function.`);
   }, window.onresize = () => {
     const s = N.getInstance();
     s && M.CanvasSize === "auto" && s.onResize();
-  }), or.exports = T;
+  }), or.exports = F;
 })();
-var Ue = or.exports;
+var xt = or.exports;
 const lr = performance.now();
-let Ee = null, zt = 0, _i = 0;
-window.addEventListener("error", function(v) {
-  if (v.message && v.message.includes("Cannot read properties of null"))
-    return console.log("[Live2D] 检测到页面切换，忽略渲染错误"), v.preventDefault(), !0;
+let Te = null, zt = 0, _i = 0;
+window.addEventListener("error", function(C) {
+  if (C.message && C.message.includes("Cannot read properties of null"))
+    return console.log("[Live2D] 检测到页面切换，忽略渲染错误"), C.preventDefault(), !0;
 });
 async function xa() {
   try {
     console.log("[Live2D] 正在从配置文件加载...");
-    const v = await fetch("/plugins/MiSide_live2d/assets/live2d-config.json");
-    if (!v.ok)
-      throw new Error(`配置文件加载失败: ${v.status}`);
-    const X = await v.json();
+    const C = await fetch("/plugins/MiSide_live2d/assets/live2d-config.json");
+    if (!C.ok)
+      throw new Error(`配置文件加载失败: ${C.status}`);
+    const X = await C.json();
     return console.log("[Live2D] ✅ 配置加载成功:", X), X;
-  } catch (v) {
-    return console.error("[Live2D] ⚠️ 配置加载失败，使用默认配置:", v), {
+  } catch (C) {
+    return console.error("[Live2D] ⚠️ 配置加载失败，使用默认配置:", C), {
       modelPath: "/plugins/MiSide_live2d/assets/live2d/mita/3.model3.json",
       canvasPosition: "right",
       canvasWidth: 400,
@@ -5043,7 +5043,7 @@ async function xa() {
     };
   }
 }
-function Sa(v) {
+function Sa(C) {
   if (document.getElementById("custom-live2d-toolbox"))
     return;
   setTimeout(() => {
@@ -5065,7 +5065,7 @@ function Sa(v) {
       </svg>
     </div>
     <div class="toolbox-panel" id="toolbox-panel">
-  `, v.showHideButton && (j += `
+  `, C.showHideButton && (j += `
       <div class="toolbox-item" id="hide-model" title="隐藏模型">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -5078,16 +5078,16 @@ function Sa(v) {
           <line x1="1" y1="1" x2="23" y2="23"/>
         </svg>
       </div>
-    `), v.showExpressionButton && v.expressionList && v.expressionList.length > 0) {
-    const Y = v.expressionList[0];
+    `), C.showExpressionButton && C.expressionList && C.expressionList.length > 0) {
+    const Y = C.expressionList[0];
     j += `
       <div class="toolbox-item" id="next-expression" title="${Y.displayName}">
         ${Y.emoji}
       </div>
     `;
   }
-  if (v.showMotionButton && v.enableMotions && v.motionGroups && v.motionGroups.length > 0) {
-    const Y = v.motionGroups[0];
+  if (C.showMotionButton && C.enableMotions && C.motionGroups && C.motionGroups.length > 0) {
+    const Y = C.motionGroups[0];
     j += `
       <div class="toolbox-item" id="next-motion" title="${Y.displayName}">
         🎭
@@ -5179,72 +5179,56 @@ function Sa(v) {
         bottom: 80px;
       }
     }
-  `, document.head.appendChild(ue), document.body.appendChild(X), Ca(v), console.log("[Live2D] ✅ 自定义工具箱已创建");
+  `, document.head.appendChild(ue), document.body.appendChild(X), Ca(C), console.log("[Live2D] ✅ 自定义工具箱已创建");
 }
-function Ca(v) {
+function Ca(C) {
   let X = !1, j = !1;
   const ue = document.getElementById("toolbox-toggle");
   ue && ue.addEventListener("click", () => {
     X = !X;
-    const T = document.getElementById("toolbox-panel");
-    X ? T.classList.add("active") : T.classList.remove("active");
+    const F = document.getElementById("toolbox-panel");
+    X ? F.classList.add("active") : F.classList.remove("active");
   });
   const Y = document.getElementById("hide-model"), U = document.getElementById("show-model");
   Y && Y.addEventListener("click", () => {
-    const T = document.getElementById("live2d"), y = document.getElementById("live2dMessageBox");
-    T && (T.style.opacity = "0", T.style.pointerEvents = "none"), y && (y.style.opacity = "0"), Y.style.display = "none", U.style.display = "flex", console.log("[Live2D] 模型已隐藏");
+    const F = document.getElementById("live2d"), x = document.getElementById("live2dMessageBox");
+    F && (F.style.opacity = "0", F.style.pointerEvents = "none"), x && (x.style.opacity = "0"), Y.style.display = "none", U.style.display = "flex", console.log("[Live2D] 模型已隐藏");
   }), U && U.addEventListener("click", () => {
-    const T = document.getElementById("live2d"), y = document.getElementById("live2dMessageBox");
-    T && (T.style.opacity = "1", T.style.pointerEvents = "auto"), y && (y.style.opacity = "1"), Y.style.display = "flex", U.style.display = "none", console.log("[Live2D] 模型已显示");
+    const F = document.getElementById("live2d"), x = document.getElementById("live2dMessageBox");
+    F && (F.style.opacity = "1", F.style.pointerEvents = "auto"), x && (x.style.opacity = "1"), Y.style.display = "flex", U.style.display = "none", console.log("[Live2D] 模型已显示");
   });
-  const Ve = document.getElementById("next-expression");
-  Ve && v.expressionList && v.expressionList.length > 0 && Ve.addEventListener("click", () => {
+  const Ee = document.getElementById("next-expression");
+  Ee && C.expressionList && C.expressionList.length > 0 && Ee.addEventListener("click", () => {
     if (j) {
       console.warn("[Live2D] 切换中，请稍候...");
       return;
     }
     j = !0;
     try {
-      zt = (zt + 1) % v.expressionList.length;
-      const T = v.expressionList[zt];
-      console.log(`[Live2D] 准备切换表情: ${T.displayName} (${T.name}), 当前索引: ${zt}`);
-      let y = !1;
-      if (typeof Ue.setExpression == "function") {
-        const he = Ue.setExpression(T.name);
-        console.log("[Live2D] setExpression 返回值:", he), y = !0;
-      }
-      if (!y && window.Live2DRender && window.Live2DRender.model)
-        try {
-          window.Live2DRender.model.setExpression(T.name), console.log("[Live2D] 使用 model.setExpression 切换"), y = !0;
-        } catch (he) {
-          console.log("[Live2D] model.setExpression 不可用:", he.message);
-        }
-      y && setTimeout(() => {
-        T.name !== "default" && (Ue.setExpression("default"), setTimeout(() => {
-          Ue.setExpression(T.name), console.log("[Live2D] 使用重置法切换表情");
-        }, 50));
-      }, 50), y || console.error("[Live2D] 所有表情切换方法都不可用"), Ve.textContent = T.emoji, Ve.title = T.displayName, console.log(`[Live2D] ✅ 表情切换完成: ${T.displayName}`);
-    } catch (T) {
-      console.error("[Live2D] ❌ 切换表情失败:", T), console.error("[Live2D] 错误详情:", T.stack);
+      zt = (zt + 1) % C.expressionList.length;
+      const F = C.expressionList[zt];
+      console.log(`[Live2D] 切换表情: ${F.displayName} (${F.name}), 索引: ${zt}`), typeof xt.setExpression == "function" ? xt.setExpression(F.name) : console.error("[Live2D] setExpression 方法不可用"), Ee.textContent = F.emoji, Ee.title = F.displayName;
+    } catch (F) {
+      console.error("[Live2D] 切换表情失败:", F);
     } finally {
       setTimeout(() => {
-        j = !1, console.log("[Live2D] 表情切换锁已解除");
-      }, 800);
+        j = !1;
+      }, 300);
     }
   });
-  const ve = document.getElementById("next-motion");
-  ve && v.motionGroups && v.motionGroups.length > 0 && ve.addEventListener("click", () => {
+  const Be = document.getElementById("next-motion");
+  Be && C.motionGroups && C.motionGroups.length > 0 && Be.addEventListener("click", () => {
     if (j) {
       console.warn("[Live2D] 切换中，请稍候...");
       return;
     }
     j = !0;
     try {
-      _i = (_i + 1) % v.motionGroups.length;
-      const T = v.motionGroups[_i];
-      Ue.startMotion && Ue.startMotion(T.groupName, T.index, 3), ve.title = T.displayName, console.log(`[Live2D] 切换动作: ${T.displayName} (${T.groupName}[${T.index}])`);
-    } catch (T) {
-      console.error("[Live2D] 切换动作失败:", T);
+      _i = (_i + 1) % C.motionGroups.length;
+      const F = C.motionGroups[_i];
+      xt.startMotion && xt.startMotion(F.groupName, F.index, 3), Be.title = F.displayName, console.log(`[Live2D] 切换动作: ${F.displayName} (${F.groupName}[${F.index}])`);
+    } catch (F) {
+      console.error("[Live2D] 切换动作失败:", F);
     } finally {
       setTimeout(() => {
         j = !1;
@@ -5253,50 +5237,46 @@ function Ca(v) {
   });
 }
 function Ba() {
-  const v = document.getElementById("live2d");
-  if (!v) {
+  const C = document.getElementById("live2d");
+  if (!C) {
     console.warn("[Live2D] 未找到 Canvas 元素");
     return;
   }
-  const X = window.devicePixelRatio || 1, j = parseInt(v.style.width) || v.width, ue = parseInt(v.style.height) || v.height;
-  v.width = j * X, v.height = ue * X, v.style.width = j + "px", v.style.height = ue + "px";
-  const Y = v.getContext("webgl") || v.getContext("experimental-webgl");
-  Y && Y.viewport(0, 0, v.width, v.height);
+  const X = window.devicePixelRatio || 1, j = parseInt(C.style.width) || C.width, ue = parseInt(C.style.height) || C.height;
+  C.width = j * X, C.height = ue * X, C.style.width = j + "px", C.style.height = ue + "px", C.style.opacity = "1", C.style.pointerEvents = "auto", C.style.visibility = "visible";
+  const Y = C.getContext("webgl") || C.getContext("experimental-webgl");
+  Y && Y.viewport(0, 0, C.width, C.height);
   const U = ((performance.now() - lr) / 1e3).toFixed(2);
   console.log(`[Live2D] ✅ 米塔已就绪 (总耗时: ${U}秒)`);
 }
-function ur(v = 0, X = 10) {
-  if (document.getElementById("live2d")) {
-    Ba(), setTimeout(() => {
-      Sa(Ee);
-    }, 300);
-    return;
-  }
-  v < X ? setTimeout(() => ur(v + 1, X), 100) : console.warn("[Live2D] ⚠️ Canvas 创建超时");
+function ur(C = 0, X = 20) {
+  return document.getElementById("live2d") ? (Ba(), setTimeout(() => {
+    Sa(Te);
+  }, 100), !0) : C < X ? (setTimeout(() => ur(C + 1, X), 50), !1) : (console.warn("[Live2D] ⚠️ Canvas 创建超时"), !1);
 }
 async function va() {
   try {
-    console.log("[Live2D] 开始加载配置..."), Ee = await xa(), console.log(`[Live2D] 开始加载模型: ${Ee.modelPath}`), await Ue.initializeLive2D({
+    console.log("[Live2D] 开始加载配置..."), Te = await xa(), console.log(`[Live2D] 开始加载模型: ${Te.modelPath}`), await xt.initializeLive2D({
       // live2d 所在区域的背景颜色（透明）
       BackgroundRGBA: [0, 0, 0, 0],
       // live2d 的 model3.json 文件的路径
-      ResourcesPath: Ee.modelPath,
+      ResourcesPath: Te.modelPath,
       // live2d 的大小
       CanvasSize: {
-        height: Ee.canvasHeight,
-        width: Ee.canvasWidth
+        height: Te.canvasHeight,
+        width: Te.canvasWidth
       },
       // live2d 的位置 ('left' | 'right')
-      CanvasPosition: Ee.canvasPosition,
+      CanvasPosition: Te.canvasPosition,
       // 关闭原生工具箱（使用自定义工具箱）
       showToolBox: !1,
       // 使用 indexDB 缓存（第二次访问会快很多）
-      LoadFromCache: Ee.loadFromCache
+      LoadFromCache: Te.loadFromCache
     });
-    const v = ((performance.now() - lr) / 1e3).toFixed(2);
-    console.log(`[Live2D] ✅ 模型加载完成 (耗时: ${v}秒)`), ur();
-  } catch (v) {
-    console.error("[Live2D] ❌ 初始化失败:", v);
+    const C = ((performance.now() - lr) / 1e3).toFixed(2);
+    console.log(`[Live2D] ✅ 模型加载完成 (耗时: ${C}秒)`), ur();
+  } catch (C) {
+    console.error("[Live2D] ❌ 初始化失败:", C);
   }
 }
 va();
