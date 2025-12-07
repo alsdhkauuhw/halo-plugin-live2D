@@ -1,12 +1,18 @@
 /**
  * Live2D 前台初始化脚本
  * 用于在博客前台全局显示 Live2D 模型
+ * 支持从后端API读取配置
  */
 
 import * as Live2DRender from 'live2d-render'
 
 // 性能监控
 const perfStart = performance.now()
+
+// 全局配置对象
+let pluginConfig = null
+let currentExpressionIndex = 0
+let currentMotionIndex = 0
 
 // 全局错误处理，忽略页面切换时的渲染错误
 window.addEventListener('error', function(event) {
@@ -18,9 +24,50 @@ window.addEventListener('error', function(event) {
 })
 
 /**
+ * 从静态配置文件获取配置
+ */
+async function fetchConfig() {
+  try {
+    console.log('[Live2D] 正在从配置文件加载...')
+    const response = await fetch('/plugins/MiSide_live2d/assets/live2d-config.json')
+
+    if (!response.ok) {
+      throw new Error(`配置文件加载失败: ${response.status}`)
+    }
+
+    const config = await response.json()
+    console.log('[Live2D] ✅ 配置加载成功:', config)
+    return config
+  } catch (error) {
+    console.error('[Live2D] ⚠️ 配置加载失败，使用默认配置:', error)
+    // 返回默认配置
+    return {
+      modelPath: '/plugins/MiSide_live2d/assets/live2d/mita/3.model3.json',
+      canvasPosition: 'right',
+      canvasWidth: 400,
+      canvasHeight: 500,
+      loadFromCache: true,
+      expressionList: [
+        {name: 'default', displayName: '默认', emoji: '😐'},
+        {name: 'smile', displayName: '微笑', emoji: '😊'},
+        {name: 'happy', displayName: '开心', emoji: '😄'},
+        {name: 'sad', displayName: '悲伤', emoji: '😢'},
+        {name: 'surprised', displayName: '惊讶', emoji: '😲'},
+        {name: 'angry', displayName: '生气', emoji: '😠'}
+      ],
+      enableMotions: false,
+      motionGroups: [],
+      showExpressionButton: true,
+      showMotionButton: true,
+      showHideButton: true
+    }
+  }
+}
+
+/**
  * 创建自定义工具箱
  */
-function createCustomToolbox() {
+function createCustomToolbox(config) {
   // 检查工具箱是否已存在
   if (document.getElementById('custom-live2d-toolbox')) {
     return
@@ -41,7 +88,12 @@ function createCustomToolbox() {
   // 创建工具箱容器
   const toolbox = document.createElement('div')
   toolbox.id = 'custom-live2d-toolbox'
-  toolbox.innerHTML = `
+
+  // 构建工具箱按钮 HTML
+  let buttonsHTML = ''
+
+  // 切换按钮（始终显示）
+  buttonsHTML += `
     <div class="toolbox-toggle" id="toolbox-toggle" title="展开/收起">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="10"/>
@@ -49,6 +101,11 @@ function createCustomToolbox() {
       </svg>
     </div>
     <div class="toolbox-panel" id="toolbox-panel">
+  `
+
+  // 隐藏/显示按钮
+  if (config.showHideButton) {
+    buttonsHTML += `
       <div class="toolbox-item" id="hide-model" title="隐藏模型">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -61,21 +118,31 @@ function createCustomToolbox() {
           <line x1="1" y1="1" x2="23" y2="23"/>
         </svg>
       </div>
-      <div class="toolbox-item" id="random-expression" title="随机表情">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-          <line x1="9" y1="9" x2="9.01" y2="9"/>
-          <line x1="15" y1="9" x2="15.01" y2="9"/>
-        </svg>
+    `
+  }
+
+  // 表情切换按钮
+  if (config.showExpressionButton && config.expressionList && config.expressionList.length > 0) {
+    const firstExpression = config.expressionList[0]
+    buttonsHTML += `
+      <div class="toolbox-item" id="next-expression" title="${firstExpression.displayName}">
+        ${firstExpression.emoji}
       </div>
-      <div class="toolbox-item" id="expression-smile" title="微笑">😊</div>
-      <div class="toolbox-item" id="expression-happy" title="开心">😄</div>
-      <div class="toolbox-item" id="expression-sad" title="悲伤">😢</div>
-      <div class="toolbox-item" id="expression-surprised" title="惊讶">😲</div>
-      <div class="toolbox-item" id="expression-angry" title="生气">😠</div>
-    </div>
-  `
+    `
+  }
+
+  // 动作切换按钮
+  if (config.showMotionButton && config.enableMotions && config.motionGroups && config.motionGroups.length > 0) {
+    const firstMotion = config.motionGroups[0]
+    buttonsHTML += `
+      <div class="toolbox-item" id="next-motion" title="${firstMotion.displayName}">
+        🎭
+      </div>
+    `
+  }
+
+  buttonsHTML += `</div>`
+  toolbox.innerHTML = buttonsHTML
 
   // 添加样式
   const style = document.createElement('style')
@@ -168,118 +235,194 @@ function createCustomToolbox() {
   document.body.appendChild(toolbox)
 
   // 绑定事件
+  bindToolboxEvents(config)
+
+  console.log('[Live2D] ✅ 自定义工具箱已创建')
+}
+
+/**
+ * 绑定工具箱事件
+ */
+function bindToolboxEvents(config) {
   let isVisible = true
   let isPanelOpen = false
-  let isChangingExpression = false // 防止快速重复点击
+  let isChanging = false // 防止快速重复点击
 
   // 切换面板
-  document.getElementById('toolbox-toggle').addEventListener('click', () => {
-    isPanelOpen = !isPanelOpen
-    const panel = document.getElementById('toolbox-panel')
-    if (isPanelOpen) {
-      panel.classList.add('active')
-    } else {
-      panel.classList.remove('active')
-    }
-  })
+  const toggleBtn = document.getElementById('toolbox-toggle')
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      isPanelOpen = !isPanelOpen
+      const panel = document.getElementById('toolbox-panel')
+      if (isPanelOpen) {
+        panel.classList.add('active')
+      } else {
+        panel.classList.remove('active')
+      }
+    })
+  }
 
   // 隐藏/显示模型
   const hideBtn = document.getElementById('hide-model')
   const showBtn = document.getElementById('show-model')
 
-  hideBtn.addEventListener('click', () => {
-    const canvas = document.getElementById('live2d')
-    const messageBox = document.getElementById('live2dMessageBox')
+  if (hideBtn) {
+    hideBtn.addEventListener('click', () => {
+      const canvas = document.getElementById('live2d')
+      const messageBox = document.getElementById('live2dMessageBox')
 
-    isVisible = false
+      isVisible = false
 
-    if (canvas) {
-      canvas.style.opacity = '0'
-      canvas.style.pointerEvents = 'none'
-    }
+      if (canvas) {
+        canvas.style.opacity = '0'
+        canvas.style.pointerEvents = 'none'
+      }
 
-    if (messageBox) {
-      messageBox.style.opacity = '0'
-    }
+      if (messageBox) {
+        messageBox.style.opacity = '0'
+      }
 
-    hideBtn.style.display = 'none'
-    showBtn.style.display = 'flex'
+      hideBtn.style.display = 'none'
+      showBtn.style.display = 'flex'
 
-    console.log('[Live2D] 模型已隐藏')
-  })
+      console.log('[Live2D] 模型已隐藏')
+    })
+  }
 
-  showBtn.addEventListener('click', () => {
-    const canvas = document.getElementById('live2d')
-    const messageBox = document.getElementById('live2dMessageBox')
+  if (showBtn) {
+    showBtn.addEventListener('click', () => {
+      const canvas = document.getElementById('live2d')
+      const messageBox = document.getElementById('live2dMessageBox')
 
-    isVisible = true
+      isVisible = true
 
-    if (canvas) {
-      canvas.style.opacity = '1'
-      canvas.style.pointerEvents = 'auto'
-    }
+      if (canvas) {
+        canvas.style.opacity = '1'
+        canvas.style.pointerEvents = 'auto'
+      }
 
-    if (messageBox) {
-      messageBox.style.opacity = '1'
-    }
+      if (messageBox) {
+        messageBox.style.opacity = '1'
+      }
 
-    hideBtn.style.display = 'flex'
-    showBtn.style.display = 'none'
+      hideBtn.style.display = 'flex'
+      showBtn.style.display = 'none'
 
-    console.log('[Live2D] 模型已显示')
-  })
+      console.log('[Live2D] 模型已显示')
+    })
+  }
 
-  // 随机表情（添加防抖）
-  document.getElementById('random-expression').addEventListener('click', () => {
-    if (isChangingExpression) {
-      console.warn('[Live2D] 表情切换中，请稍候...')
-      return
-    }
+  // 表情切换按钮（顺序切换）
+  const expressionBtn = document.getElementById('next-expression')
+  if (expressionBtn && config.expressionList && config.expressionList.length > 0) {
+    expressionBtn.addEventListener('click', () => {
+      if (isChanging) {
+        console.warn('[Live2D] 切换中，请稍候...')
+        return
+      }
 
-    isChangingExpression = true
+      isChanging = true
 
-    try {
-      Live2DRender.setRandomExpression()
-      console.log('[Live2D] 切换随机表情')
-    } catch (error) {
-      console.error('[Live2D] 切换表情失败:', error)
-    } finally {
-      // 500ms 后解锁
-      setTimeout(() => {
-        isChangingExpression = false
-      }, 500)
-    }
-  })
+      try {
+        // 切换到下一个表情
+        currentExpressionIndex = (currentExpressionIndex + 1) % config.expressionList.length
+        const expression = config.expressionList[currentExpressionIndex]
 
-  // 具体表情（添加防抖）
-  const expressions = ['smile', 'happy', 'sad', 'surprised', 'angry']
-  expressions.forEach(exp => {
-    const element = document.getElementById(`expression-${exp}`)
-    if (element) {
-      element.addEventListener('click', () => {
-        if (isChangingExpression) {
-          console.warn('[Live2D] 表情切换中，请稍候...')
-          return
+        console.log(`[Live2D] 准备切换表情: ${expression.displayName} (${expression.name}), 当前索引: ${currentExpressionIndex}`)
+
+        // 尝试多种表情切换方法
+        let switchSuccess = false
+
+        // 方法1: 直接调用 setExpression
+        if (typeof Live2DRender.setExpression === 'function') {
+          const result = Live2DRender.setExpression(expression.name)
+          console.log('[Live2D] setExpression 返回值:', result)
+          switchSuccess = true
         }
 
-        isChangingExpression = true
+        // 方法2: 尝试使用内部模型对象（如果方法1不生效）
+        if (!switchSuccess && window.Live2DRender && window.Live2DRender.model) {
+          try {
+            window.Live2DRender.model.setExpression(expression.name)
+            console.log('[Live2D] 使用 model.setExpression 切换')
+            switchSuccess = true
+          } catch (e) {
+            console.log('[Live2D] model.setExpression 不可用:', e.message)
+          }
+        }
 
-        try {
-          Live2DRender.setExpression(exp)
-          console.log(`[Live2D] 切换表情: ${exp}`)
-        } catch (error) {
-          console.error(`[Live2D] 切换表情 ${exp} 失败:`, error)
-        } finally {
-          // 500ms 后解锁
+        // 方法3: 尝试先重置表情再设置（强制刷新）
+        if (switchSuccess) {
+          // 先设置为 null 或 default，再设置目标表情
           setTimeout(() => {
-            isChangingExpression = false
-          }, 500)
+            if (expression.name !== 'default') {
+              Live2DRender.setExpression('default')
+              setTimeout(() => {
+                Live2DRender.setExpression(expression.name)
+                console.log('[Live2D] 使用重置法切换表情')
+              }, 50)
+            }
+          }, 50)
         }
-      })
-    }
-  })
 
-  console.log('[Live2D] ✅ 自定义工具箱已创建')
+        if (!switchSuccess) {
+          console.error('[Live2D] 所有表情切换方法都不可用')
+        }
+
+        // 更新按钮显示
+        expressionBtn.textContent = expression.emoji
+        expressionBtn.title = expression.displayName
+
+        console.log(`[Live2D] ✅ 表情切换完成: ${expression.displayName}`)
+      } catch (error) {
+        console.error('[Live2D] ❌ 切换表情失败:', error)
+        console.error('[Live2D] 错误详情:', error.stack)
+      } finally {
+        // 800ms 后解锁（增加延迟以适应重置法）
+        setTimeout(() => {
+          isChanging = false
+          console.log('[Live2D] 表情切换锁已解除')
+        }, 800)
+      }
+    })
+  }
+
+  // 动作切换按钮（顺序切换）
+  const motionBtn = document.getElementById('next-motion')
+  if (motionBtn && config.motionGroups && config.motionGroups.length > 0) {
+    motionBtn.addEventListener('click', () => {
+      if (isChanging) {
+        console.warn('[Live2D] 切换中，请稍候...')
+        return
+      }
+
+      isChanging = true
+
+      try {
+        // 切换到下一个动作
+        currentMotionIndex = (currentMotionIndex + 1) % config.motionGroups.length
+        const motion = config.motionGroups[currentMotionIndex]
+
+        // 使用 startMotion 播放动作
+        // 注意：live2d-render 可能不直接暴露 startMotion，这需要测试
+        if (Live2DRender.startMotion) {
+          Live2DRender.startMotion(motion.groupName, motion.index, 3)
+        }
+
+        // 更新按钮标题
+        motionBtn.title = motion.displayName
+
+        console.log(`[Live2D] 切换动作: ${motion.displayName} (${motion.groupName}[${motion.index}])`)
+      } catch (error) {
+        console.error('[Live2D] 切换动作失败:', error)
+      } finally {
+        // 500ms 后解锁
+        setTimeout(() => {
+          isChanging = false
+        }, 500)
+      }
+    })
+  }
 }
 
 /**
@@ -329,7 +472,7 @@ function tryFixCanvas(attempts = 0, maxAttempts = 10) {
 
     // 创建自定义工具箱
     setTimeout(() => {
-      createCustomToolbox()
+      createCustomToolbox(pluginConfig)
     }, 300)
 
     return
@@ -343,42 +486,47 @@ function tryFixCanvas(attempts = 0, maxAttempts = 10) {
   }
 }
 
-// 立即开始初始化（不等待 DOMContentLoaded）
-// 因为使用了 ES Module，脚本本身就是延迟执行的
+/**
+ * 初始化 Live2D
+ */
 async function initLive2D() {
   try {
-    console.log('[Live2D] 开始加载米塔模型（约7MB，请耐心等待）...')
+    console.log('[Live2D] 开始加载配置...')
 
+    // 1. 获取配置
+    pluginConfig = await fetchConfig()
+
+    console.log(`[Live2D] 开始加载模型: ${pluginConfig.modelPath}`)
+
+    // 2. 初始化 Live2D
     // @ts-ignore - live2d-render 的类型定义不完整
     await Live2DRender.initializeLive2D({
       // live2d 所在区域的背景颜色（透明）
       BackgroundRGBA: [0.0, 0.0, 0.0, 0.0],
 
       // live2d 的 model3.json 文件的路径
-      // 通过 ReverseProxy 访问插件的 static 目录
-      // 使用英文路径避免 URL 编码问题
-      ResourcesPath: '/plugins/live2d/assets/live2d/mita/3.model3.json',
+      ResourcesPath: pluginConfig.modelPath,
 
       // live2d 的大小
       CanvasSize: {
-        height: 500,
-        width: 400,
+        height: pluginConfig.canvasHeight,
+        width: pluginConfig.canvasWidth,
       },
 
       // live2d 的位置 ('left' | 'right')
-      CanvasPosition: 'right',
+      CanvasPosition: pluginConfig.canvasPosition,
 
       // 关闭原生工具箱（使用自定义工具箱）
       showToolBox: false,
 
       // 使用 indexDB 缓存（第二次访问会快很多）
-      LoadFromCache: true,
+      LoadFromCache: pluginConfig.loadFromCache,
     })
 
     const loadTime = ((performance.now() - perfStart) / 1000).toFixed(2)
     console.log(`[Live2D] ✅ 模型加载完成 (耗时: ${loadTime}秒)`)
 
-    // 使用轮询方式等待 Canvas 创建，而不是固定延迟
+    // 3. 使用轮询方式等待 Canvas 创建，而不是固定延迟
     // 这样可以更快地响应 Canvas 创建完成
     tryFixCanvas()
 

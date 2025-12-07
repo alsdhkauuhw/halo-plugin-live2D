@@ -28,8 +28,9 @@ public class Live2DHeadProcessor implements TemplateHeadProcessor {
 
         // 注入 Live2D 前台初始化脚本
         // 通过 ReverseProxy 访问插件的 static 目录
+        // 路径格式: /plugins/{plugin-name}/assets/{file-path}
         Map<String, String> attributes = Map.of(
-            "src", "/plugins/live2d/assets/frontend-live2d.js",
+            "src", "/plugins/MiSide_live2d/assets/frontend-live2d.js",
             "type", "module"
         );
 

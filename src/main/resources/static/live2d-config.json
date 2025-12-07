@@ -1,0 +1,20 @@
+{
+  "modelPath": "/plugins/MiSide_live2d/assets/live2d/mita/3.model3.json",
+  "canvasPosition": "right",
+  "canvasWidth": 400,
+  "canvasHeight": 500,
+  "loadFromCache": true,
+  "expressionList": [
+    {"name": "default", "displayName": "默认", "emoji": "😐"},
+    {"name": "smile", "displayName": "微笑", "emoji": "😊"},
+    {"name": "happy", "displayName": "开心", "emoji": "😄"},
+    {"name": "sad", "displayName": "悲伤", "emoji": "😢"},
+    {"name": "surprised", "displayName": "惊讶", "emoji": "😲"},
+    {"name": "angry", "displayName": "生气", "emoji": "😠"}
+  ],
+  "enableMotions": false,
+  "motionGroups": [],
+  "showExpressionButton": true,
+  "showMotionButton": true,
+  "showHideButton": true
+}
