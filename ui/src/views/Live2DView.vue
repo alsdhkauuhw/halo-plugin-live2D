@@ -26,8 +26,8 @@ onMounted(async () => {
       // live2d 的位置 ('left' | 'right')
       CanvasPosition: 'right',
 
-      // 展示工具箱（可以控制 live2d 的展出隐藏，使用特定表情）
-      ShowToolBox: true,
+      // 展示工具箱（注意：字段名是小写 showToolBox）
+      showToolBox: true,
 
       // 是否使用 indexDB 进行缓存优化，这样下一次载入就不会再发起网络请求了
       LoadFromCache: true,
