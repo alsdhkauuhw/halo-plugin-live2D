@@ -15,8 +15,7 @@
 			{"Name": "happy", "File": "exp_happy.exp3.json"},
 			{"Name": "sad", "File": "exp_sad.exp3.json"},
 			{"Name": "surprised", "File": "exp_surprised.exp3.json"},
-			{"Name": "angry", "File": "exp_angry.exp3.json"},
-			{"Name": "wink", "File": "exp_wink.exp3.json"}
+			{"Name": "angry", "File": "exp_angry.exp3.json"}
 		]
 	},
 	"Groups": [
