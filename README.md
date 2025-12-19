@@ -20,6 +20,13 @@
 - 🛠️ **自定义工具箱** - 简洁的浮动工具栏，支持显示/隐藏和表情切换
 - 📦 **配置灵活** - 支持自定义模型路径、大小、位置和表情列表
 
+## 效果展示
+
+<img width="1456" height="891" alt="image" src="https://github.com/user-attachments/assets/54a19cc9-d16d-4ba2-b638-5d3655014032" />
+<img width="1333" height="899" alt="image" src="https://github.com/user-attachments/assets/ce8cc1ba-b088-419c-85bf-7e4eddf3f9fe" />
+
+
+
 ## 下载及使用说明
 
 ### 安装步骤
